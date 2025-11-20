@@ -1,0 +1,11 @@
+name = "f2f-transfer"
+compatibility_date = "2025-11-20"
+pages_build_output_dir = "./public"
+
+# KV 命名空间绑定
+# 请使用 wrangler kv:namespace create "TRANSFERS" 创建你自己的 KV 命名空间
+# 然后将生成的 ID 替换下面的示例值
+[[kv_namespaces]]
+binding = "TRANSFERS"
+id = "your_kv_namespace_id_here"          # 替换为你的生产环境 KV ID
+preview_id = "your_preview_kv_id_here"    # 替换为你的预览环境 KV ID

@@ -1,0 +1,30 @@
+{
+  "name": "f2f-transfer",
+  "version": "1.0.0",
+  "description": "Simple peer-to-peer file and text transfer tool using Cloudflare Workers",
+  "scripts": {
+    "build:css": "postcss src/input.css -o public/assets/css/style.css",
+    "watch:css": "postcss src/input.css -o public/assets/css/style.css --watch",
+    "dev": "npm run build:css && wrangler pages dev public --kv TRANSFERS",
+    "deploy": "npm run build:css",
+    "build": "npm run build:css"
+  },
+  "keywords": [
+    "cloudflare",
+    "workers",
+    "file-transfer",
+    "p2p"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241127.0",
+    "@tailwindcss/postcss": "^4.1.16",
+    "autoprefixer": "^10.4.21",
+    "cssnano": "^7.1.1",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "tailwindcss": "^4.1.16",
+    "wrangler": "^3.0.0"
+  }
+}

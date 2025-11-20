@@ -1,0 +1,39 @@
+name: Welcome
+
+on:
+  issues:
+    types: [opened]
+  pull_request:
+    types: [opened]
+
+jobs:
+  welcome:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Welcome new contributors
+        uses: actions/first-interaction@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          issue-message: |
+            👋 感谢你提交第一个 Issue！
+            
+            我们会尽快审查并回复。在此期间，请确保你已经：
+            - ✅ 搜索了现有的 Issues，确认没有重复
+            - ✅ 提供了足够的信息来重现问题
+            - ✅ 遵循了 Issue 模板
+            
+            期待你的参与！🎉
+            
+          pr-message: |
+            🎉 感谢你提交第一个 Pull Request！
+            
+            我们会尽快审查你的代码。在此期间，请确保：
+            - ✅ 所有测试都通过了
+            - ✅ 代码遵循了项目规范
+            - ✅ 已经更新了相关文档
+            - ✅ 提交信息符合 Conventional Commits 规范
+            
+            感谢你的贡献！❤️
+
+
+
