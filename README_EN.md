@@ -466,13 +466,6 @@ In Cloudflare Dashboard you can view:
 
 ---
 
-## 📊 Project Statistics
-
-<div align="center">
-
-![Repobeats analytics](https://repobeats.axiom.co/api/embed/edf9c6b674c0f6e8c6f8e6e8f6c6e8f6c6f8e6e8.svg "Repobeats analytics image")
-
-</div>
 
 ## ⭐ Star History
 

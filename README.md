@@ -466,13 +466,6 @@ R2 对象存储需要绑定银行卡才能使用，而 KV 存储完全免费且�
 
 ---
 
-## 📊 项目统计
-
-<div align="center">
-
-![Repobeats analytics](https://repobeats.axiom.co/api/embed/edf9c6b674c0f6e8c6f8e6e8f6c6e8f6c6f8e6e8.svg "Repobeats analytics image")
-
-</div>
 
 ## ⭐ Star 历史
 
