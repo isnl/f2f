@@ -1,32 +1,32 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
   <!-- Primary Meta Tags -->
-  <title>F2F.icu - 免费在线文件传输工具 | 快速分享文件、文本和图片</title>
-  <meta name="title" content="F2F.icu - 免费在线文件传输工具 | 快速分享文件、文本和图片">
-  <meta name="description" content="F2F.icu 是一款简单易用的在线文件传输工具，支持文件、文本、图片快速分享。无需注册，通过取件码即时传输，1分钟自动销毁，保护隐私安全。">
-  <meta name="keywords" content="文件传输,在线传输,文件分享,图片传输,文本分享,临时文件,取件码,F2F,免费传输工具">
+  <title>F2F.icu - Free Online File Transfer Tool | Quick Share Files, Text and Images</title>
+  <meta name="title" content="F2F.icu - Free Online File Transfer Tool | Quick Share Files, Text and Images">
+  <meta name="description" content="F2F.icu is a simple and easy-to-use online file transfer tool that supports quick sharing of files, text, and images. No registration required, instant transfer via pickup code, auto-delete after 1 minute for privacy protection.">
+  <meta name="keywords" content="file transfer,online transfer,file sharing,image transfer,text sharing,temporary files,pickup code,F2F,free transfer tool">
   <meta name="author" content="F2F.icu">
   <meta name="robots" content="index, follow">
-  <meta name="language" content="zh-CN">
-  
+  <meta name="language" content="en">
+
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://f2f.icu/">
-  <meta property="og:title" content="F2F.icu - 免费在线文件传输工具">
-  <meta property="og:description" content="简单易用的在线文件传输工具，支持文件、文本、图片快速分享。无需注册，通过取件码即时传输，1分钟自动销毁，保护隐私安全。">
+  <meta property="og:title" content="F2F.icu - Free Online File Transfer Tool">
+  <meta property="og:description" content="Simple and easy-to-use online file transfer tool supporting quick sharing of files, text, and images. No registration required, instant transfer via pickup code, auto-delete after 1 minute.">
   <meta property="og:image" content="https://f2f.icu/favicon.png">
   <meta property="og:site_name" content="F2F.icu">
-  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale" content="en_US">
   
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://f2f.icu/">
-  <meta name="twitter:title" content="F2F.icu - 免费在线文件传输工具">
-  <meta name="twitter:description" content="简单易用的在线文件传输工具，支持文件、文本、图片快速分享。无需注册，通过取件码即时传输。">
+  <meta name="twitter:title" content="F2F.icu - Free Online File Transfer Tool">
+  <meta name="twitter:description" content="Simple online file transfer tool supporting quick sharing of files, text, and images. No registration required.">
   <meta name="twitter:image" content="https://f2f.icu/favicon.png">
   
   <!-- Additional Meta Tags -->
@@ -34,7 +34,7 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="F2F 传输">
+  <meta name="apple-mobile-web-app-title" content="F2F Transfer">
   <meta name="format-detection" content="telephone=no">
   
   <!-- Canonical URL -->
@@ -53,7 +53,527 @@
   <!-- Tailwind CSS -->
   <link rel="stylesheet" href="/assets/css/style.css">
   <script src="/assets/js/lucide.min.js"></script>
+
+  <!-- Custom Styles for Layout Stability -->
+  <style>
+    /* Prevent layout shift during language switch */
+    [data-i18n] {
+      display: inline-block;
+      min-height: 1em;
+      transition: opacity 0.2s ease;
+    }
+
+    /* Smooth transition for language change */
+    .lang-transitioning [data-i18n] {
+      opacity: 0.7;
+    }
+
+    /* Fixed widths for critical UI elements */
+    #tab-send span[data-i18n],
+    #tab-receive span[data-i18n] {
+      min-width: 50px;
+      display: inline-block;
+    }
+
+    /* Ensure toast container doesn't affect layout */
+    #toast-container {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      z-index: 9999;
+      pointer-events: none;
+    }
+
+    #toast-container .toast {
+      pointer-events: auto;
+      animation: slideIn 0.3s ease-out;
+      margin-bottom: 10px;
+    }
+
+    #toast-container .toast.hiding {
+      animation: slideOut 0.3s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideOut {
+      from {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+    }
+
+    /* Animation for fade-in */
+    .animate-fade-in {
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Logo animations */
+    @keyframes floatFolder {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-5px);
+      }
+    }
+
+    @keyframes openFolder {
+      0%, 100% {
+        transform: rotateX(0deg);
+      }
+      50% {
+        transform: rotateX(-10deg);
+      }
+    }
+
+    @keyframes floatFile {
+      0%, 100% {
+        transform: translateY(0px) translateX(0px);
+        opacity: 0.6;
+      }
+      50% {
+        transform: translateY(-8px) translateX(2px);
+        opacity: 1;
+      }
+    }
+
+    @keyframes arrowMove {
+      0%, 100% {
+        transform: translateX(0px);
+        opacity: 0.6;
+      }
+      50% {
+        transform: translateX(3px);
+        opacity: 1;
+      }
+    }
+
+    .folder-container {
+      animation: floatFolder 3s ease-in-out infinite;
+      transition: all 0.3s ease;
+    }
+
+    .folder-container:hover {
+      animation: floatFolder 1.5s ease-in-out infinite;
+      transform: scale(1.05);
+    }
+
+    .folder-container:hover .folder-top {
+      animation: openFolder 0.6s ease-in-out infinite;
+      transform-origin: bottom center;
+    }
+
+    .folder-container:hover .file-icon {
+      animation: floatFile 1.2s ease-in-out infinite;
+    }
+
+    .folder-container:hover .arrow-icon {
+      animation: arrowMove 1s ease-in-out infinite;
+    }
+
+    /* Custom Language Dropdown */
+    .language-dropdown {
+      position: relative;
+    }
+
+    .language-dropdown-button {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(34, 197, 94, 0.2);
+      border: none;
+      font-size: 14px;
+      font-weight: 500;
+      min-width: 100px;
+      justify-content: space-between;
+    }
+
+    .language-dropdown-button:hover {
+      background: linear-gradient(135deg, #16a34a 0%, #059669 100%);
+      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .language-dropdown-button svg {
+      transition: transform 0.3s ease;
+    }
+
+    .language-dropdown.active .language-dropdown-button svg {
+      transform: rotate(180deg);
+    }
+
+    .language-dropdown-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      z-index: 1000;
+      min-width: 160px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .language-dropdown.active .language-dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .language-dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: #374151;
+      font-size: 14px;
+    }
+
+    .language-dropdown-item:hover {
+      background: linear-gradient(90deg, #f0fdf4 0%, #dcfce7 100%);
+      color: #16a34a;
+    }
+
+    .language-dropdown-item.active {
+      background: linear-gradient(90deg, #dcfce7 0%, #bbf7d0 100%);
+      color: #16a34a;
+      font-weight: 600;
+    }
+
+    .language-dropdown-item .flag {
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .language-dropdown-item .check {
+      margin-left: auto;
+      color: #22c55e;
+      display: none;
+    }
+
+    .language-dropdown-item.active .check {
+      display: block;
+    }
+
+    /* Badge animation */
+    @keyframes shimmer {
+      0% {
+        background-position: -200% center;
+      }
+      100% {
+        background-position: 200% center;
+      }
+    }
+
+    .security-badge {
+      background: linear-gradient(
+        90deg,
+        rgba(34, 197, 94, 0.1) 0%,
+        rgba(34, 197, 94, 0.2) 50%,
+        rgba(34, 197, 94, 0.1) 100%
+      );
+      background-size: 200% 100%;
+      animation: shimmer 3s linear infinite;
+    }
+  </style>
+
   <script>
+    // i18n translations
+    const translations = {
+      en: {
+        // Header
+        siteName: 'F2F.ICU',
+        tagline: 'Simple, Fast, Secure',
+        endToEndEncryption: 'End-to-End Encryption',
+
+        // Tabs
+        send: 'Send',
+        receive: 'Receive',
+
+        // Send Tab
+        sendTitle: 'Send Files or Text',
+        sendDescription: 'Upload files (≤25MB) or enter text content to generate share code',
+        dailyLimit: 'You can upload 10 times per day, please use reasonably',
+        shareCode: 'Share Code',
+        random: 'Random',
+        file: 'File',
+        text: 'Text',
+        image: 'Image',
+        clickToSelectFile: 'Click to select file or drag here',
+        supportAnyFormat: 'Support any format, max 25MB',
+        pasteImageTip: 'Tip: Press Ctrl/Cmd + V to paste image',
+        clickToSelectImage: 'Click to select image or drag here',
+        supportedImageFormats: 'Support PNG, JPG, GIF, WEBP formats',
+        pasteScreenshotTip: 'Tip: Press Ctrl/Cmd + V to paste screenshot',
+        enterTextContent: 'Enter text content to transfer...',
+        createShare: 'Create Share',
+        uploadSuccess: 'Upload Successful',
+        shareWithRecipient: 'Share with recipient',
+        copyLink: 'Copy Link',
+        copyShareCode: 'Copy Code',
+        autoDeleteNote: 'Data will auto-delete 1 minute after download',
+
+        // Receive Tab
+        receiveTitle: 'Receive Files or Text',
+        receiveDescription: 'Enter 6-digit pickup code to download file or view text',
+        receiveWarning: 'File will be auto-deleted in 1 minute after pickup, please save promptly',
+        pickupCode: 'Pickup Code',
+        getContent: 'Get Content',
+        downloading: 'Downloading...',
+        downloadSuccess: 'Download Successful',
+        textContent: 'Text Content',
+        copy: 'Copy',
+        copied: 'Copied',
+        download: 'Download',
+        imagePreview: 'Image Preview',
+        contentAutoDelete: 'Content will auto-delete in 1 minute, please save promptly',
+        fileAutoDelete: 'File will auto-delete in 1 minute, please confirm saved',
+
+        // Messages
+        enterShareCode: 'Please enter 6-digit share code',
+        invalidShareCode: 'Share code must be 6 digits/uppercase letters',
+        selectFile: 'Please select file',
+        enterText: 'Please enter text content',
+        selectImage: 'Please select image',
+        fileSizeExceeded: 'File size exceeds 25MB limit',
+        imageSizeExceeded: 'Image size exceeds 25MB limit',
+        selectImageFile: 'Please select image file (PNG, JPG, GIF, WEBP, etc.)',
+        dragImageOnly: 'Please drag image files only',
+        uploading: 'Uploading...',
+        getting: 'Getting...',
+        uploadFailed: 'Upload failed',
+        getFailed: 'Get failed',
+        networkError: 'Network error, please retry',
+        textCopied: 'Text copied',
+        copyFailed: 'Copy failed, please copy manually',
+        linkCopied: 'Share link copied',
+        codeCopied: 'Share code copied',
+        switchToImageMode: 'Auto-switched to image mode',
+        imageDownloading: 'Image downloading...',
+        enterPickupCode: 'Please enter pickup code',
+        invalidPickupCode: 'Pickup code must be 6 digits/uppercase letters',
+
+        // Footer
+        poweredBy: 'Powered by Cloudflare Edge Network',
+        freeFastSecure: 'Free • Fast • Secure',
+        aes256Security: 'AES-256 Security',
+        autoDelete: 'Auto Delete',
+        afterOneMinute: 'After 1 Minute',
+        instantTransfer: 'Instant Transfer',
+        noRegistration: 'No Registration',
+
+        // Image Preview Modal
+        reset: 'Reset',
+        reupload: 'Click to reupload'
+      },
+      zh: {
+        // Header
+        siteName: 'F2F.ICU',
+        tagline: '简单、快速、安全',
+        endToEndEncryption: '端到端加密',
+
+        // Tabs
+        send: '发送',
+        receive: '接收',
+
+        // Send Tab
+        sendTitle: '发送文件或文本',
+        sendDescription: '上传文件（≤25MB）或输入文本内容，生成分享码',
+        dailyLimit: '每天可上传 10 次，请合理使用',
+        shareCode: '分享码',
+        random: '随机',
+        file: '文件',
+        text: '文本',
+        image: '图片',
+        clickToSelectFile: '点击选择文件或拖拽到此处',
+        supportAnyFormat: '支持任意格式，最大 25MB',
+        pasteImageTip: '提示：按 Ctrl/Cmd + V 可直接粘贴图片',
+        clickToSelectImage: '点击选择图片或拖拽到此处',
+        supportedImageFormats: '支持 PNG、JPG、GIF、WEBP 等格式',
+        pasteScreenshotTip: '提示：按 Ctrl/Cmd + V 可直接粘贴截图',
+        enterTextContent: '输入要传输的文本内容...',
+        createShare: '创建分享',
+        uploadSuccess: '创建成功',
+        shareWithRecipient: '分享给接收方',
+        copyLink: '复制链接',
+        copyShareCode: '复制分享码',
+        autoDeleteNote: '对方下载后，数据将在 1 分钟内自动删除',
+
+        // Receive Tab
+        receiveTitle: '接收文件或文本',
+        receiveDescription: '输入 6 位取件码下载文件或查看文本',
+        receiveWarning: '取件后文件将在 1 分钟内自动删除，请及时保存',
+        pickupCode: '取件码',
+        getContent: '获取内容',
+        downloading: '正在下载...',
+        downloadSuccess: '下载成功',
+        textContent: '文本内容',
+        copy: '复制',
+        copied: '已复制',
+        download: '下载',
+        imagePreview: '图片预览',
+        contentAutoDelete: '内容将在 1 分钟后自动删除，请及时复制保存',
+        fileAutoDelete: '文件将在 1 分钟后自动删除，请确认已保存',
+
+        // Messages
+        enterShareCode: '请输入 6 位分享码',
+        invalidShareCode: '分享码必须是 6 位数字或大写字母',
+        selectFile: '请选择文件',
+        enterText: '请输入文本内容',
+        selectImage: '请选择图片',
+        fileSizeExceeded: '文件大小超过 25MB 限制',
+        imageSizeExceeded: '图片大小超过 25MB 限制',
+        selectImageFile: '请选择图片文件（PNG、JPG、GIF、WEBP等）',
+        dragImageOnly: '请拖入图片文件',
+        uploading: '上传中...',
+        getting: '获取中...',
+        uploadFailed: '上传失败',
+        getFailed: '获取失败',
+        networkError: '网络错误，请重试',
+        textCopied: '文本已复制',
+        copyFailed: '复制失败，请手动复制',
+        linkCopied: '分享链接已复制',
+        codeCopied: '分享码已复制',
+        switchToImageMode: '已自动切换到图片模式',
+        imageDownloading: '图片下载中...',
+        enterPickupCode: '请输入取件码',
+        invalidPickupCode: '取件码必须是 6 位数字或大写字母',
+
+        // Footer
+        poweredBy: '基于 Cloudflare 边缘网络',
+        freeFastSecure: '免费 • 快速 • 安全',
+        aes256Security: 'AES-256 加密',
+        autoDelete: '自动删除',
+        afterOneMinute: '1分钟后删除',
+        instantTransfer: '即时传输',
+        noRegistration: '无需注册',
+
+        // Image Preview Modal
+        reset: '重置',
+        reupload: '点击重新上传'
+      }
+    };
+
+    let currentLang = localStorage.getItem('language') || 'en';
+
+    function t(key) {
+      return translations[currentLang][key] || translations['en'][key] || key;
+    }
+
+    function switchLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('language', lang);
+      updateUILanguage();
+    }
+
+    function updateUILanguage() {
+      // Update all elements with data-i18n attribute
+      document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+          element.placeholder = t(key);
+        } else {
+          element.textContent = t(key);
+        }
+      });
+
+      // Update HTML lang attribute
+      document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
+
+      // Update language dropdown
+      updateLanguageDropdown();
+
+      // Update meta tags
+      document.querySelector('meta[name="language"]').content = currentLang === 'zh' ? 'zh-CN' : 'en';
+      document.querySelector('meta[property="og:locale"]').content = currentLang === 'zh' ? 'zh_CN' : 'en_US';
+
+      // Re-render icons
+      if (typeof lucide !== 'undefined' && lucide.createIcons) {
+        lucide.createIcons();
+      }
+    }
+
+    // Language dropdown functions
+    function toggleLanguageDropdown(event) {
+      event.stopPropagation();
+      const dropdown = document.getElementById('language-dropdown');
+      dropdown.classList.toggle('active');
+    }
+
+    function selectLanguage(lang, event) {
+      event.stopPropagation();
+      switchLanguage(lang);
+      document.getElementById('language-dropdown').classList.remove('active');
+    }
+
+    function updateLanguageDropdown() {
+      const flag = document.getElementById('current-lang-flag');
+      const text = document.getElementById('current-lang-text');
+
+      if (currentLang === 'zh') {
+        flag.textContent = '🇨🇳';
+        text.textContent = '简体中文';
+      } else {
+        flag.textContent = '🇺🇸';
+        text.textContent = 'English';
+      }
+
+      // Update active state
+      document.querySelectorAll('.language-dropdown-item').forEach(item => {
+        if (item.getAttribute('data-lang') === currentLang) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+      const dropdown = document.getElementById('language-dropdown');
+      if (dropdown && !dropdown.contains(event.target)) {
+        dropdown.classList.remove('active');
+      }
+    });
+
     // Set initial tab state before page loads to avoid flash
     (function() {
       const urlParams = new URLSearchParams(window.location.search);
@@ -74,20 +594,91 @@
   
   <!-- Header -->
   <header class="bg-white/80 backdrop-blur-sm border-b border-primary-200/50 sticky top-0 z-50">
-    <div class="max-w-4xl mx-auto px-4 py-4">
+    <div class="max-w-4xl mx-auto px-4 py-3">
       <div class="flex items-center justify-between">
+        <!-- Left Section: Logo + Brand -->
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-emerald-600 rounded-lg flex items-center justify-center">
-            <i data-lucide="package" class="w-6 h-6 text-white"></i>
+          <!-- Logo with Animation -->
+          <div class="folder-container relative" style="width: 42px; height: 42px;">
+            <!-- Folder SVG Icon -->
+            <svg viewBox="0 0 64 64" class="w-full h-full">
+              <!-- Folder Back -->
+              <path class="folder-back" d="M 8 18 L 8 50 C 8 52 10 54 12 54 L 52 54 C 54 54 56 52 56 50 L 56 18 Z"
+                    fill="url(#folderGradient1)"
+                    stroke="#16a34a"
+                    stroke-width="1"/>
+
+              <!-- Folder Tab -->
+              <path class="folder-top" d="M 8 18 L 8 14 C 8 12 10 10 12 10 L 24 10 L 28 14 L 40 14 C 42 14 44 16 44 18 Z"
+                    fill="url(#folderGradient2)"
+                    stroke="#16a34a"
+                    stroke-width="1"/>
+
+              <!-- File Icon (floating) -->
+              <g class="file-icon">
+                <rect x="30" y="24" width="18" height="22" rx="2"
+                      fill="white"
+                      stroke="#22c55e"
+                      stroke-width="1.5"/>
+                <line x1="34" y1="30" x2="44" y2="30" stroke="#22c55e" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="34" y1="35" x2="44" y2="35" stroke="#22c55e" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="34" y1="40" x2="40" y2="40" stroke="#22c55e" stroke-width="1.5" stroke-linecap="round"/>
+              </g>
+
+              <!-- Arrow Icon (transfer symbol) -->
+              <g class="arrow-icon">
+                <path d="M 14 32 L 24 32" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
+                <path d="M 20 28 L 24 32 L 20 36" stroke="#10b981" stroke-width="2" stroke-linecap="round" fill="none"/>
+              </g>
+
+              <!-- Gradient Definitions -->
+              <defs>
+                <linearGradient id="folderGradient1" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" style="stop-color:#22c55e;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#10b981;stop-opacity:1" />
+                </linearGradient>
+                <linearGradient id="folderGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" style="stop-color:#16a34a;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+                </linearGradient>
+              </defs>
+            </svg>
           </div>
-          <div>
-            <h1 class="text-xl font-bold text-gray-900">F2F.ICU</h1>
-            <p class="text-xs text-gray-500">简单、快速、安全</p>
+
+          <!-- Brand Info -->
+          <div class="flex flex-col">
+            <h1 class="text-2xl font-bold bg-gradient-to-r from-primary-600 to-emerald-600 bg-clip-text text-transparent tracking-tight leading-none">F2F.ICU</h1>
+            <p class="text-xs text-gray-500 mt-0.5" data-i18n="tagline">Simple, Fast, Secure</p>
           </div>
         </div>
-        <div class="flex items-center gap-2 text-sm text-gray-600">
-          <i data-lucide="shield-check" class="w-4 h-4 text-primary-500"></i>
-          <span class="hidden sm:inline">端到端加密</span>
+
+        <!-- Right Section: Language Dropdown -->
+        <div class="language-dropdown" id="language-dropdown">
+          <button class="language-dropdown-button" onclick="toggleLanguageDropdown(event)">
+            <span class="flex items-center gap-2">
+              <span class="flag" id="current-lang-flag">🇺🇸</span>
+              <span id="current-lang-text">English</span>
+            </span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="language-dropdown-menu">
+            <div class="language-dropdown-item" data-lang="en" onclick="selectLanguage('en', event)">
+              <span class="flag">🇺🇸</span>
+              <span>English</span>
+              <svg class="check w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <div class="language-dropdown-item" data-lang="zh" onclick="selectLanguage('zh', event)">
+              <span class="flag">🇨🇳</span>
+              <span>简体中文</span>
+              <svg class="check w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -101,28 +692,28 @@
       <div class="flex border-b border-gray-200">
         <button onclick="switchTab('send')" id="tab-send" class="flex-1 px-6 py-4 font-medium transition-colors flex items-center justify-center gap-2 border-b-2 cursor-pointer hover:bg-gray-50">
           <i data-lucide="upload" class="w-5 h-5"></i>
-          <span>发送</span>
+          <span data-i18n="send">Send</span>
         </button>
         <button onclick="switchTab('receive')" id="tab-receive" class="flex-1 px-6 py-4 font-medium transition-colors flex items-center justify-center gap-2 border-b-2 cursor-pointer hover:bg-gray-50">
           <i data-lucide="download" class="w-5 h-5"></i>
-          <span>接收</span>
+          <span data-i18n="receive">Receive</span>
         </button>
       </div>
 
       <!-- Send Tab -->
       <div id="send-content" class="p-6 sm:p-8">
         <div class="mb-6">
-          <h2 class="text-2xl font-bold text-gray-900 mb-2">发送文件或文本</h2>
-          <p class="text-gray-600">上传文件（≤25MB）或输入文本内容，生成分享码</p>
+          <h2 class="text-2xl font-bold text-gray-900 mb-2" data-i18n="sendTitle">Send Files or Text</h2>
+          <p class="text-gray-600" data-i18n="sendDescription">Upload files (≤25MB) or enter text content to generate share code</p>
           <div class="mt-2 flex items-center gap-2 text-sm text-gray-500">
             <i data-lucide="info" class="w-4 h-4"></i>
-            <span>每天可上传 10 次，请合理使用</span>
+            <span data-i18n="dailyLimit">You can upload 10 times per day, please use reasonably</span>
           </div>
         </div>
 
         <!-- Share Code Input -->
         <div class="mb-6">
-          <label class="block text-sm font-medium text-gray-700 mb-2">分享码</label>
+          <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="shareCode">Share Code</label>
           <div class="flex gap-2">
             <input 
               type="text" 
@@ -134,7 +725,7 @@
             >
             <button onclick="generateRandomCode()" class="px-4 py-3 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors flex items-center gap-2 text-gray-700 cursor-pointer">
               <i data-lucide="shuffle" class="w-5 h-5"></i>
-              <span class="hidden sm:inline">随机</span>
+              <span class="hidden sm:inline" data-i18n="random">Random</span>
             </button>
           </div>
         </div>
@@ -145,19 +736,19 @@
             <button onclick="switchContentType('file')" id="content-type-file" class="flex-1 py-2 px-4 rounded-lg font-medium transition-colors bg-primary-500 text-white cursor-pointer hover:bg-primary-600">
               <div class="flex items-center justify-center gap-2">
                 <i data-lucide="file" class="w-4 h-4"></i>
-                <span>文件</span>
+                <span data-i18n="file">File</span>
               </div>
             </button>
             <button onclick="switchContentType('text')" id="content-type-text" class="flex-1 py-2 px-4 rounded-lg font-medium transition-colors bg-gray-100 text-gray-600 hover:bg-gray-200 cursor-pointer">
               <div class="flex items-center justify-center gap-2">
                 <i data-lucide="type" class="w-4 h-4"></i>
-                <span>文本</span>
+                <span data-i18n="text">Text</span>
               </div>
             </button>
             <button onclick="switchContentType('image')" id="content-type-image" class="flex-1 py-2 px-4 rounded-lg font-medium transition-colors bg-gray-100 text-gray-600 hover:bg-gray-200 cursor-pointer">
               <div class="flex items-center justify-center gap-2">
                 <i data-lucide="image" class="w-4 h-4"></i>
-                <span>图片</span>
+                <span data-i18n="image">Image</span>
               </div>
             </button>
           </div>
@@ -176,9 +767,9 @@
                     <i data-lucide="file-plus" class="w-8 h-8 text-primary-600"></i>
                   </div>
                   <div>
-                    <p class="text-gray-700 font-medium">点击选择文件或拖拽到此处</p>
-                    <p class="text-sm text-gray-500 mt-1">支持任意格式，最大 25MB</p>
-                    <p class="text-xs text-primary-600 mt-2">提示：按 Ctrl/Cmd + V 可直接粘贴图片</p>
+                    <p class="text-gray-700 font-medium" data-i18n="clickToSelectFile">Click to select file or drag here</p>
+                    <p class="text-sm text-gray-500 mt-1" data-i18n="supportAnyFormat">Support any format, max 25MB</p>
+                    <p class="text-xs text-primary-600 mt-2" data-i18n="pasteImageTip">Tip: Press Ctrl/Cmd + V to paste image</p>
                   </div>
                 </div>
               </div>
@@ -187,9 +778,9 @@
               <div id="upload-preview-state" class="hidden">
                 <!-- Image Preview -->
                 <div id="image-preview-area" class="hidden relative group">
-                  <img id="preview-img" class="w-full max-h-64 object-contain bg-gray-50" alt="预览">
+                  <img id="preview-img" class="w-full max-h-64 object-contain bg-gray-50" alt="Preview">
                   <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <div class="text-white text-sm">点击重新上传</div>
+                    <div class="text-white text-sm" data-i18n="reupload">Click to reupload</div>
                   </div>
                 </div>
 
@@ -219,7 +810,7 @@
             <textarea 
               id="text-content"
               rows="8"
-              placeholder="输入要传输的文本内容..."
+              placeholder="Enter text content to transfer..." data-i18n="enterTextContent"
               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none resize-none"
             ></textarea>
           </div>
@@ -238,18 +829,18 @@
                     <i data-lucide="image-plus" class="w-8 h-8 text-primary-600"></i>
                   </div>
                   <div>
-                    <p class="text-gray-700 font-medium">点击选择图片或拖拽到此处</p>
-                    <p class="text-sm text-gray-500 mt-1">支持 PNG、JPG、GIF、WEBP 等格式</p>
-                    <p class="text-xs text-primary-600 mt-2">提示：按 Ctrl/Cmd + V 可直接粘贴截图</p>
+                    <p class="text-gray-700 font-medium" data-i18n="clickToSelectImage">Click to select image or drag here</p>
+                    <p class="text-sm text-gray-500 mt-1" data-i18n="supportedImageFormats">Support PNG, JPG, GIF, WEBP formats</p>
+                    <p class="text-xs text-primary-600 mt-2" data-i18n="pasteScreenshotTip">Tip: Press Ctrl/Cmd + V to paste screenshot</p>
                   </div>
                 </div>
               </div>
 
               <!-- Image Preview State -->
               <div id="image-upload-preview-state" class="hidden relative group">
-                <img id="image-upload-preview-img" class="w-full max-h-96 object-contain bg-gray-50" alt="预览">
+                <img id="image-upload-preview-img" class="w-full max-h-96 object-contain bg-gray-50" alt="Preview">
                 <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <div class="text-white text-sm">点击重新上传</div>
+                  <div class="text-white text-sm">Click to reupload</div>
                 </div>
               </div>
 
@@ -265,7 +856,7 @@
           class="w-full bg-gradient-to-r from-primary-500 to-emerald-600 hover:from-primary-600 hover:to-emerald-700 text-white font-medium py-4 rounded-lg transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary-500/30 cursor-pointer"
         >
           <i data-lucide="send" class="w-5 h-5"></i>
-          <span>创建分享</span>
+          <span data-i18n="createShare">Create Share</span>
         </button>
 
         <!-- Message -->
@@ -279,30 +870,30 @@
                 <i data-lucide="check" class="w-6 h-6 text-white"></i>
               </div>
               <div>
-                <h3 class="font-bold text-gray-900">创建成功</h3>
-                <p class="text-sm text-gray-600">分享给接收方</p>
+                <h3 class="font-bold text-gray-900" data-i18n="uploadSuccess">Upload Successful</h3>
+                <p class="text-sm text-gray-600" data-i18n="shareWithRecipient">Share with recipient</p>
               </div>
             </div>
             
             <div class="bg-white rounded-lg p-4 text-center mb-3">
-              <p class="text-xs text-gray-500 mb-2">分享码</p>
+              <p class="text-xs text-gray-500 mb-2" data-i18n="shareCode">Share Code</p>
               <p id="result-code" class="text-3xl font-bold text-primary-600 tracking-widest font-mono"></p>
             </div>
 
             <div class="grid grid-cols-2 gap-2">
               <button onclick="copyShareLink()" class="flex items-center justify-center gap-2 px-4 py-2.5 bg-white hover:bg-gray-50 border border-gray-200 rounded-lg transition-colors text-sm font-medium text-gray-700 cursor-pointer">
                 <i data-lucide="link" class="w-4 h-4"></i>
-                <span>复制链接</span>
+                <span data-i18n="copyLink">Copy Link</span>
               </button>
               <button onclick="copyShareCode()" class="flex items-center justify-center gap-2 px-4 py-2.5 bg-white hover:bg-gray-50 border border-gray-200 rounded-lg transition-colors text-sm font-medium text-gray-700 cursor-pointer">
                 <i data-lucide="copy" class="w-4 h-4"></i>
-                <span>复制分享码</span>
+                <span data-i18n="copyShareCode">Copy Code</span>
               </button>
             </div>
 
             <div class="mt-4 flex items-start gap-2 text-xs text-gray-600">
               <i data-lucide="info" class="w-3.5 h-3.5 mt-0.5 text-primary-500"></i>
-              <p>对方下载后，数据将在 1 分钟内自动删除</p>
+              <p data-i18n="autoDeleteNote">Data will auto-delete 1 minute after download</p>
             </div>
           </div>
         </div>
@@ -311,17 +902,17 @@
       <!-- Receive Tab -->
       <div id="receive-content" class="hidden p-6 sm:p-8">
         <div class="mb-6">
-          <h2 class="text-2xl font-bold text-gray-900 mb-2">接收文件或文本</h2>
-          <p class="text-gray-600">输入 6 位取件码下载文件或查看文本</p>
+          <h2 class="text-2xl font-bold text-gray-900 mb-2" data-i18n="receiveTitle">Receive Files or Text</h2>
+          <p class="text-gray-600" data-i18n="receiveDescription">Enter 6-digit pickup code to download file or view text</p>
           <div class="mt-3 flex items-start gap-2 text-sm text-amber-700 bg-amber-50 border border-amber-200 rounded-lg p-3">
             <i data-lucide="alert-triangle" class="w-4 h-4 mt-0.5 flex-shrink-0"></i>
-            <p>取件后文件将在 <strong>1 分钟内自动删除</strong>，请及时保存</p>
+            <p data-i18n="receiveWarning">File will be auto-deleted in <strong>1 minute after pickup</strong>, please save promptly</p>
           </div>
         </div>
 
         <!-- Receive Code Input -->
         <div class="mb-6">
-          <label class="block text-sm font-medium text-gray-700 mb-2">取件码</label>
+          <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="pickupCode">Pickup Code</label>
           <input 
             type="text" 
             id="receive-code"
@@ -339,7 +930,7 @@
           class="w-full bg-gradient-to-r from-primary-500 to-emerald-600 hover:from-primary-600 hover:to-emerald-700 text-white font-medium py-4 rounded-lg transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary-500/30 cursor-pointer"
         >
           <i data-lucide="download" class="w-5 h-5"></i>
-          <span>获取内容</span>
+          <span data-i18n="getContent">Get Content</span>
         </button>
 
         <!-- Download Progress -->
@@ -349,7 +940,7 @@
               <div class="animate-spin">
                 <i data-lucide="loader-2" class="w-5 h-5 text-primary-500"></i>
               </div>
-              <span class="text-sm text-gray-700">正在下载...</span>
+              <span class="text-sm text-gray-700" data-i18n="downloading">Downloading...</span>
             </div>
             <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
               <div id="progress-bar" class="bg-gradient-to-r from-primary-500 to-emerald-600 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
@@ -367,12 +958,25 @@
     </div>
 
     <!-- Footer -->
-    <footer class="mt-8 text-center text-sm text-gray-600">
-      <div class="flex items-center justify-center gap-2 mb-2">
-        <i data-lucide="zap" class="w-4 h-4 text-primary-500"></i>
-        <span>基于 Cloudflare 边缘网络</span>
+    <footer class="mt-12 pb-8">
+      <div class="text-center text-sm text-gray-600 space-y-2">
+        <div class="flex items-center justify-center gap-2">
+          <i data-lucide="zap" class="w-4 h-4 text-primary-500"></i>
+          <span data-i18n="poweredBy">Powered by Cloudflare Edge Network</span>
+        </div>
+        <p data-i18n="freeFastSecure">Free • Fast • Secure</p>
+        <p class="text-xs text-gray-500">
+          <span data-i18n="endToEndEncryption">End-to-End Encryption</span>
+          <span class="mx-1">•</span>
+          <span data-i18n="aes256Security">AES-256 Security</span>
+          <span class="mx-1">•</span>
+          <span data-i18n="autoDelete">Auto Delete</span>
+          <span class="mx-1">•</span>
+          <span data-i18n="instantTransfer">Instant Transfer</span>
+          <span class="mx-1">•</span>
+          <span data-i18n="noRegistration">No Registration</span>
+        </p>
       </div>
-      <p>免费 • 快速 • 安全</p>
     </footer>
 
   </main>
@@ -398,14 +1002,14 @@
           <i data-lucide="zoom-in" class="w-5 h-5"></i>
         </button>
         <div class="w-px h-6 bg-white/20"></div>
-        <button onclick="resetZoom(event)" class="text-white text-sm hover:text-primary-300 transition-colors cursor-pointer">
-          重置
+        <button onclick="resetZoom(event)" class="text-white text-sm hover:text-primary-300 transition-colors cursor-pointer" data-i18n="reset">
+          Reset
         </button>
       </div>
 
       <!-- Image Container -->
       <div id="preview-image-container" class="overflow-hidden">
-        <img id="preview-modal-img" class="transition-transform duration-200" style="cursor: move;" alt="预览">
+        <img id="preview-modal-img" class="transition-transform duration-200" style="cursor: move;" alt="Preview">
       </div>
     </div>
   </div>
@@ -501,7 +1105,7 @@
           // If in file mode, switch to image mode
           if (currentContentType === 'file') {
             switchContentType('image');
-            showToast('已自动切换到图片模式');
+            showToast(t('switchToImageMode'));
           }
           
           // If in image mode, handle directly
@@ -583,7 +1187,7 @@
 
     function handleFile(file) {
       if (file.size > 25 * 1024 * 1024) {
-        showMessage('send-message', '文件大小超过 25MB 限制', 'error');
+        showMessage('send-message', t('fileSizeExceeded'), 'error');
         return;
       }
 
@@ -648,12 +1252,12 @@
     function handleImage(file) {
       // Validate image type
       if (!file.type.startsWith('image/')) {
-        showMessage('send-message', '请选择图片文件（PNG、JPG、GIF、WEBP等）', 'error');
+        showMessage('send-message', t('selectImageFile'), 'error');
         return;
       }
 
       if (file.size > 25 * 1024 * 1024) {
-        showMessage('send-message', '图片大小超过 25MB 限制', 'error');
+        showMessage('send-message', t('imageSizeExceeded'), 'error');
         return;
       }
 
@@ -705,7 +1309,7 @@
       if (files.length > 0 && files[0].type.startsWith('image/')) {
         handleImage(files[0]);
       } else if (files.length > 0) {
-        showMessage('send-message', '请拖入图片文件', 'error');
+        showMessage('send-message', t('dragImageOnly'), 'error');
       }
     });
 
@@ -735,28 +1339,28 @@
       const textContent = document.getElementById('text-content').value.trim();
 
       if (!code) {
-        showMessage('send-message', '请输入 6 位分享码', 'error');
+        showMessage('send-message', t('enterShareCode'), 'error');
         return;
       }
 
       if (!/^[A-Z0-9]{6}$/.test(code)) {
-        showMessage('send-message', '分享码必须是 6 位数字或大写字母', 'error');
+        showMessage('send-message', t('invalidShareCode'), 'error');
         return;
       }
 
       // Check based on current content type
       if (currentContentType === 'file' && !selectedFile) {
-        showMessage('send-message', '请选择文件', 'error');
+        showMessage('send-message', t('selectFile'), 'error');
         return;
       }
 
       if (currentContentType === 'text' && !textContent) {
-        showMessage('send-message', '请输入文本内容', 'error');
+        showMessage('send-message', t('enterText'), 'error');
         return;
       }
 
       if (currentContentType === 'image' && !selectedImage) {
-        showMessage('send-message', '请选择图片', 'error');
+        showMessage('send-message', t('selectImage'), 'error');
         return;
       }
 
@@ -815,7 +1419,7 @@
           hideMessage('send-message');
 
           // 显示成功提示
-          showToast('上传成功！', 'success');
+          showToast(t('uploadSuccess') + '!', 'success');
 
           // Clear form
           document.getElementById('send-code').value = '';
@@ -824,10 +1428,10 @@
           clearImage();
           generateRandomCode();
         } else {
-          showMessage('send-message', result.error || '上传失败', 'error');
+          showMessage('send-message', result.error || t('uploadFailed'), 'error');
         }
       } catch (error) {
-        showMessage('send-message', '网络错误，请重试', 'error');
+        showMessage('send-message', t('networkError'), 'error');
       } finally {
         btn.disabled = false;
         btn.innerHTML = originalHTML;
@@ -840,12 +1444,12 @@
       const code = document.getElementById('receive-code').value.trim();
 
       if (!code) {
-        showMessage('receive-message', '请输入取件码', 'error');
+        showMessage('receive-message', t('enterPickupCode'), 'error');
         return;
       }
 
       if (!/^[A-Z0-9]{6}$/.test(code)) {
-        showMessage('receive-message', '取件码必须是 6 位数字或大写字母', 'error');
+        showMessage('receive-message', t('invalidPickupCode'), 'error');
         return;
       }
 
@@ -884,13 +1488,13 @@
                       <i data-lucide="image" class="w-6 h-6 text-white"></i>
                     </div>
                     <div>
-                      <h3 class="font-bold text-gray-900">图片预览</h3>
+                      <h3 class="font-bold text-gray-900">${t("imagePreview")}</h3>
                       <p class="text-sm text-gray-600">${result.fileName || '图片'}</p>
                     </div>
                   </div>
                   <button onclick="downloadImageFromResult('${result.content}', '${result.fileName}')" class="flex items-center gap-2 px-3 py-1.5 bg-primary-500 hover:bg-primary-600 text-white text-sm rounded-lg transition-colors cursor-pointer">
                     <i data-lucide="download" class="w-4 h-4"></i>
-                    <span>下载</span>
+                    <span>${t("download")}</span>
                   </button>
                 </div>
                 <div class="bg-white rounded-lg p-4 mb-3">
@@ -898,7 +1502,7 @@
                 </div>
                 <div class="flex items-start gap-2 text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg p-3">
                   <i data-lucide="clock" class="w-3.5 h-3.5 mt-0.5 flex-shrink-0"></i>
-                  <p>图片将在 1 分钟后自动删除，请及时保存</p>
+                  <p>${t("contentAutoDelete")}</p>
                 </div>
               </div>
             `;
@@ -938,13 +1542,13 @@
                       <i data-lucide="check" class="w-6 h-6 text-white"></i>
                     </div>
                     <div>
-                      <h3 class="font-bold text-gray-900">下载成功</h3>
+                      <h3 class="font-bold text-gray-900">${t("downloadSuccess")}</h3>
                       <p class="text-sm text-gray-600">${result.fileName}</p>
                     </div>
                   </div>
                   <div class="flex items-start gap-2 text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg p-3">
                     <i data-lucide="clock" class="w-3.5 h-3.5 mt-0.5 flex-shrink-0"></i>
-                    <p>文件将在 1 分钟后自动删除，请确认已保存</p>
+                    <p>${t("fileAutoDelete")}</p>
                   </div>
                 </div>
               `;
@@ -956,10 +1560,10 @@
             display.innerHTML = `
               <div class="bg-gradient-to-br from-primary-50 to-emerald-50 rounded-lg p-6 border border-primary-200">
                 <div class="flex items-center justify-between mb-4">
-                  <h3 class="font-bold text-gray-900">文本内容</h3>
+                  <h3 class="font-bold text-gray-900">${t("textContent")}</h3>
                   <button onclick="copyText(\`${escapeHtml(result.content).replace(/`/g, '\\`')}\`, this)" class="flex items-center gap-2 px-3 py-1.5 bg-primary-500 hover:bg-primary-600 text-white text-sm rounded-lg transition-colors cursor-pointer">
                     <i data-lucide="copy" class="w-4 h-4"></i>
-                    <span>复制</span>
+                    <span>${t("copy")}</span>
                   </button>
                 </div>
                 <div class="bg-white rounded-lg p-4 max-h-96 overflow-y-auto mb-3">
@@ -967,7 +1571,7 @@
                 </div>
                 <div class="flex items-start gap-2 text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg p-3">
                   <i data-lucide="clock" class="w-3.5 h-3.5 mt-0.5 flex-shrink-0"></i>
-                  <p>内容将在 1 分钟后自动删除，请及时复制保存</p>
+                  <p>${t("contentAutoDelete")}</p>
                 </div>
               </div>
             `;
@@ -981,14 +1585,14 @@
           progressDiv.classList.add('hidden');
           progressBar.style.width = '0%';
           progressText.textContent = '0%';
-          showMessage('receive-message', result.error || '获取失败', 'error');
+          showMessage('receive-message', result.error || t('getFailed'), 'error');
         }
       } catch (error) {
         if (progressInterval) clearInterval(progressInterval);
         progressDiv.classList.add('hidden');
         progressBar.style.width = '0%';
         progressText.textContent = '0%';
-        showMessage('receive-message', '网络错误，请重试', 'error');
+        showMessage('receive-message', t('networkError'), 'error');
       } finally {
         btn.disabled = false;
         btn.innerHTML = originalHTML;
@@ -1006,10 +1610,10 @@
     // Copy to clipboard
     function copyText(text, button) {
       navigator.clipboard.writeText(text).then(() => {
-        showToast('文本已复制');
+        showToast(t('textCopied'));
         
         const originalHTML = button.innerHTML;
-        button.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i><span>已复制</span>';
+        button.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i><span>${t("copied")}</span>';
         lucide.createIcons();
         
         setTimeout(() => {
@@ -1029,10 +1633,10 @@
           document.body.removeChild(textarea);
           
           if (success) {
-            showToast('文本已复制');
+            showToast(t('textCopied'));
             
             const originalHTML = button.innerHTML;
-            button.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i><span>已复制</span>';
+            button.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i><span>${t("copied")}</span>';
             lucide.createIcons();
             
             setTimeout(() => {
@@ -1040,10 +1644,10 @@
               lucide.createIcons();
             }, 2000);
           } else {
-            showToast('复制失败，请手动复制', 'error');
+            showToast(t('copyFailed'), 'error');
           }
         } catch (err) {
-          showToast('复制失败，请手动复制', 'error');
+          showToast(t('copyFailed'), 'error');
         }
       });
     }
@@ -1055,9 +1659,9 @@
       const link = `${origin}?code=${code}`;
       
       navigator.clipboard.writeText(link).then(() => {
-        showToast('分享链接已复制');
+        showToast(t('linkCopied'));
       }).catch(() => {
-        showToast('复制失败，请手动复制', 'error');
+        showToast(t('copyFailed'), 'error');
       });
     }
 
@@ -1066,9 +1670,9 @@
       const code = document.getElementById('result-code').textContent;
       
       navigator.clipboard.writeText(code).then(() => {
-        showToast('分享码已复制');
+        showToast(t('codeCopied'));
       }).catch(() => {
-        showToast('复制失败，请手动复制', 'error');
+        showToast(t('copyFailed'), 'error');
       });
     }
 
@@ -1078,7 +1682,7 @@
       link.href = dataUrl;
       link.download = fileName || 'image.png';
       link.click();
-      showToast('图片下载中...');
+      showToast(t('imageDownloading'));
     }
 
     // Image preview modal
@@ -1172,9 +1776,9 @@
     window.onload = () => {
       const initialTab = sessionStorage.getItem('initialTab') || 'send';
       const initialCode = sessionStorage.getItem('initialCode');
-      
+
       generateRandomCode();
-      
+
       // Set initial tab
       if (initialTab === 'receive' && initialCode) {
         switchTab('receive');
@@ -1185,7 +1789,10 @@
       } else {
         switchTab('send');
       }
-      
+
+      // Initialize UI language
+      updateUILanguage();
+
       lucide.createIcons();
     };
   </script>

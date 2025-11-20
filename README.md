@@ -4,6 +4,8 @@
 
 **简单、快速、安全的点对点文件传输工具**
 
+[English](./README_EN.md) | 简体中文
+
 [![GitHub stars](https://img.shields.io/github/stars/isnl/f2f?style=flat-square&logo=github)](https://github.com/isnl/f2f/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/isnl/f2f?style=flat-square&logo=github)](https://github.com/isnl/f2f/network)
 [![GitHub issues](https://img.shields.io/github/issues/isnl/f2f?style=flat-square&logo=github)](https://github.com/isnl/f2f/issues)
@@ -13,7 +15,7 @@
 [![Deploy with Cloudflare Pages](https://img.shields.io/badge/Deploy%20with-Cloudflare%20Pages-F38020?style=flat-square&logo=cloudflare)](https://pages.cloudflare.com/)
 [![Powered by Workers](https://img.shields.io/badge/Powered%20by-Cloudflare%20Workers-F38020?style=flat-square&logo=cloudflare)](https://workers.cloudflare.com/)
 
-[🌐 在线体验](https://f2f.icu) | [📖 文档](https://github.com/isnl/f2f#readme) | [🐛 报告问题](https://github.com/isnl/f2f/issues) | [💡 功能建议](https://github.com/isnl/f2f/issues/new)
+[🌐 在线体验](https://f2f.icu) | [📖 文档](https://github.com/isnl/f2f) | [🐛 报告问题](https://github.com/isnl/f2f/issues) | [💡 功能建议](https://github.com/isnl/f2f/issues/new)
 
 </div>
 
@@ -367,22 +369,6 @@ expirationTtl: 60 // 1分钟 = 60秒，可自定义
 - 添加必要的注释
 - 提交前测试功能
 
-## 📊 项目统计
-
-<div align="center">
-
-![Alt](https://repobeats.axiom.co/api/embed/your-repo-id-here.svg "Repobeats analytics image")
-
-</div>
-
-## ⭐ Star 历史
-
-<div align="center">
-
-[![Star History Chart](https://api.star-history.com/svg?repos=isnl/f2f&type=Date)](https://star-history.com/#isnl/f2f&Date)
-
-</div>
-
 ## 🌟 致谢
 
 感谢以下技术和项目：
@@ -477,6 +463,24 @@ R2 对象存储需要绑定银行卡才能使用，而 KV 存储完全免费且�
 - **KV Metrics**：读写次数、存储使用量等
 - **Pages Analytics**：访问量、地理分布等
 </details>
+
+---
+
+## 📊 项目统计
+
+<div align="center">
+
+![Repobeats analytics](https://repobeats.axiom.co/api/embed/edf9c6b674c0f6e8c6f8e6e8f6c6e8f6c6f8e6e8.svg "Repobeats analytics image")
+
+</div>
+
+## ⭐ Star 历史
+
+<div align="center">
+
+[![Star History Chart](https://api.star-history.com/svg?repos=isnl/f2f&type=Date)](https://star-history.com/#isnl/f2f&Date)
+
+</div>
 
 ---
 
