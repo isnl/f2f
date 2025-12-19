@@ -10,7 +10,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     const formData = await request.formData();
     
     const code = formData.get('code') as string;
-    const type = formData.get('type') as string; // 'file' 或 'text'
+    const type = formData.get('type') as string; // 'file', 'text', or 'images'
     const content = formData.get('content') as string;
     const fileName = formData.get('fileName') as string | null;
     
@@ -60,6 +60,8 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       }
     } else if (type === 'text') {
       contentType = 'text/plain';
+    } else if (type === 'images' || type === 'files') {
+      contentType = 'application/json';
     }
     
     // 构造存储数据

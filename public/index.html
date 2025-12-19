@@ -53,6 +53,8 @@
   <!-- Tailwind CSS -->
   <link rel="stylesheet" href="/assets/css/style.css">
   <script src="/assets/js/lucide.min.js"></script>
+  <!-- JSZip for file compression -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
   <!-- Custom Styles for Layout Stability -->
   <style>
@@ -461,7 +463,23 @@
 
         // Image Preview Modal
         reset: 'Reset',
-        reupload: 'Click to reupload'
+        reupload: 'Click to reupload',
+
+        // Multi-image upload
+        selectedImages: 'Selected images',
+        clearAll: 'Clear All',
+        maxImagesReached: 'Maximum 25 images allowed',
+        totalSizeExceeded: 'Total size exceeds 25MB limit',
+        downloadAllImages: 'Download All',
+        imagesPreview: 'Images Preview',
+        downloadAsZip: 'Download as ZIP',
+
+        // Multi-file upload
+        selectedFiles: 'Selected files',
+        maxFilesReached: 'Maximum 100 files allowed',
+        filesPreview: 'Files Preview',
+        clickToSelectFiles: 'Click to select files or drag here',
+        supportAnyFormatMultiple: 'Support any format, max 100 files, total 25MB'
       },
       zh: {
         // Header
@@ -550,7 +568,23 @@
 
         // Image Preview Modal
         reset: '重置',
-        reupload: '点击重新上传'
+        reupload: '点击重新上传',
+
+        // Multi-image upload
+        selectedImages: '已选图片',
+        clearAll: '清空全部',
+        maxImagesReached: '最多只能选择25张图片',
+        totalSizeExceeded: '图片总大小超过25MB限制',
+        downloadAllImages: '下载全部',
+        imagesPreview: '图片预览',
+        downloadAsZip: '打包下载 ZIP',
+
+        // Multi-file upload
+        selectedFiles: '已选文件',
+        maxFilesReached: '最多只能选择100个文件',
+        filesPreview: '文件预览',
+        clickToSelectFiles: '点击选择文件或拖拽到此处',
+        supportAnyFormatMultiple: '支持任意格式，最多 100 个文件，总大小 25MB'
       }
     };
 
@@ -841,53 +875,42 @@
 
           <!-- File Upload Area -->
           <div id="file-upload-area">
-            <div 
-              id="file-upload" 
+            <!-- Files Grid Preview -->
+            <div id="files-grid-preview" class="hidden mb-4">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-sm text-gray-600">
+                  <span data-i18n="selectedFiles">Selected files</span>: <span id="files-count">0</span>/100
+                </span>
+                <button onclick="clearAllFiles()" class="text-xs text-red-500 hover:text-red-700 cursor-pointer flex items-center gap-1">
+                  <i data-lucide="trash-2" class="w-3 h-3"></i>
+                  <span data-i18n="clearAll">Clear All</span>
+                </button>
+              </div>
+              <div id="files-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 p-2">
+                <!-- Files will be inserted here -->
+              </div>
+            </div>
+
+            <div
+              id="file-upload"
               onclick="document.getElementById('file-input').click()"
               class="border-2 border-dashed border-gray-300 rounded-lg overflow-hidden cursor-pointer hover:border-primary-400 transition-all"
             >
-              <!-- Empty State -->
+              <!-- Empty/Add More State -->
               <div id="upload-empty-state" class="p-8 text-center">
                 <div class="flex flex-col items-center gap-3">
                   <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center">
                     <i data-lucide="file-plus" class="w-8 h-8 text-primary-600"></i>
                   </div>
                   <div>
-                    <p class="text-gray-700 font-medium" data-i18n="clickToSelectFile">Click to select file or drag here</p>
-                    <p class="text-sm text-gray-500 mt-1" data-i18n="supportAnyFormat">Support any format, max 25MB</p>
+                    <p class="text-gray-700 font-medium" data-i18n="clickToSelectFiles">Click to select files or drag here</p>
+                    <p class="text-sm text-gray-500 mt-1" data-i18n="supportAnyFormatMultiple">Support any format, max 100 files, total 25MB</p>
                     <p class="text-xs text-primary-600 mt-2" data-i18n="pasteImageTip">Tip: Press Ctrl/Cmd + V to paste image</p>
                   </div>
                 </div>
               </div>
 
-              <!-- File Preview State -->
-              <div id="upload-preview-state" class="hidden">
-                <!-- Image Preview -->
-                <div id="image-preview-area" class="hidden relative group">
-                  <img id="preview-img" class="w-full max-h-64 object-contain bg-gray-50" alt="Preview">
-                  <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <div class="text-white text-sm" data-i18n="reupload">Click to reupload</div>
-                  </div>
-                </div>
-
-                <!-- Non-image File Preview -->
-                <div id="file-preview-area" class="hidden p-6 bg-primary-50/50 hover:bg-primary-50 transition-colors">
-                  <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <i data-lucide="file" class="w-6 h-6 text-primary-600"></i>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                      <p id="file-name" class="text-sm font-medium text-gray-900 truncate"></p>
-                      <p id="file-size" class="text-xs text-gray-500"></p>
-                    </div>
-                    <div class="text-gray-400">
-                      <i data-lucide="upload" class="w-5 h-5"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <input type="file" id="file-input" class="hidden" onchange="handleFileSelect(event)">
+              <input type="file" id="file-input" multiple class="hidden" onchange="handleFileSelect(event)">
             </div>
           </div>
 
@@ -903,12 +926,28 @@
 
           <!-- Image Upload Area -->
           <div id="image-upload-area" class="hidden">
-            <div 
-              id="image-upload" 
+            <!-- Images Grid Preview -->
+            <div id="images-grid-preview" class="hidden mb-4">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-sm text-gray-600">
+                  <span data-i18n="selectedImages">Selected images</span>: <span id="images-count">0</span>/25
+                </span>
+                <button onclick="clearAllImages()" class="text-xs text-red-500 hover:text-red-700 cursor-pointer flex items-center gap-1">
+                  <i data-lucide="trash-2" class="w-3 h-3"></i>
+                  <span data-i18n="clearAll">Clear All</span>
+                </button>
+              </div>
+              <div id="images-grid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 p-2">
+                <!-- Images will be inserted here -->
+              </div>
+            </div>
+
+            <div
+              id="image-upload"
               onclick="document.getElementById('image-input').click()"
               class="border-2 border-dashed border-gray-300 rounded-lg overflow-hidden cursor-pointer hover:border-primary-400 transition-all"
             >
-              <!-- Empty State -->
+              <!-- Empty/Add More State -->
               <div id="image-upload-empty-state" class="p-8 text-center">
                 <div class="flex flex-col items-center gap-3">
                   <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center">
@@ -916,21 +955,13 @@
                   </div>
                   <div>
                     <p class="text-gray-700 font-medium" data-i18n="clickToSelectImage">Click to select image or drag here</p>
-                    <p class="text-sm text-gray-500 mt-1" data-i18n="supportedImageFormats">Support PNG, JPG, GIF, WEBP formats</p>
+                    <p class="text-sm text-gray-500 mt-1" data-i18n="supportedImageFormats">Support PNG, JPG, GIF, WEBP formats (max 25 images)</p>
                     <p class="text-xs text-primary-600 mt-2" data-i18n="pasteScreenshotTip">Tip: Press Ctrl/Cmd + V to paste screenshot</p>
                   </div>
                 </div>
               </div>
 
-              <!-- Image Preview State -->
-              <div id="image-upload-preview-state" class="hidden relative group">
-                <img id="image-upload-preview-img" class="w-full max-h-96 object-contain bg-gray-50" alt="Preview">
-                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <div class="text-white text-sm">Click to reupload</div>
-                </div>
-              </div>
-
-              <input type="file" id="image-input" accept="image/*" class="hidden" onchange="handleImageSelect(event)">
+              <input type="file" id="image-input" accept="image/*" multiple class="hidden" onchange="handleImageSelect(event)">
             </div>
           </div>
         </div>
@@ -963,7 +994,7 @@
             
             <div class="bg-white rounded-lg p-4 text-center mb-3">
               <p class="text-xs text-gray-500 mb-2" data-i18n="shareCode">Share Code</p>
-              <p id="result-code" style="font-family: 'Orbitron', sans-serif; font-weight: 900; letter-spacing: 0.5em; color: #22c55e; text-shadow: 0 0 15px rgba(34, 197, 94, 0.6), 0 0 30px rgba(34, 197, 94, 0.3);" class="text-5xl"></p>
+              <p id="result-code" style="font-family: 'Orbitron', sans-serif; font-weight: 900; letter-spacing: 0.5em; color: #22c55e; text-shadow: 0 0 15px rgba(34, 197, 94, 0.6), 0 0 30px rgba(34, 197, 94, 0.3);" class="text-3xl"></p>
             </div>
 
             <div class="grid grid-cols-2 gap-2">
@@ -1127,8 +1158,8 @@
     // Initialize Lucide icons
     lucide.createIcons();
 
-    let selectedFile = null;
-    let selectedImage = null;
+    let selectedFiles = []; // Array for multiple files
+    let selectedImages = []; // Array for multiple images
     let currentContentType = 'file'; // 'file', 'text', or 'image'
 
     // Toast notification
@@ -1210,16 +1241,16 @@
         if (items[i].type.indexOf('image') !== -1) {
           e.preventDefault();
           const blob = items[i].getAsFile();
-          
+
           // If in file mode, switch to image mode
           if (currentContentType === 'file') {
             switchContentType('image');
             showToast(t('switchToImageMode'));
           }
-          
+
           // If in image mode, handle directly
           if (currentContentType === 'image') {
-            handleImage(blob);
+            addImage(blob);
           }
           break;
         }
@@ -1280,123 +1311,236 @@
     fileUpload.addEventListener('drop', (e) => {
       e.preventDefault();
       fileUpload.classList.remove('border-primary-500', 'bg-primary-50');
-      const files = e.dataTransfer.files;
-      if (files.length > 0) {
-        handleFile(files[0]);
-      }
+      const files = Array.from(e.dataTransfer.files);
+      files.forEach(file => addFile(file));
     });
 
-    // Handle file selection
+    // Handle file selection (multiple)
     function handleFileSelect(event) {
-      const file = event.target.files[0];
-      if (file) {
-        handleFile(file);
-      }
+      const files = Array.from(event.target.files);
+      files.forEach(file => addFile(file));
+      event.target.value = '';
     }
 
-    function handleFile(file) {
+    // Add a single file to the array
+    function addFile(file) {
+      // Check max count
+      if (selectedFiles.length >= 100) {
+        showMessage('send-message', t('maxFilesReached'), 'error');
+        return;
+      }
+
+      // Check individual file size (25MB)
       if (file.size > 25 * 1024 * 1024) {
         showMessage('send-message', t('fileSizeExceeded'), 'error');
         return;
       }
 
-      selectedFile = file;
-      
-      const emptyState = document.getElementById('upload-empty-state');
-      const previewState = document.getElementById('upload-preview-state');
-      const imagePreviewArea = document.getElementById('image-preview-area');
-      const filePreviewArea = document.getElementById('file-preview-area');
-      const previewImg = document.getElementById('preview-img');
-      const fileName = document.getElementById('file-name');
-      const fileSize = document.getElementById('file-size');
-
-      // Hide empty state, show preview state
-      emptyState.classList.add('hidden');
-      previewState.classList.remove('hidden');
-      
-      // Update file info
-      fileName.textContent = file.name;
-      fileSize.textContent = `${(file.size / 1024).toFixed(2)} KB`;
-      
-      // Show image preview or file preview
-      if (file.type.startsWith('image/')) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          previewImg.src = e.target.result;
-          imagePreviewArea.classList.remove('hidden');
-          filePreviewArea.classList.add('hidden');
-        };
-        reader.readAsDataURL(file);
-      } else {
-        filePreviewArea.classList.remove('hidden');
-        imagePreviewArea.classList.add('hidden');
+      // Check total size
+      const currentTotalSize = selectedFiles.reduce((sum, f) => sum + f.file.size, 0);
+      if (currentTotalSize + file.size > 25 * 1024 * 1024) {
+        showMessage('send-message', t('totalSizeExceeded'), 'error');
+        return;
       }
-      
+
+      // Generate unique ID and read as data URL
+      const id = Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        selectedFiles.push({
+          id,
+          file,
+          dataUrl: e.target.result,
+          name: file.name,
+          size: file.size,
+          type: file.type
+        });
+        updateFilesPreview();
+      };
+
+      reader.readAsDataURL(file);
+    }
+
+    // Get file icon based on type
+    function getFileIcon(type) {
+      if (type.startsWith('image/')) return 'image';
+      if (type.startsWith('video/')) return 'video';
+      if (type.startsWith('audio/')) return 'music';
+      if (type.includes('pdf')) return 'file-text';
+      if (type.includes('zip') || type.includes('rar')) return 'archive';
+      if (type.includes('word') || type.includes('document')) return 'file-text';
+      if (type.includes('sheet') || type.includes('excel')) return 'table';
+      return 'file';
+    }
+
+    // Update the files grid preview
+    function updateFilesPreview() {
+      const gridPreview = document.getElementById('files-grid-preview');
+      const grid = document.getElementById('files-grid');
+      const countSpan = document.getElementById('files-count');
+      const emptyState = document.getElementById('upload-empty-state');
+
+      countSpan.textContent = selectedFiles.length;
+
+      if (selectedFiles.length === 0) {
+        gridPreview.classList.add('hidden');
+        emptyState.querySelector('p[data-i18n="clickToSelectFiles"]').textContent = t('clickToSelectFiles');
+      } else {
+        gridPreview.classList.remove('hidden');
+        emptyState.querySelector('p[data-i18n="clickToSelectFiles"]').textContent = t('clickToSelectFiles').replace('select files', 'add more files').replace('选择文件', '添加更多文件');
+
+        // Build grid HTML
+        grid.innerHTML = selectedFiles.map((f, index) => {
+          const isImage = f.type.startsWith('image/');
+          const icon = getFileIcon(f.type);
+          const sizeKB = (f.size / 1024).toFixed(1);
+
+          return `
+            <div class="relative bg-white rounded-lg border-2 border-gray-200 hover:border-primary-400 transition-all overflow-visible">
+              <div class="w-full h-24 bg-gray-50 flex items-center justify-center overflow-hidden rounded-t-lg">
+                ${isImage ? `
+                  <img src="${f.dataUrl}" alt="${f.name}" class="w-full h-full object-cover">
+                ` : `
+                  <i data-lucide="${icon}" class="w-10 h-10 text-primary-600"></i>
+                `}
+              </div>
+              <div class="p-2 border-t border-gray-100">
+                <div class="text-xs truncate font-medium text-gray-900" title="${f.name}">${f.name}</div>
+                <div class="text-xs text-gray-500">${sizeKB} KB</div>
+              </div>
+              <button onclick="event.stopPropagation(); removeFile('${f.id}')" class="absolute -top-2 -right-2 w-6 h-6 bg-red-500 hover:bg-red-600 rounded-full flex items-center justify-center text-white shadow-lg cursor-pointer border-2 border-white z-10">
+                <i data-lucide="x" class="w-3 h-3"></i>
+              </button>
+            </div>
+          `;
+        }).join('');
+      }
+
       lucide.createIcons();
     }
 
-    function clearFile() {
-      selectedFile = null;
+    // Remove a single file
+    function removeFile(id) {
+      selectedFiles = selectedFiles.filter(f => f.id !== id);
+      updateFilesPreview();
+    }
+
+    // Clear all files
+    function clearAllFiles() {
+      selectedFiles = [];
       document.getElementById('file-input').value = '';
-      
-      const emptyState = document.getElementById('upload-empty-state');
-      const previewState = document.getElementById('upload-preview-state');
-      const imagePreviewArea = document.getElementById('image-preview-area');
-      const filePreviewArea = document.getElementById('file-preview-area');
-      
-      emptyState.classList.remove('hidden');
-      previewState.classList.add('hidden');
-      imagePreviewArea.classList.add('hidden');
-      filePreviewArea.classList.add('hidden');
+      updateFilesPreview();
     }
 
-    // Handle image selection
+    // Legacy clearFile function (for compatibility)
+    function clearFile() {
+      clearAllFiles();
+    }
+
+    // Handle image selection (multiple)
     function handleImageSelect(event) {
-      const file = event.target.files[0];
-      if (file) {
-        handleImage(file);
-      }
+      const files = Array.from(event.target.files);
+      files.forEach(file => addImage(file));
+      // Reset input so same file can be selected again
+      event.target.value = '';
     }
 
-    function handleImage(file) {
+    // Add a single image to the array
+    function addImage(file) {
       // Validate image type
       if (!file.type.startsWith('image/')) {
         showMessage('send-message', t('selectImageFile'), 'error');
         return;
       }
 
+      // Check max count
+      if (selectedImages.length >= 25) {
+        showMessage('send-message', t('maxImagesReached'), 'error');
+        return;
+      }
+
+      // Check individual file size (25MB)
       if (file.size > 25 * 1024 * 1024) {
         showMessage('send-message', t('imageSizeExceeded'), 'error');
         return;
       }
 
-      selectedImage = file;
-      
-      const emptyState = document.getElementById('image-upload-empty-state');
-      const previewState = document.getElementById('image-upload-preview-state');
-      const previewImg = document.getElementById('image-upload-preview-img');
+      // Check total size
+      const currentTotalSize = selectedImages.reduce((sum, img) => sum + img.file.size, 0);
+      if (currentTotalSize + file.size > 25 * 1024 * 1024) {
+        showMessage('send-message', t('totalSizeExceeded'), 'error');
+        return;
+      }
 
-      // Read and display image
+      // Generate unique ID and read as data URL
+      const id = Date.now() + '-' + Math.random().toString(36).substr(2, 9);
       const reader = new FileReader();
+
       reader.onload = (e) => {
-        previewImg.src = e.target.result;
-        emptyState.classList.add('hidden');
-        previewState.classList.remove('hidden');
+        selectedImages.push({
+          id,
+          file,
+          dataUrl: e.target.result,
+          name: file.name
+        });
+        updateImagesPreview();
       };
+
       reader.readAsDataURL(file);
-      
+    }
+
+    // Update the images grid preview
+    function updateImagesPreview() {
+      const gridPreview = document.getElementById('images-grid-preview');
+      const grid = document.getElementById('images-grid');
+      const countSpan = document.getElementById('images-count');
+      const emptyState = document.getElementById('image-upload-empty-state');
+
+      countSpan.textContent = selectedImages.length;
+
+      if (selectedImages.length === 0) {
+        gridPreview.classList.add('hidden');
+        emptyState.querySelector('p[data-i18n="clickToSelectImage"]').textContent = t('clickToSelectImage');
+      } else {
+        gridPreview.classList.remove('hidden');
+        emptyState.querySelector('p[data-i18n="clickToSelectImage"]').textContent = t('clickToSelectImage').replace('select image', 'add more images').replace('选择图片', '添加更多图片');
+
+        // Build grid HTML
+        grid.innerHTML = selectedImages.map((img, index) => `
+          <div class="relative bg-white rounded-lg border-2 border-gray-200 hover:border-primary-400 transition-all overflow-visible">
+            <div class="w-full h-20 bg-gray-50 flex items-center justify-center overflow-hidden rounded-t-lg">
+              <img src="${img.dataUrl}" alt="${img.name}" class="w-full h-full object-cover">
+            </div>
+            <button onclick="event.stopPropagation(); removeImage('${img.id}')" class="absolute -top-2 -right-2 w-6 h-6 bg-red-500 hover:bg-red-600 rounded-full flex items-center justify-center text-white shadow-lg cursor-pointer border-2 border-white z-10">
+              <i data-lucide="x" class="w-3 h-3"></i>
+            </button>
+            <div class="bg-black/70 text-white text-xs px-2 py-1 truncate rounded-b-lg">
+              ${index + 1}. ${img.name}
+            </div>
+          </div>
+        `).join('');
+      }
+
       lucide.createIcons();
     }
 
-    function clearImage() {
-      selectedImage = null;
+    // Remove a single image
+    function removeImage(id) {
+      selectedImages = selectedImages.filter(img => img.id !== id);
+      updateImagesPreview();
+    }
+
+    // Clear all images
+    function clearAllImages() {
+      selectedImages = [];
       document.getElementById('image-input').value = '';
-      
-      const emptyState = document.getElementById('image-upload-empty-state');
-      const previewState = document.getElementById('image-upload-preview-state');
-      
-      emptyState.classList.remove('hidden');
-      previewState.classList.add('hidden');
+      updateImagesPreview();
+    }
+
+    // Legacy clearImage function (for compatibility)
+    function clearImage() {
+      clearAllImages();
     }
 
     // Image upload drag and drop
@@ -1414,12 +1558,15 @@
     imageUpload.addEventListener('drop', (e) => {
       e.preventDefault();
       imageUpload.classList.remove('border-primary-500', 'bg-primary-50');
-      const files = e.dataTransfer.files;
-      if (files.length > 0 && files[0].type.startsWith('image/')) {
-        handleImage(files[0]);
-      } else if (files.length > 0) {
+      const files = Array.from(e.dataTransfer.files);
+      const imageFiles = files.filter(f => f.type.startsWith('image/'));
+
+      if (imageFiles.length === 0 && files.length > 0) {
         showMessage('send-message', t('dragImageOnly'), 'error');
+        return;
       }
+
+      imageFiles.forEach(file => addImage(file));
     });
 
     // Show message
@@ -1458,7 +1605,7 @@
       }
 
       // Check based on current content type
-      if (currentContentType === 'file' && !selectedFile) {
+      if (currentContentType === 'file' && selectedFiles.length === 0) {
         showMessage('send-message', t('selectFile'), 'error');
         return;
       }
@@ -1468,7 +1615,7 @@
         return;
       }
 
-      if (currentContentType === 'image' && !selectedImage) {
+      if (currentContentType === 'image' && selectedImages.length === 0) {
         showMessage('send-message', t('selectImage'), 'error');
         return;
       }
@@ -1481,35 +1628,33 @@
           <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
           <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
-        <span>上传中...</span>
+        <span>${t('uploading')}</span>
       `;
 
       try {
         const formData = new FormData();
         formData.append('code', code);
 
-        if (selectedFile) {
-          const reader = new FileReader();
-          const base64 = await new Promise((resolve, reject) => {
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = reject;
-            reader.readAsDataURL(selectedFile);
-          });
+        if (selectedFiles.length > 0) {
+          // Multi-file upload - pack files as JSON array
+          const filesData = selectedFiles.map(f => ({
+            dataUrl: f.dataUrl,
+            name: f.name,
+            size: f.size,
+            type: f.type
+          }));
 
-          formData.append('type', 'file');
-          formData.append('content', base64);
-          formData.append('fileName', selectedFile.name);
-        } else if (selectedImage) {
-          const reader = new FileReader();
-          const base64 = await new Promise((resolve, reject) => {
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = reject;
-            reader.readAsDataURL(selectedImage);
-          });
+          formData.append('type', 'files');
+          formData.append('content', JSON.stringify(filesData));
+        } else if (selectedImages.length > 0) {
+          // Multi-image upload - pack images as JSON array
+          const imagesData = selectedImages.map(img => ({
+            dataUrl: img.dataUrl,
+            name: img.name
+          }));
 
-          formData.append('type', 'file');
-          formData.append('content', base64);
-          formData.append('fileName', selectedImage.name);
+          formData.append('type', 'images');
+          formData.append('content', JSON.stringify(imagesData));
         } else {
           formData.append('type', 'text');
           formData.append('content', textContent);
@@ -1587,8 +1732,117 @@
           const display = document.getElementById('receive-result');
           const isImage = result.contentType && result.contentType.startsWith('image/');
 
-          if (result.type === 'file' && isImage) {
-            // 图片类型：直接展示
+          if (result.type === 'images') {
+            // 多图类型：展示网格
+            const images = JSON.parse(result.content);
+            const imagesHtml = images.map((img, index) => `
+              <div class="relative group aspect-square bg-gray-100 rounded-lg overflow-hidden">
+                <img src="${img.dataUrl}" alt="${img.name}" class="w-full h-full object-cover cursor-pointer hover:opacity-90 transition-opacity" onclick="openImagePreview('${img.dataUrl}')">
+                <div class="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-xs px-2 py-1 truncate">
+                  ${index + 1}. ${img.name}
+                </div>
+              </div>
+            `).join('');
+
+            display.innerHTML = `
+              <div class="bg-gradient-to-br from-primary-50 to-emerald-50 rounded-lg p-6 border border-primary-200">
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center">
+                      <i data-lucide="images" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <div>
+                      <h3 class="font-bold text-gray-900">${t("imagesPreview")}</h3>
+                      <p class="text-sm text-gray-600">${images.length} ${images.length === 1 ? 'image' : 'images'}</p>
+                    </div>
+                  </div>
+                  <div class="flex gap-2">
+                    <button onclick="downloadAllImages(${JSON.stringify(images).replace(/"/g, '&quot;')})" class="flex items-center gap-2 px-3 py-1.5 bg-white hover:bg-gray-50 border border-gray-200 text-gray-700 text-sm rounded-lg transition-colors cursor-pointer">
+                      <i data-lucide="download" class="w-4 h-4"></i>
+                      <span>${t("downloadAllImages")}</span>
+                    </button>
+                    <button onclick="downloadImagesAsZip(${JSON.stringify(images).replace(/"/g, '&quot;')})" class="flex items-center gap-2 px-3 py-1.5 bg-primary-500 hover:bg-primary-600 text-white text-sm rounded-lg transition-colors cursor-pointer">
+                      <i data-lucide="archive" class="w-4 h-4"></i>
+                      <span>${t("downloadAsZip")}</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="bg-white rounded-lg p-4 mb-3">
+                  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                    ${imagesHtml}
+                  </div>
+                </div>
+                <div class="flex items-start gap-2 text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg p-3">
+                  <i data-lucide="clock" class="w-3.5 h-3.5 mt-0.5 flex-shrink-0"></i>
+                  <p>${t("contentAutoDelete")}</p>
+                </div>
+              </div>
+            `;
+            display.classList.remove('hidden');
+            lucide.createIcons();
+          } else if (result.type === 'files') {
+            // 多文件类型：展示网格
+            const files = JSON.parse(result.content);
+            const filesHtml = files.map((f, index) => {
+              const isImage = f.type && f.type.startsWith('image/');
+              const icon = getFileIcon(f.type || '');
+              const sizeKB = (f.size / 1024).toFixed(1);
+
+              return `
+                <div class="relative group bg-gray-100 rounded-lg overflow-hidden p-3">
+                  ${isImage ? `
+                    <div class="aspect-square mb-2 bg-gray-200 rounded overflow-hidden">
+                      <img src="${f.dataUrl}" alt="${f.name}" class="w-full h-full object-cover cursor-pointer hover:opacity-90 transition-opacity" onclick="openImagePreview('${f.dataUrl}')">
+                    </div>
+                  ` : `
+                    <div class="aspect-square mb-2 bg-gradient-to-br from-primary-100 to-emerald-100 rounded flex items-center justify-center">
+                      <i data-lucide="${icon}" class="w-12 h-12 text-primary-600"></i>
+                    </div>
+                  `}
+                  <div class="text-xs truncate font-medium text-gray-900" title="${f.name}">${f.name}</div>
+                  <div class="text-xs text-gray-500">${sizeKB} KB</div>
+                </div>
+              `;
+            }).join('');
+
+            display.innerHTML = `
+              <div class="bg-gradient-to-br from-primary-50 to-emerald-50 rounded-lg p-6 border border-primary-200">
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center">
+                      <i data-lucide="files" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <div>
+                      <h3 class="font-bold text-gray-900">${t("filesPreview")}</h3>
+                      <p class="text-sm text-gray-600">${files.length} ${files.length === 1 ? 'file' : 'files'}</p>
+                    </div>
+                  </div>
+                  <div class="flex gap-2">
+                    <button onclick="downloadAllFiles(${JSON.stringify(files).replace(/"/g, '&quot;')})" class="flex items-center gap-2 px-3 py-1.5 bg-white hover:bg-gray-50 border border-gray-200 text-gray-700 text-sm rounded-lg transition-colors cursor-pointer">
+                      <i data-lucide="download" class="w-4 h-4"></i>
+                      <span>${t("downloadAllImages")}</span>
+                    </button>
+                    <button onclick="downloadFilesAsZip(${JSON.stringify(files).replace(/"/g, '&quot;')})" class="flex items-center gap-2 px-3 py-1.5 bg-primary-500 hover:bg-primary-600 text-white text-sm rounded-lg transition-colors cursor-pointer">
+                      <i data-lucide="archive" class="w-4 h-4"></i>
+                      <span>${t("downloadAsZip")}</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="bg-white rounded-lg p-4 mb-3">
+                  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                    ${filesHtml}
+                  </div>
+                </div>
+                <div class="flex items-start gap-2 text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg p-3">
+                  <i data-lucide="clock" class="w-3.5 h-3.5 mt-0.5 flex-shrink-0"></i>
+                  <p>${t("contentAutoDelete")}</p>
+                </div>
+              </div>
+            `;
+            display.classList.remove('hidden');
+            lucide.createIcons();
+          } else if (result.type === 'file' && isImage) {
+            // 单图类型：直接展示
             display.innerHTML = `
               <div class="bg-gradient-to-br from-primary-50 to-emerald-50 rounded-lg p-6 border border-primary-200">
                 <div class="flex items-center justify-between mb-4">
@@ -1792,6 +2046,82 @@
       link.download = fileName || 'image.png';
       link.click();
       showToast(t('imageDownloading'));
+    }
+
+    // Download all images (one by one)
+    function downloadAllImages(images) {
+      images.forEach((img, index) => {
+        setTimeout(() => {
+          const link = document.createElement('a');
+          link.href = img.dataUrl;
+          link.download = img.name;
+          link.click();
+        }, index * 200); // Stagger downloads
+      });
+      showToast(`${t('imageDownloading')} (${images.length})`);
+    }
+
+    // Download images as ZIP
+    async function downloadImagesAsZip(images) {
+      try {
+        const zip = new JSZip();
+
+        images.forEach(img => {
+          const base64Data = img.dataUrl.split(',')[1];
+          zip.file(img.name, base64Data, {base64: true});
+        });
+
+        const blob = await zip.generateAsync({type: 'blob'});
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'images.zip';
+        link.click();
+
+        URL.revokeObjectURL(url);
+        showToast(t('downloadAsZip') + ' ✓');
+      } catch (error) {
+        showToast('ZIP download failed', 'error');
+      }
+    }
+
+    // Download files as ZIP
+    async function downloadFilesAsZip(files) {
+      try {
+        const zip = new JSZip();
+
+        files.forEach(f => {
+          const base64Data = f.dataUrl.split(',')[1];
+          zip.file(f.name, base64Data, {base64: true});
+        });
+
+        const blob = await zip.generateAsync({type: 'blob'});
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'files.zip';
+        link.click();
+
+        URL.revokeObjectURL(url);
+        showToast(t('downloadAsZip') + ' ✓');
+      } catch (error) {
+        showToast('ZIP download failed', 'error');
+      }
+    }
+
+    // Download all files (one by one)
+    function downloadAllFiles(files) {
+      files.forEach((f, index) => {
+        setTimeout(() => {
+          const link = document.createElement('a');
+          link.href = f.dataUrl;
+          link.download = f.name;
+          link.click();
+        }, index * 200);
+      });
+      showToast(`${t('downloading')} (${files.length})`);
     }
 
     // Image preview modal
