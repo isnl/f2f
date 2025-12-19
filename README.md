@@ -37,6 +37,12 @@
     <td><b>多种格式</b><br/>支持文件、文本、图片等多种内容类型</td>
   </tr>
   <tr>
+    <td align="center">📚</td>
+    <td><b>批量上传</b><br/>支持多文件（最多100个）和多图片（最多25张）同时上传</td>
+    <td align="center">📦</td>
+    <td><b>ZIP打包下载</b><br/>多文件/多图片支持一键打包下载</td>
+  </tr>
+  <tr>
     <td align="center">⏱️</td>
     <td><b>自动销毁</b><br/>下载后 1 分钟自动删除，保护隐私</td>
     <td align="center">🆓</td>
@@ -170,9 +176,9 @@ preview_id = "your_preview_kv_id_here"    # 替换为你的预览环境 KV ID
 1. 切换到**发送**标签
 2. 输入或生成 6 位分享码（支持大写字母 A-Z 和数字 0-9）
 3. 选择内容类型：
-   - **文件**：点击上传或拖拽文件（≤25MB）
+   - **文件**：点击上传或拖拽文件（支持多文件，最多100个，总大小≤25MB）
    - **文本**：直接输入文本内容
-   - **图片**：选择图片或 Ctrl/Cmd + V 粘贴截图
+   - **图片**：选择图片或 Ctrl/Cmd + V 粘贴截图（支持多图，最多25张）
 4. 点击**创建分享**
 5. 复制分享码或分享链接发送给接收方
 
@@ -181,7 +187,10 @@ preview_id = "your_preview_kv_id_here"    # 替换为你的预览环境 KV ID
 1. 切换到**接收**标签
 2. 输入 6 位取件码
 3. 点击**获取内容**
-4. 文件自动下载，文本/图片直接显示
+4. 下载选项：
+   - **单文件**：自动下载
+   - **多文件/多图片**：可选择逐个下载或一键打包为 ZIP 下载
+   - **文本/图片**：直接显示预览
 5. ⚠️ 内容将在 **1 分钟后自动删除**，请及时保存
 
 ## ⚙️ 工作原理
@@ -234,7 +243,8 @@ graph LR
 
 ## 📊 限制说明
 
-- **文件大小**：单文件最大 25MB
+- **文件大小**：总大小最大 25MB
+- **文件数量**：单次最多 100 个文件或 25 张图片
 - **分享码格式**：6 位大写字母或数字（A-Z, 0-9）
 - **数据保留时间**：
   - 未下载：1 小时后自动删除
@@ -255,8 +265,12 @@ graph LR
 ```typescript
 {
   code: string,       // 6位分享码（必填）
-  type: 'file' | 'text',  // 内容类型（必填）
-  content: string,    // Base64 编码的文件内容或文本（必填）
+  type: 'file' | 'text' | 'files' | 'images',  // 内容类型（必填）
+  content: string,    // 内容（必填）
+                      // - file: Base64 编码的文件内容
+                      // - text: 纯文本内容
+                      // - files: JSON 数组 [{dataUrl, name, size, type}, ...]
+                      // - images: JSON 数组 [{dataUrl, name}, ...]
   fileName?: string   // 文件名（type=file 时必填）
 }
 ```
@@ -286,8 +300,8 @@ graph LR
 ```typescript
 {
   success: true,
-  type: 'file' | 'text',
-  content: string,      // Base64 或文本内容
+  type: 'file' | 'text' | 'files' | 'images',
+  content: string,      // Base64、文本或 JSON 数组
   contentType: string,  // MIME 类型
   fileName?: string     // 文件名（type=file 时返回）
 }
@@ -450,9 +464,10 @@ R2 对象存储需要绑定银行卡才能使用，而 KV 存储完全免费且�
 <details>
 <summary><b>支持批量上传吗？</b></summary>
 
-当前版本不支持批量上传，但你可以：
-- 将多个文件打包成 ZIP 后上传
-- 或者参考贡献指南，提交 PR 添加批量上传功能
+✅ **支持！** 当前版本已支持批量上传：
+- **多文件上传**：最多 100 个文件，总大小不超过 25MB
+- **多图片上传**：最多 25 张图片，总大小不超过 25MB
+- **下载方式**：支持逐个下载或一键打包为 ZIP 下载
 </details>
 
 <details>

@@ -37,6 +37,12 @@ English | [简体中文](./README.md)
     <td><b>Multiple Formats</b><br/>Support for files, text, images, and various content types</td>
   </tr>
   <tr>
+    <td align="center">📚</td>
+    <td><b>Batch Upload</b><br/>Support multiple files (up to 100) and images (up to 25) at once</td>
+    <td align="center">📦</td>
+    <td><b>ZIP Download</b><br/>Download multiple files/images as a single ZIP package</td>
+  </tr>
+  <tr>
     <td align="center">⏱️</td>
     <td><b>Auto-Deletion</b><br/>Automatically deleted 1 minute after download to protect privacy</td>
     <td align="center">🆓</td>
@@ -170,9 +176,9 @@ preview_id = "your_preview_kv_id_here"    # Replace with your preview KV ID
 1. Switch to **Send** tab
 2. Enter or generate a 6-digit share code (supports uppercase letters A-Z and numbers 0-9)
 3. Select content type:
-   - **File**: Click to upload or drag and drop (≤25MB)
+   - **File**: Click to upload or drag and drop (supports multiple files, up to 100, total ≤25MB)
    - **Text**: Enter text content directly
-   - **Image**: Select image or Ctrl/Cmd + V to paste screenshot
+   - **Image**: Select image or Ctrl/Cmd + V to paste screenshot (supports multiple images, up to 25)
 4. Click **Create Share**
 5. Copy the share code or link and send to recipient
 
@@ -181,7 +187,10 @@ preview_id = "your_preview_kv_id_here"    # Replace with your preview KV ID
 1. Switch to **Receive** tab
 2. Enter 6-digit pickup code
 3. Click **Get Content**
-4. Files will auto-download, text/images display directly
+4. Download options:
+   - **Single file**: Auto-download
+   - **Multiple files/images**: Choose to download individually or as a ZIP package
+   - **Text/Image**: Direct preview display
 5. ⚠️ Content will be **automatically deleted after 1 minute**, please save promptly
 
 ## ⚙️ How It Works
@@ -234,7 +243,8 @@ graph LR
 
 ## 📊 Limitations
 
-- **File Size**: Maximum 25MB per file
+- **File Size**: Maximum 25MB total
+- **File Count**: Up to 100 files or 25 images per transfer
 - **Share Code Format**: 6-digit uppercase letters or numbers (A-Z, 0-9)
 - **Data Retention**:
   - Not downloaded: Auto-delete after 1 hour
@@ -255,8 +265,12 @@ Upload file or text
 ```typescript
 {
   code: string,       // 6-digit share code (required)
-  type: 'file' | 'text',  // Content type (required)
-  content: string,    // Base64 encoded file content or text (required)
+  type: 'file' | 'text' | 'files' | 'images',  // Content type (required)
+  content: string,    // Content (required)
+                      // - file: Base64 encoded file content
+                      // - text: Plain text content
+                      // - files: JSON array [{dataUrl, name, size, type}, ...]
+                      // - images: JSON array [{dataUrl, name}, ...]
   fileName?: string   // File name (required when type=file)
 }
 ```
@@ -286,8 +300,8 @@ Download file or get text
 ```typescript
 {
   success: true,
-  type: 'file' | 'text',
-  content: string,      // Base64 or text content
+  type: 'file' | 'text' | 'files' | 'images',
+  content: string,      // Base64, text, or JSON array
   contentType: string,  // MIME type
   fileName?: string     // File name (returned when type=file)
 }
@@ -450,9 +464,10 @@ Absolutely! This project is open source, you can:
 <details>
 <summary><b>Does it support batch upload?</b></summary>
 
-Current version doesn't support batch upload, but you can:
-- Package multiple files as ZIP then upload
-- Or submit a PR to add batch upload feature
+✅ **Yes!** The current version supports batch upload:
+- **Multiple files**: Up to 100 files, total size not exceeding 25MB
+- **Multiple images**: Up to 25 images, total size not exceeding 25MB
+- **Download options**: Download individually or as a single ZIP package
 </details>
 
 <details>
