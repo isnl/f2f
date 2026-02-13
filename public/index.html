@@ -585,13 +585,539 @@
         filesPreview: '文件预览',
         clickToSelectFiles: '点击选择文件或拖拽到此处',
         supportAnyFormatMultiple: '支持任意格式，最多 100 个文件，总大小 25MB'
+      },
+      ja: {
+        // Header
+        siteName: 'F2F.ICU',
+        tagline: 'シンプル・高速・安全',
+        endToEndEncryption: 'エンドツーエンド暗号化',
+
+        // Tabs
+        send: '送信',
+        receive: '受信',
+
+        // Send Tab
+        sendTitle: 'ファイルまたはテキストを送信',
+        sendDescription: 'ファイル（25MB以下）またはテキストをアップロードして共有コードを生成',
+        shareCode: '共有コード',
+        random: 'ランダム',
+        file: 'ファイル',
+        text: 'テキスト',
+        image: '画像',
+        clickToSelectFile: 'クリックしてファイルを選択またはここにドラッグ',
+        supportAnyFormat: '任意の形式に対応、最大25MB',
+        pasteImageTip: 'ヒント：Ctrl/Cmd + V で画像を貼り付け',
+        clickToSelectImage: 'クリックして画像を選択またはここにドラッグ',
+        supportedImageFormats: 'PNG、JPG、GIF、WEBP形式に対応',
+        pasteScreenshotTip: 'ヒント：Ctrl/Cmd + V でスクリーンショットを貼り付け',
+        enterTextContent: '転送するテキストを入力...',
+        createShare: '共有を作成',
+        uploadSuccess: 'アップロード成功',
+        shareWithRecipient: '受信者に共有する',
+        copyLink: 'リンクをコピー',
+        copyShareCode: 'コードをコピー',
+        autoDeleteNote: 'ダウンロード後、1分以内にデータは自動削除されます',
+
+        // Receive Tab
+        receiveTitle: 'ファイルまたはテキストを受信',
+        receiveDescription: '6桁の受取コードを入力してファイルをダウンロードまたはテキストを表示',
+        receiveWarning: '受取後、ファイルは1分以内に自動削除されます。速やかに保存してください',
+        pickupCode: '受取コード',
+        getContent: 'コンテンツを取得',
+        downloading: 'ダウンロード中...',
+        downloadSuccess: 'ダウンロード成功',
+        textContent: 'テキスト内容',
+        copy: 'コピー',
+        copied: 'コピー済み',
+        download: 'ダウンロード',
+        imagePreview: '画像プレビュー',
+        contentAutoDelete: 'コンテンツは1分後に自動削除されます。速やかにコピー・保存してください',
+        fileAutoDelete: 'ファイルは1分後に自動削除されます。保存済みか確認してください',
+
+        // Messages
+        enterShareCode: '6桁の共有コードを入力してください',
+        invalidShareCode: '共有コードは6桁の数字または大文字英字です',
+        selectFile: 'ファイルを選択してください',
+        enterText: 'テキストを入力してください',
+        selectImage: '画像を選択してください',
+        fileSizeExceeded: 'ファイルサイズが25MBの制限を超えています',
+        imageSizeExceeded: '画像サイズが25MBの制限を超えています',
+        selectImageFile: '画像ファイルを選択してください（PNG、JPG、GIF、WEBPなど）',
+        dragImageOnly: '画像ファイルのみドラッグしてください',
+        uploading: 'アップロード中...',
+        getting: '取得中...',
+        uploadFailed: 'アップロード失敗',
+        getFailed: '取得失敗',
+        networkError: 'ネットワークエラー、再試行してください',
+        textCopied: 'テキストをコピーしました',
+        copyFailed: 'コピー失敗、手動でコピーしてください',
+        linkCopied: '共有リンクをコピーしました',
+        codeCopied: '共有コードをコピーしました',
+        switchToImageMode: '画像モードに自動切替しました',
+        imageDownloading: '画像をダウンロード中...',
+        enterPickupCode: '受取コードを入力してください',
+        invalidPickupCode: '受取コードは6桁の数字または大文字英字です',
+
+        // Footer
+        poweredBy: 'Cloudflareエッジネットワーク搭載',
+        freeFastSecure: '無料 • 高速 • 安全',
+        aes256Security: 'AES-256暗号化',
+        autoDelete: '自動削除',
+        afterOneMinute: '1分後に削除',
+        instantTransfer: '即時転送',
+        noRegistration: '登録不要',
+        viewOnGithub: 'GitHubで見る',
+        starOnGithub: 'スター',
+        openSourceMit: 'オープンソース (MIT)',
+        madeWithLove: '❤️ で作られました',
+
+        // Image Preview Modal
+        reset: 'リセット',
+        reupload: 'クリックして再アップロード',
+
+        // Multi-image upload
+        selectedImages: '選択済み画像',
+        clearAll: 'すべてクリア',
+        maxImagesReached: '画像は最大25枚までです',
+        totalSizeExceeded: '合計サイズが25MBの制限を超えています',
+        downloadAllImages: 'すべてダウンロード',
+        imagesPreview: '画像プレビュー',
+        downloadAsZip: 'ZIPでダウンロード',
+
+        // Multi-file upload
+        selectedFiles: '選択済みファイル',
+        maxFilesReached: 'ファイルは最大100個までです',
+        filesPreview: 'ファイルプレビュー',
+        clickToSelectFiles: 'クリックしてファイルを選択またはここにドラッグ',
+        supportAnyFormatMultiple: '任意の形式に対応、最大100ファイル、合計25MB'
+      },
+      ko: {
+        // Header
+        siteName: 'F2F.ICU',
+        tagline: '간편 • 빠름 • 안전',
+        endToEndEncryption: '종단간 암호화',
+
+        // Tabs
+        send: '보내기',
+        receive: '받기',
+
+        // Send Tab
+        sendTitle: '파일 또는 텍스트 보내기',
+        sendDescription: '파일(25MB 이하) 또는 텍스트를 업로드하여 공유 코드 생성',
+        shareCode: '공유 코드',
+        random: '랜덤',
+        file: '파일',
+        text: '텍스트',
+        image: '이미지',
+        clickToSelectFile: '클릭하여 파일 선택 또는 여기로 드래그',
+        supportAnyFormat: '모든 형식 지원, 최대 25MB',
+        pasteImageTip: '팁: Ctrl/Cmd + V로 이미지 붙여넣기',
+        clickToSelectImage: '클릭하여 이미지 선택 또는 여기로 드래그',
+        supportedImageFormats: 'PNG, JPG, GIF, WEBP 형식 지원',
+        pasteScreenshotTip: '팁: Ctrl/Cmd + V로 스크린샷 붙여넣기',
+        enterTextContent: '전송할 텍스트를 입력하세요...',
+        createShare: '공유 만들기',
+        uploadSuccess: '업로드 성공',
+        shareWithRecipient: '수신자에게 공유',
+        copyLink: '링크 복사',
+        copyShareCode: '코드 복사',
+        autoDeleteNote: '다운로드 후 1분 이내에 데이터가 자동 삭제됩니다',
+
+        // Receive Tab
+        receiveTitle: '파일 또는 텍스트 받기',
+        receiveDescription: '6자리 수령 코드를 입력하여 파일 다운로드 또는 텍스트 보기',
+        receiveWarning: '수령 후 파일은 1분 이내에 자동 삭제됩니다. 즉시 저장하세요',
+        pickupCode: '수령 코드',
+        getContent: '콘텐츠 가져오기',
+        downloading: '다운로드 중...',
+        downloadSuccess: '다운로드 성공',
+        textContent: '텍스트 내용',
+        copy: '복사',
+        copied: '복사됨',
+        download: '다운로드',
+        imagePreview: '이미지 미리보기',
+        contentAutoDelete: '콘텐츠는 1분 후 자동 삭제됩니다. 즉시 복사하여 저장하세요',
+        fileAutoDelete: '파일은 1분 후 자동 삭제됩니다. 저장을 확인하세요',
+
+        // Messages
+        enterShareCode: '6자리 공유 코드를 입력하세요',
+        invalidShareCode: '공유 코드는 6자리 숫자 또는 대문자여야 합니다',
+        selectFile: '파일을 선택하세요',
+        enterText: '텍스트를 입력하세요',
+        selectImage: '이미지를 선택하세요',
+        fileSizeExceeded: '파일 크기가 25MB 제한을 초과합니다',
+        imageSizeExceeded: '이미지 크기가 25MB 제한을 초과합니다',
+        selectImageFile: '이미지 파일을 선택하세요 (PNG, JPG, GIF, WEBP 등)',
+        dragImageOnly: '이미지 파일만 드래그하세요',
+        uploading: '업로드 중...',
+        getting: '가져오는 중...',
+        uploadFailed: '업로드 실패',
+        getFailed: '가져오기 실패',
+        networkError: '네트워크 오류, 다시 시도하세요',
+        textCopied: '텍스트가 복사되었습니다',
+        copyFailed: '복사 실패, 수동으로 복사하세요',
+        linkCopied: '공유 링크가 복사되었습니다',
+        codeCopied: '공유 코드가 복사되었습니다',
+        switchToImageMode: '이미지 모드로 자동 전환되었습니다',
+        imageDownloading: '이미지 다운로드 중...',
+        enterPickupCode: '수령 코드를 입력하세요',
+        invalidPickupCode: '수령 코드는 6자리 숫자 또는 대문자여야 합니다',
+
+        // Footer
+        poweredBy: 'Cloudflare 엣지 네트워크 기반',
+        freeFastSecure: '무료 • 빠름 • 안전',
+        aes256Security: 'AES-256 암호화',
+        autoDelete: '자동 삭제',
+        afterOneMinute: '1분 후 삭제',
+        instantTransfer: '즉시 전송',
+        noRegistration: '가입 불필요',
+        viewOnGithub: 'GitHub에서 보기',
+        starOnGithub: '스타',
+        openSourceMit: '오픈소스 (MIT)',
+        madeWithLove: '❤️로 만들었습니다',
+
+        // Image Preview Modal
+        reset: '초기화',
+        reupload: '클릭하여 다시 업로드',
+
+        // Multi-image upload
+        selectedImages: '선택된 이미지',
+        clearAll: '전체 삭제',
+        maxImagesReached: '이미지는 최대 25장까지 가능합니다',
+        totalSizeExceeded: '총 크기가 25MB 제한을 초과합니다',
+        downloadAllImages: '전체 다운로드',
+        imagesPreview: '이미지 미리보기',
+        downloadAsZip: 'ZIP으로 다운로드',
+
+        // Multi-file upload
+        selectedFiles: '선택된 파일',
+        maxFilesReached: '파일은 최대 100개까지 가능합니다',
+        filesPreview: '파일 미리보기',
+        clickToSelectFiles: '클릭하여 파일 선택 또는 여기로 드래그',
+        supportAnyFormatMultiple: '모든 형식 지원, 최대 100개 파일, 총 25MB'
+      },
+      es: {
+        // Header
+        siteName: 'F2F.ICU',
+        tagline: 'Simple, Rápido, Seguro',
+        endToEndEncryption: 'Cifrado de extremo a extremo',
+
+        // Tabs
+        send: 'Enviar',
+        receive: 'Recibir',
+
+        // Send Tab
+        sendTitle: 'Enviar archivos o texto',
+        sendDescription: 'Sube archivos (≤25MB) o introduce texto para generar un código',
+        shareCode: 'Código',
+        random: 'Aleatorio',
+        file: 'Archivo',
+        text: 'Texto',
+        image: 'Imagen',
+        clickToSelectFile: 'Haz clic para seleccionar o arrastra aquí',
+        supportAnyFormat: 'Cualquier formato, máximo 25MB',
+        pasteImageTip: 'Consejo: Pulsa Ctrl/Cmd + V para pegar imagen',
+        clickToSelectImage: 'Haz clic para seleccionar imagen o arrastra aquí',
+        supportedImageFormats: 'Formatos PNG, JPG, GIF, WEBP',
+        pasteScreenshotTip: 'Consejo: Pulsa Ctrl/Cmd + V para pegar captura',
+        enterTextContent: 'Introduce el texto a transferir...',
+        createShare: 'Crear enlace',
+        uploadSuccess: 'Carga exitosa',
+        shareWithRecipient: 'Compartir con el destinatario',
+        copyLink: 'Copiar enlace',
+        copyShareCode: 'Copiar código',
+        autoDeleteNote: 'Los datos se eliminarán automáticamente 1 minuto después de la descarga',
+
+        // Receive Tab
+        receiveTitle: 'Recibir archivos o texto',
+        receiveDescription: 'Introduce el código de 6 dígitos para descargar o ver texto',
+        receiveWarning: 'El archivo se eliminará automáticamente en 1 minuto, guárdalo pronto',
+        pickupCode: 'Código de recogida',
+        getContent: 'Obtener contenido',
+        downloading: 'Descargando...',
+        downloadSuccess: 'Descarga exitosa',
+        textContent: 'Contenido de texto',
+        copy: 'Copiar',
+        copied: 'Copiado',
+        download: 'Descargar',
+        imagePreview: 'Vista previa',
+        contentAutoDelete: 'El contenido se eliminará en 1 minuto, cópialo y guárdalo pronto',
+        fileAutoDelete: 'El archivo se eliminará en 1 minuto, confirma que lo has guardado',
+
+        // Messages
+        enterShareCode: 'Introduce el código de 6 dígitos',
+        invalidShareCode: 'El código debe tener 6 dígitos o letras mayúsculas',
+        selectFile: 'Selecciona un archivo',
+        enterText: 'Introduce el texto',
+        selectImage: 'Selecciona una imagen',
+        fileSizeExceeded: 'El archivo supera el límite de 25MB',
+        imageSizeExceeded: 'La imagen supera el límite de 25MB',
+        selectImageFile: 'Selecciona un archivo de imagen (PNG, JPG, GIF, WEBP, etc.)',
+        dragImageOnly: 'Arrastra solo archivos de imagen',
+        uploading: 'Subiendo...',
+        getting: 'Obteniendo...',
+        uploadFailed: 'Error al subir',
+        getFailed: 'Error al obtener',
+        networkError: 'Error de red, inténtalo de nuevo',
+        textCopied: 'Texto copiado',
+        copyFailed: 'Error al copiar, cópialo manualmente',
+        linkCopied: 'Enlace copiado',
+        codeCopied: 'Código copiado',
+        switchToImageMode: 'Cambio automático al modo imagen',
+        imageDownloading: 'Descargando imagen...',
+        enterPickupCode: 'Introduce el código de recogida',
+        invalidPickupCode: 'El código debe tener 6 dígitos o letras mayúsculas',
+
+        // Footer
+        poweredBy: 'Impulsado por Cloudflare Edge Network',
+        freeFastSecure: 'Gratis • Rápido • Seguro',
+        aes256Security: 'Cifrado AES-256',
+        autoDelete: 'Auto-eliminación',
+        afterOneMinute: 'Tras 1 minuto',
+        instantTransfer: 'Transferencia instantánea',
+        noRegistration: 'Sin registro',
+        viewOnGithub: 'Ver en GitHub',
+        starOnGithub: 'Estrella',
+        openSourceMit: 'Código abierto (MIT)',
+        madeWithLove: 'Hecho con ❤️',
+
+        // Image Preview Modal
+        reset: 'Restablecer',
+        reupload: 'Clic para resubir',
+
+        // Multi-image upload
+        selectedImages: 'Imágenes seleccionadas',
+        clearAll: 'Borrar todo',
+        maxImagesReached: 'Máximo 25 imágenes permitidas',
+        totalSizeExceeded: 'El tamaño total supera el límite de 25MB',
+        downloadAllImages: 'Descargar todo',
+        imagesPreview: 'Vista previa de imágenes',
+        downloadAsZip: 'Descargar como ZIP',
+
+        // Multi-file upload
+        selectedFiles: 'Archivos seleccionados',
+        maxFilesReached: 'Máximo 100 archivos permitidos',
+        filesPreview: 'Vista previa de archivos',
+        clickToSelectFiles: 'Haz clic para seleccionar archivos o arrastra aquí',
+        supportAnyFormatMultiple: 'Cualquier formato, máx. 100 archivos, total 25MB'
+      },
+      fr: {
+        // Header
+        siteName: 'F2F.ICU',
+        tagline: 'Simple, Rapide, Sécurisé',
+        endToEndEncryption: 'Chiffrement de bout en bout',
+
+        // Tabs
+        send: 'Envoyer',
+        receive: 'Recevoir',
+
+        // Send Tab
+        sendTitle: 'Envoyer des fichiers ou du texte',
+        sendDescription: 'Téléchargez des fichiers (≤25 Mo) ou saisissez du texte pour générer un code',
+        shareCode: 'Code de partage',
+        random: 'Aléatoire',
+        file: 'Fichier',
+        text: 'Texte',
+        image: 'Image',
+        clickToSelectFile: 'Cliquez pour sélectionner ou glissez ici',
+        supportAnyFormat: 'Tout format, max 25 Mo',
+        pasteImageTip: 'Astuce : Ctrl/Cmd + V pour coller une image',
+        clickToSelectImage: 'Cliquez pour sélectionner une image ou glissez ici',
+        supportedImageFormats: 'Formats PNG, JPG, GIF, WEBP',
+        pasteScreenshotTip: 'Astuce : Ctrl/Cmd + V pour coller une capture',
+        enterTextContent: 'Saisissez le texte à transférer...',
+        createShare: 'Créer le partage',
+        uploadSuccess: 'Envoi réussi',
+        shareWithRecipient: 'Partager avec le destinataire',
+        copyLink: 'Copier le lien',
+        copyShareCode: 'Copier le code',
+        autoDeleteNote: 'Les données seront supprimées 1 minute après le téléchargement',
+
+        // Receive Tab
+        receiveTitle: 'Recevoir des fichiers ou du texte',
+        receiveDescription: 'Entrez le code à 6 chiffres pour télécharger ou voir le texte',
+        receiveWarning: 'Le fichier sera supprimé en 1 minute, enregistrez-le rapidement',
+        pickupCode: 'Code de retrait',
+        getContent: 'Obtenir le contenu',
+        downloading: 'Téléchargement...',
+        downloadSuccess: 'Téléchargement réussi',
+        textContent: 'Contenu texte',
+        copy: 'Copier',
+        copied: 'Copié',
+        download: 'Télécharger',
+        imagePreview: 'Aperçu',
+        contentAutoDelete: 'Le contenu sera supprimé dans 1 minute, copiez et sauvegardez rapidement',
+        fileAutoDelete: 'Le fichier sera supprimé dans 1 minute, confirmez la sauvegarde',
+
+        // Messages
+        enterShareCode: 'Entrez le code de partage à 6 chiffres',
+        invalidShareCode: 'Le code doit comporter 6 chiffres ou lettres majuscules',
+        selectFile: 'Sélectionnez un fichier',
+        enterText: 'Saisissez le texte',
+        selectImage: 'Sélectionnez une image',
+        fileSizeExceeded: 'Le fichier dépasse la limite de 25 Mo',
+        imageSizeExceeded: "L'image dépasse la limite de 25 Mo",
+        selectImageFile: 'Sélectionnez un fichier image (PNG, JPG, GIF, WEBP, etc.)',
+        dragImageOnly: 'Glissez uniquement des fichiers image',
+        uploading: 'Envoi en cours...',
+        getting: 'Récupération...',
+        uploadFailed: "Échec de l'envoi",
+        getFailed: 'Échec de la récupération',
+        networkError: 'Erreur réseau, veuillez réessayer',
+        textCopied: 'Texte copié',
+        copyFailed: 'Échec de la copie, copiez manuellement',
+        linkCopied: 'Lien copié',
+        codeCopied: 'Code copié',
+        switchToImageMode: "Basculement automatique en mode image",
+        imageDownloading: "Téléchargement de l'image...",
+        enterPickupCode: 'Entrez le code de retrait',
+        invalidPickupCode: 'Le code doit comporter 6 chiffres ou lettres majuscules',
+
+        // Footer
+        poweredBy: 'Propulsé par Cloudflare Edge Network',
+        freeFastSecure: 'Gratuit • Rapide • Sécurisé',
+        aes256Security: 'Chiffrement AES-256',
+        autoDelete: 'Suppression auto',
+        afterOneMinute: 'Après 1 minute',
+        instantTransfer: 'Transfert instantané',
+        noRegistration: 'Sans inscription',
+        viewOnGithub: 'Voir sur GitHub',
+        starOnGithub: 'Étoile',
+        openSourceMit: 'Open Source (MIT)',
+        madeWithLove: 'Fait avec ❤️',
+
+        // Image Preview Modal
+        reset: 'Réinitialiser',
+        reupload: 'Cliquez pour retélécharger',
+
+        // Multi-image upload
+        selectedImages: 'Images sélectionnées',
+        clearAll: 'Tout effacer',
+        maxImagesReached: 'Maximum 25 images autorisées',
+        totalSizeExceeded: 'La taille totale dépasse la limite de 25 Mo',
+        downloadAllImages: 'Tout télécharger',
+        imagesPreview: "Aperçu des images",
+        downloadAsZip: 'Télécharger en ZIP',
+
+        // Multi-file upload
+        selectedFiles: 'Fichiers sélectionnés',
+        maxFilesReached: 'Maximum 100 fichiers autorisés',
+        filesPreview: 'Aperçu des fichiers',
+        clickToSelectFiles: 'Cliquez pour sélectionner des fichiers ou glissez ici',
+        supportAnyFormatMultiple: 'Tout format, max 100 fichiers, total 25 Mo'
+      },
+      de: {
+        // Header
+        siteName: 'F2F.ICU',
+        tagline: 'Einfach, Schnell, Sicher',
+        endToEndEncryption: 'Ende-zu-Ende-Verschlüsselung',
+
+        // Tabs
+        send: 'Senden',
+        receive: 'Empfangen',
+
+        // Send Tab
+        sendTitle: 'Dateien oder Text senden',
+        sendDescription: 'Laden Sie Dateien (≤25 MB) hoch oder geben Sie Text ein, um einen Code zu generieren',
+        shareCode: 'Freigabecode',
+        random: 'Zufällig',
+        file: 'Datei',
+        text: 'Text',
+        image: 'Bild',
+        clickToSelectFile: 'Klicken zum Auswählen oder hierher ziehen',
+        supportAnyFormat: 'Jedes Format, max. 25 MB',
+        pasteImageTip: 'Tipp: Strg/Cmd + V zum Einfügen eines Bildes',
+        clickToSelectImage: 'Klicken zum Auswählen eines Bildes oder hierher ziehen',
+        supportedImageFormats: 'PNG, JPG, GIF, WEBP Formate',
+        pasteScreenshotTip: 'Tipp: Strg/Cmd + V zum Einfügen eines Screenshots',
+        enterTextContent: 'Text zum Übertragen eingeben...',
+        createShare: 'Freigabe erstellen',
+        uploadSuccess: 'Upload erfolgreich',
+        shareWithRecipient: 'Mit Empfänger teilen',
+        copyLink: 'Link kopieren',
+        copyShareCode: 'Code kopieren',
+        autoDeleteNote: 'Daten werden 1 Minute nach dem Download automatisch gelöscht',
+
+        // Receive Tab
+        receiveTitle: 'Dateien oder Text empfangen',
+        receiveDescription: '6-stelligen Abholcode eingeben zum Herunterladen oder Text anzeigen',
+        receiveWarning: 'Datei wird in 1 Minute automatisch gelöscht, bitte umgehend speichern',
+        pickupCode: 'Abholcode',
+        getContent: 'Inhalt abrufen',
+        downloading: 'Wird heruntergeladen...',
+        downloadSuccess: 'Download erfolgreich',
+        textContent: 'Textinhalt',
+        copy: 'Kopieren',
+        copied: 'Kopiert',
+        download: 'Herunterladen',
+        imagePreview: 'Bildvorschau',
+        contentAutoDelete: 'Inhalt wird in 1 Minute gelöscht, bitte umgehend kopieren und speichern',
+        fileAutoDelete: 'Datei wird in 1 Minute gelöscht, bitte Speicherung bestätigen',
+
+        // Messages
+        enterShareCode: 'Bitte 6-stelligen Freigabecode eingeben',
+        invalidShareCode: 'Code muss aus 6 Ziffern oder Großbuchstaben bestehen',
+        selectFile: 'Bitte Datei auswählen',
+        enterText: 'Bitte Text eingeben',
+        selectImage: 'Bitte Bild auswählen',
+        fileSizeExceeded: 'Dateigröße überschreitet 25-MB-Limit',
+        imageSizeExceeded: 'Bildgröße überschreitet 25-MB-Limit',
+        selectImageFile: 'Bitte Bilddatei auswählen (PNG, JPG, GIF, WEBP usw.)',
+        dragImageOnly: 'Bitte nur Bilddateien ziehen',
+        uploading: 'Wird hochgeladen...',
+        getting: 'Wird abgerufen...',
+        uploadFailed: 'Upload fehlgeschlagen',
+        getFailed: 'Abruf fehlgeschlagen',
+        networkError: 'Netzwerkfehler, bitte erneut versuchen',
+        textCopied: 'Text kopiert',
+        copyFailed: 'Kopieren fehlgeschlagen, bitte manuell kopieren',
+        linkCopied: 'Link kopiert',
+        codeCopied: 'Code kopiert',
+        switchToImageMode: 'Automatisch in den Bildmodus gewechselt',
+        imageDownloading: 'Bild wird heruntergeladen...',
+        enterPickupCode: 'Bitte Abholcode eingeben',
+        invalidPickupCode: 'Abholcode muss aus 6 Ziffern oder Großbuchstaben bestehen',
+
+        // Footer
+        poweredBy: 'Betrieben von Cloudflare Edge Network',
+        freeFastSecure: 'Kostenlos • Schnell • Sicher',
+        aes256Security: 'AES-256 Verschlüsselung',
+        autoDelete: 'Auto-Löschung',
+        afterOneMinute: 'Nach 1 Minute',
+        instantTransfer: 'Sofortübertragung',
+        noRegistration: 'Keine Registrierung',
+        viewOnGithub: 'Auf GitHub ansehen',
+        starOnGithub: 'Stern',
+        openSourceMit: 'Open Source (MIT)',
+        madeWithLove: 'Mit ❤️ gemacht',
+
+        // Image Preview Modal
+        reset: 'Zurücksetzen',
+        reupload: 'Klicken zum erneuten Hochladen',
+
+        // Multi-image upload
+        selectedImages: 'Ausgewählte Bilder',
+        clearAll: 'Alle löschen',
+        maxImagesReached: 'Maximal 25 Bilder erlaubt',
+        totalSizeExceeded: 'Gesamtgröße überschreitet 25-MB-Limit',
+        downloadAllImages: 'Alle herunterladen',
+        imagesPreview: 'Bildervorschau',
+        downloadAsZip: 'Als ZIP herunterladen',
+
+        // Multi-file upload
+        selectedFiles: 'Ausgewählte Dateien',
+        maxFilesReached: 'Maximal 100 Dateien erlaubt',
+        filesPreview: 'Dateivorschau',
+        clickToSelectFiles: 'Klicken zum Auswählen oder hierher ziehen',
+        supportAnyFormatMultiple: 'Jedes Format, max. 100 Dateien, gesamt 25 MB'
       }
     };
 
     let currentLang = localStorage.getItem('language') || 'en';
 
     function t(key) {
-      return translations[currentLang][key] || translations['en'][key] || key;
+      const lang = translations[currentLang] ? currentLang : 'en';
+      return translations[lang][key] || translations['en'][key] || key;
     }
 
     function switchLanguage(lang) {
@@ -612,14 +1138,20 @@
       });
 
       // Update HTML lang attribute
-      document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
+      const langCodes = {
+        en: 'en', zh: 'zh-CN', ja: 'ja', ko: 'ko', es: 'es', fr: 'fr', de: 'de'
+      };
+      const localeCodes = {
+        en: 'en_US', zh: 'zh_CN', ja: 'ja_JP', ko: 'ko_KR', es: 'es_ES', fr: 'fr_FR', de: 'de_DE'
+      };
+      document.documentElement.lang = langCodes[currentLang] || 'en';
 
       // Update language dropdown
       updateLanguageDropdown();
 
       // Update meta tags
-      document.querySelector('meta[name="language"]').content = currentLang === 'zh' ? 'zh-CN' : 'en';
-      document.querySelector('meta[property="og:locale"]').content = currentLang === 'zh' ? 'zh_CN' : 'en_US';
+      document.querySelector('meta[name="language"]').content = langCodes[currentLang] || 'en';
+      document.querySelector('meta[property="og:locale"]').content = localeCodes[currentLang] || 'en_US';
 
       // Re-render icons
       if (typeof lucide !== 'undefined' && lucide.createIcons) {
@@ -644,13 +1176,19 @@
       const flag = document.getElementById('current-lang-flag');
       const text = document.getElementById('current-lang-text');
 
-      if (currentLang === 'zh') {
-        flag.textContent = '🇨🇳';
-        text.textContent = '简体中文';
-      } else {
-        flag.textContent = '🇺🇸';
-        text.textContent = 'English';
-      }
+      const langMap = {
+        en: { flag: '🇺🇸', text: 'English' },
+        zh: { flag: '🇨🇳', text: '简体中文' },
+        ja: { flag: '🇯🇵', text: '日本語' },
+        ko: { flag: '🇰🇷', text: '한국어' },
+        es: { flag: '🇪🇸', text: 'Español' },
+        fr: { flag: '🇫🇷', text: 'Français' },
+        de: { flag: '🇩🇪', text: 'Deutsch' }
+      };
+
+      const current = langMap[currentLang] || langMap['en'];
+      flag.textContent = current.flag;
+      text.textContent = current.text;
 
       // Update active state
       document.querySelectorAll('.language-dropdown-item').forEach(item => {
@@ -797,6 +1335,41 @@
             <div class="language-dropdown-item" data-lang="zh" onclick="selectLanguage('zh', event)">
               <span class="flag">🇨🇳</span>
               <span>简体中文</span>
+              <svg class="check w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <div class="language-dropdown-item" data-lang="ja" onclick="selectLanguage('ja', event)">
+              <span class="flag">🇯🇵</span>
+              <span>日本語</span>
+              <svg class="check w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <div class="language-dropdown-item" data-lang="ko" onclick="selectLanguage('ko', event)">
+              <span class="flag">🇰🇷</span>
+              <span>한국어</span>
+              <svg class="check w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <div class="language-dropdown-item" data-lang="es" onclick="selectLanguage('es', event)">
+              <span class="flag">🇪🇸</span>
+              <span>Español</span>
+              <svg class="check w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <div class="language-dropdown-item" data-lang="fr" onclick="selectLanguage('fr', event)">
+              <span class="flag">🇫🇷</span>
+              <span>Français</span>
+              <svg class="check w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <div class="language-dropdown-item" data-lang="de" onclick="selectLanguage('de', event)">
+              <span class="flag">🇩🇪</span>
+              <span>Deutsch</span>
               <svg class="check w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
                 <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
@@ -1343,26 +1916,29 @@
         return;
       }
 
-      // Generate unique ID and read as data URL
+      // Generate unique ID and create object URL for preview
       const id = Date.now() + '-' + Math.random().toString(36).substr(2, 9);
-      const reader = new FileReader();
+      const previewUrl = URL.createObjectURL(file);
 
-      reader.onload = (e) => {
-        selectedFiles.push({
-          id,
-          file,
-          dataUrl: e.target.result,
-          name: file.name,
-          size: file.size,
-          type: file.type
-        });
-        updateFilesPreview();
-      };
-
-      reader.readAsDataURL(file);
+      selectedFiles.push({
+        id,
+        file,
+        previewUrl,
+        name: file.name,
+        size: file.size,
+        type: file.type
+      });
+      updateFilesPreview();
     }
 
     // Get file icon based on type
+    function formatFileSize(bytes) {
+      if (bytes >= 1024 * 1024) {
+        return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+      }
+      return (bytes / 1024).toFixed(1) + ' KB';
+    }
+
     function getFileIcon(type) {
       if (type.startsWith('image/')) return 'image';
       if (type.startsWith('video/')) return 'video';
@@ -1394,20 +1970,20 @@
         grid.innerHTML = selectedFiles.map((f, index) => {
           const isImage = f.type.startsWith('image/');
           const icon = getFileIcon(f.type);
-          const sizeKB = (f.size / 1024).toFixed(1);
+          const fileSize = formatFileSize(f.size);
 
           return `
             <div class="relative bg-white rounded-lg border-2 border-gray-200 hover:border-primary-400 transition-all overflow-visible">
               <div class="w-full h-24 bg-gray-50 flex items-center justify-center overflow-hidden rounded-t-lg">
                 ${isImage ? `
-                  <img src="${f.dataUrl}" alt="${f.name}" class="w-full h-full object-cover">
+                  <img src="${f.previewUrl}" alt="${f.name}" class="w-full h-full object-cover">
                 ` : `
                   <i data-lucide="${icon}" class="w-10 h-10 text-primary-600"></i>
                 `}
               </div>
               <div class="p-2 border-t border-gray-100">
                 <div class="text-xs truncate font-medium text-gray-900" title="${f.name}">${f.name}</div>
-                <div class="text-xs text-gray-500">${sizeKB} KB</div>
+                <div class="text-xs text-gray-500">${fileSize}</div>
               </div>
               <button onclick="event.stopPropagation(); removeFile('${f.id}')" class="absolute -top-2 -right-2 w-6 h-6 bg-red-500 hover:bg-red-600 rounded-full flex items-center justify-center text-white shadow-lg cursor-pointer border-2 border-white z-10">
                 <i data-lucide="x" class="w-3 h-3"></i>
@@ -1422,12 +1998,15 @@
 
     // Remove a single file
     function removeFile(id) {
+      const file = selectedFiles.find(f => f.id === id);
+      if (file && file.previewUrl) URL.revokeObjectURL(file.previewUrl);
       selectedFiles = selectedFiles.filter(f => f.id !== id);
       updateFilesPreview();
     }
 
     // Clear all files
     function clearAllFiles() {
+      selectedFiles.forEach(f => { if (f.previewUrl) URL.revokeObjectURL(f.previewUrl); });
       selectedFiles = [];
       document.getElementById('file-input').value = '';
       updateFilesPreview();
@@ -1473,21 +2052,17 @@
         return;
       }
 
-      // Generate unique ID and read as data URL
+      // Generate unique ID and create object URL for preview
       const id = Date.now() + '-' + Math.random().toString(36).substr(2, 9);
-      const reader = new FileReader();
+      const previewUrl = URL.createObjectURL(file);
 
-      reader.onload = (e) => {
-        selectedImages.push({
-          id,
-          file,
-          dataUrl: e.target.result,
-          name: file.name
-        });
-        updateImagesPreview();
-      };
-
-      reader.readAsDataURL(file);
+      selectedImages.push({
+        id,
+        file,
+        previewUrl,
+        name: file.name
+      });
+      updateImagesPreview();
     }
 
     // Update the images grid preview
@@ -1510,7 +2085,7 @@
         grid.innerHTML = selectedImages.map((img, index) => `
           <div class="relative bg-white rounded-lg border-2 border-gray-200 hover:border-primary-400 transition-all overflow-visible">
             <div class="w-full h-20 bg-gray-50 flex items-center justify-center overflow-hidden rounded-t-lg">
-              <img src="${img.dataUrl}" alt="${img.name}" class="w-full h-full object-cover">
+              <img src="${img.previewUrl}" alt="${img.name}" class="w-full h-full object-cover">
             </div>
             <button onclick="event.stopPropagation(); removeImage('${img.id}')" class="absolute -top-2 -right-2 w-6 h-6 bg-red-500 hover:bg-red-600 rounded-full flex items-center justify-center text-white shadow-lg cursor-pointer border-2 border-white z-10">
               <i data-lucide="x" class="w-3 h-3"></i>
@@ -1527,12 +2102,15 @@
 
     // Remove a single image
     function removeImage(id) {
+      const img = selectedImages.find(img => img.id === id);
+      if (img && img.previewUrl) URL.revokeObjectURL(img.previewUrl);
       selectedImages = selectedImages.filter(img => img.id !== id);
       updateImagesPreview();
     }
 
     // Clear all images
     function clearAllImages() {
+      selectedImages.forEach(img => { if (img.previewUrl) URL.revokeObjectURL(img.previewUrl); });
       selectedImages = [];
       document.getElementById('image-input').value = '';
       updateImagesPreview();
@@ -1636,31 +2214,23 @@
         formData.append('code', code);
 
         if (selectedFiles.length > 0) {
-          // Multi-file upload - pack files as JSON array
-          const filesData = selectedFiles.map(f => ({
-            dataUrl: f.dataUrl,
-            name: f.name,
-            size: f.size,
-            type: f.type
-          }));
-
-          formData.append('type', 'files');
-          formData.append('content', JSON.stringify(filesData));
+          // File upload - send actual File objects
+          formData.append('type', selectedFiles.length === 1 ? 'file' : 'files');
+          selectedFiles.forEach(f => {
+            formData.append('files', f.file, f.name);
+          });
         } else if (selectedImages.length > 0) {
-          // Multi-image upload - pack images as JSON array
-          const imagesData = selectedImages.map(img => ({
-            dataUrl: img.dataUrl,
-            name: img.name
-          }));
-
-          formData.append('type', 'images');
-          formData.append('content', JSON.stringify(imagesData));
+          // Image upload - send actual File objects
+          formData.append('type', selectedImages.length === 1 ? 'file' : 'images');
+          selectedImages.forEach(img => {
+            formData.append('files', img.file, img.name);
+          });
         } else {
           formData.append('type', 'text');
           formData.append('content', textContent);
         }
 
-        const response = await fetch('/api/upload', {
+        const response = await fetch(`/api/upload?lang=${currentLang}`, {
           method: 'POST',
           body: formData
         });
@@ -1719,27 +2289,156 @@
           <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
           <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
-        <span>获取中...</span>
+        <span>${t('getting')}</span>
       `;
 
       let progressInterval = null;
 
       try {
-        const response = await fetch(`/api/download?code=${code}`);
-        const result = await response.json();
+        const response = await fetch(`/api/download?code=${code}&lang=${currentLang}`);
 
-        if (response.ok) {
+        if (!response.ok) {
+          // Error responses are always JSON
+          const result = await response.json();
+          progressDiv.classList.add('hidden');
+          progressBar.style.width = '0%';
+          progressText.textContent = '0%';
+          showMessage('receive-message', result.error || t('getFailed'), 'error');
+          return;
+        }
+
+        const contentType = response.headers.get('Content-Type') || '';
+        const transferType = response.headers.get('X-Transfer-Type');
+
+        if (transferType === 'file') {
+          // 单文件：响应体是二进制数据
+          const blob = await response.blob();
+          const fileName = decodeURIComponent(response.headers.get('X-File-Name') || 'download');
+          const fileContentType = contentType.split(';')[0].trim();
+          const isImage = fileContentType.startsWith('image/');
+
+          if (isImage) {
+            // 图片：显示预览
+            const objectUrl = URL.createObjectURL(blob);
+            const display = document.getElementById('receive-result');
+            display.innerHTML = `
+              <div class="bg-gradient-to-br from-primary-50 to-emerald-50 rounded-lg p-6 border border-primary-200">
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center">
+                      <i data-lucide="image" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <div>
+                      <h3 class="font-bold text-gray-900">${t("imagePreview")}</h3>
+                      <p class="text-sm text-gray-600">${escapeHtml(fileName)}</p>
+                    </div>
+                  </div>
+                  <button id="download-single-image-btn" class="flex items-center gap-2 px-3 py-1.5 bg-primary-500 hover:bg-primary-600 text-white text-sm rounded-lg transition-colors cursor-pointer">
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                    <span>${t("download")}</span>
+                  </button>
+                </div>
+                <div class="bg-white rounded-lg p-4 mb-3">
+                  <img id="preview-single-image" alt="${escapeHtml(fileName)}" class="w-full rounded cursor-pointer hover:opacity-90 transition-opacity">
+                </div>
+                <div class="flex items-start gap-2 text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg p-3">
+                  <i data-lucide="clock" class="w-3.5 h-3.5 mt-0.5 flex-shrink-0"></i>
+                  <p>${t("contentAutoDelete")}</p>
+                </div>
+              </div>
+            `;
+            display.classList.remove('hidden');
+            const imgEl = document.getElementById('preview-single-image');
+            imgEl.src = objectUrl;
+            imgEl.onclick = () => openImagePreview(objectUrl);
+            document.getElementById('download-single-image-btn').onclick = () => {
+              const link = document.createElement('a');
+              link.href = objectUrl;
+              link.download = fileName;
+              link.click();
+              showToast(t('imageDownloading'));
+            };
+            lucide.createIcons();
+          } else {
+            // 普通文件：显示进度条并下载
+            progressDiv.classList.remove('hidden');
+            let progress = 0;
+            progressInterval = setInterval(() => {
+              progress += 10;
+              if (progress <= 100) {
+                progressBar.style.width = progress + '%';
+                progressText.textContent = progress + '%';
+              }
+              if (progress >= 100) {
+                clearInterval(progressInterval);
+              }
+            }, 50);
+
+            // 触发文件下载
+            const objectUrl = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = objectUrl;
+            link.download = fileName;
+            link.click();
+            URL.revokeObjectURL(objectUrl);
+
+            const display = document.getElementById('receive-result');
+            // 等待进度条完成
+            setTimeout(() => {
+              progressDiv.classList.add('hidden');
+              progressBar.style.width = '0%';
+              progressText.textContent = '0%';
+
+              display.innerHTML = `
+                <div class="bg-gradient-to-br from-primary-50 to-emerald-50 rounded-lg p-6 border border-primary-200">
+                  <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center">
+                      <i data-lucide="check" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <div>
+                      <h3 class="font-bold text-gray-900">${t("downloadSuccess")}</h3>
+                      <p class="text-sm text-gray-600">${escapeHtml(fileName)}</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-2 text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg p-3">
+                    <i data-lucide="clock" class="w-3.5 h-3.5 mt-0.5 flex-shrink-0"></i>
+                    <p>${t("fileAutoDelete")}</p>
+                  </div>
+                </div>
+              `;
+              display.classList.remove('hidden');
+              lucide.createIcons();
+            }, 600);
+          }
+          hideMessage('receive-message');
+          document.getElementById('receive-code').value = '';
+        } else if (contentType.includes('application/json')) {
+          // JSON 响应：text / images / files
+          const result = await response.json();
           const display = document.getElementById('receive-result');
-          const isImage = result.contentType && result.contentType.startsWith('image/');
 
           if (result.type === 'images') {
-            // 多图类型：展示网格
-            const images = JSON.parse(result.content);
-            const imagesHtml = images.map((img, index) => `
+            // 多图类型：展示网格，逐个下载显示
+            const files = result.files; // [{name, size, type}]
+            const imageItems = files.map((f, index) => ({
+              name: f.name,
+              size: f.size,
+              type: f.type,
+              index
+            }));
+
+            // 先展示骨架屏，然后逐步加载图片
+            const imagesHtml = imageItems.map((img, index) => `
               <div class="relative group aspect-square bg-gray-100 rounded-lg overflow-hidden">
-                <img src="${img.dataUrl}" alt="${img.name}" class="w-full h-full object-cover cursor-pointer hover:opacity-90 transition-opacity" onclick="openImagePreview('${img.dataUrl}')">
+                <div id="img-placeholder-${index}" class="w-full h-full flex items-center justify-center bg-gray-200">
+                  <svg class="animate-spin h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                </div>
+                <img id="img-loaded-${index}" class="w-full h-full object-cover cursor-pointer hover:opacity-90 transition-opacity hidden" alt="${escapeHtml(img.name)}">
                 <div class="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-xs px-2 py-1 truncate">
-                  ${index + 1}. ${img.name}
+                  ${index + 1}. ${escapeHtml(img.name)}
                 </div>
               </div>
             `).join('');
@@ -1753,15 +2452,15 @@
                     </div>
                     <div>
                       <h3 class="font-bold text-gray-900">${t("imagesPreview")}</h3>
-                      <p class="text-sm text-gray-600">${images.length} ${images.length === 1 ? 'image' : 'images'}</p>
+                      <p class="text-sm text-gray-600">${files.length} ${files.length === 1 ? 'image' : 'images'}</p>
                     </div>
                   </div>
                   <div class="flex gap-2">
-                    <button onclick="downloadAllImages(${JSON.stringify(images).replace(/"/g, '&quot;')})" class="flex items-center gap-2 px-3 py-1.5 bg-white hover:bg-gray-50 border border-gray-200 text-gray-700 text-sm rounded-lg transition-colors cursor-pointer">
+                    <button id="download-all-images-btn" class="flex items-center gap-2 px-3 py-1.5 bg-white hover:bg-gray-50 border border-gray-200 text-gray-700 text-sm rounded-lg transition-colors cursor-pointer">
                       <i data-lucide="download" class="w-4 h-4"></i>
                       <span>${t("downloadAllImages")}</span>
                     </button>
-                    <button onclick="downloadImagesAsZip(${JSON.stringify(images).replace(/"/g, '&quot;')})" class="flex items-center gap-2 px-3 py-1.5 bg-primary-500 hover:bg-primary-600 text-white text-sm rounded-lg transition-colors cursor-pointer">
+                    <button id="download-images-zip-btn" class="flex items-center gap-2 px-3 py-1.5 bg-primary-500 hover:bg-primary-600 text-white text-sm rounded-lg transition-colors cursor-pointer">
                       <i data-lucide="archive" class="w-4 h-4"></i>
                       <span>${t("downloadAsZip")}</span>
                     </button>
@@ -1780,27 +2479,88 @@
             `;
             display.classList.remove('hidden');
             lucide.createIcons();
+
+            // 逐个加载图片
+            const imageObjectUrls = [];
+            for (let i = 0; i < imageItems.length; i++) {
+              try {
+                const imgResp = await fetch(`/api/download?code=${code}&fileIndex=${i}&lang=${currentLang}`);
+                if (imgResp.ok) {
+                  const imgBlob = await imgResp.blob();
+                  const objectUrl = URL.createObjectURL(imgBlob);
+                  imageObjectUrls.push({ objectUrl, name: imageItems[i].name });
+                  const imgEl = document.getElementById(`img-loaded-${i}`);
+                  const placeholder = document.getElementById(`img-placeholder-${i}`);
+                  if (imgEl && placeholder) {
+                    imgEl.src = objectUrl;
+                    imgEl.onclick = () => openImagePreview(objectUrl);
+                    imgEl.classList.remove('hidden');
+                    placeholder.classList.add('hidden');
+                  }
+                }
+              } catch (e) {
+                // 单张加载失败不影响其他
+              }
+            }
+
+            // 绑定批量下载按钮
+            document.getElementById('download-all-images-btn').onclick = () => {
+              imageObjectUrls.forEach((item, index) => {
+                setTimeout(() => {
+                  const link = document.createElement('a');
+                  link.href = item.objectUrl;
+                  link.download = item.name;
+                  link.click();
+                }, index * 200);
+              });
+              showToast(`${t('imageDownloading')} (${imageObjectUrls.length})`);
+            };
+
+            document.getElementById('download-images-zip-btn').onclick = async () => {
+              try {
+                const zip = new JSZip();
+                for (const item of imageObjectUrls) {
+                  const resp = await fetch(item.objectUrl);
+                  const blob = await resp.blob();
+                  zip.file(item.name, blob);
+                }
+                const zipBlob = await zip.generateAsync({type: 'blob'});
+                const url = URL.createObjectURL(zipBlob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'images.zip';
+                link.click();
+                URL.revokeObjectURL(url);
+                showToast(t('downloadAsZip') + ' ✓');
+              } catch (error) {
+                showToast('ZIP download failed', 'error');
+              }
+            };
+
           } else if (result.type === 'files') {
             // 多文件类型：展示网格
-            const files = JSON.parse(result.content);
+            const files = result.files;
             const filesHtml = files.map((f, index) => {
               const isImage = f.type && f.type.startsWith('image/');
               const icon = getFileIcon(f.type || '');
-              const sizeKB = (f.size / 1024).toFixed(1);
+              const fileSize = formatFileSize(f.size);
 
               return `
                 <div class="relative group bg-gray-100 rounded-lg overflow-hidden p-3">
                   ${isImage ? `
-                    <div class="aspect-square mb-2 bg-gray-200 rounded overflow-hidden">
-                      <img src="${f.dataUrl}" alt="${f.name}" class="w-full h-full object-cover cursor-pointer hover:opacity-90 transition-opacity" onclick="openImagePreview('${f.dataUrl}')">
+                    <div id="file-preview-${index}" class="aspect-square mb-2 bg-gray-200 rounded overflow-hidden flex items-center justify-center">
+                      <svg class="animate-spin h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
                     </div>
                   ` : `
                     <div class="aspect-square mb-2 bg-gradient-to-br from-primary-100 to-emerald-100 rounded flex items-center justify-center">
                       <i data-lucide="${icon}" class="w-12 h-12 text-primary-600"></i>
                     </div>
                   `}
-                  <div class="text-xs truncate font-medium text-gray-900" title="${f.name}">${f.name}</div>
-                  <div class="text-xs text-gray-500">${sizeKB} KB</div>
+                  <div class="text-xs truncate font-medium text-gray-900" title="${escapeHtml(f.name)}">${escapeHtml(f.name)}</div>
+                  <div class="text-xs text-gray-500">${fileSize}</div>
                 </div>
               `;
             }).join('');
@@ -1818,11 +2578,11 @@
                     </div>
                   </div>
                   <div class="flex gap-2">
-                    <button onclick="downloadAllFiles(${JSON.stringify(files).replace(/"/g, '&quot;')})" class="flex items-center gap-2 px-3 py-1.5 bg-white hover:bg-gray-50 border border-gray-200 text-gray-700 text-sm rounded-lg transition-colors cursor-pointer">
+                    <button id="download-all-files-btn" class="flex items-center gap-2 px-3 py-1.5 bg-white hover:bg-gray-50 border border-gray-200 text-gray-700 text-sm rounded-lg transition-colors cursor-pointer">
                       <i data-lucide="download" class="w-4 h-4"></i>
                       <span>${t("downloadAllImages")}</span>
                     </button>
-                    <button onclick="downloadFilesAsZip(${JSON.stringify(files).replace(/"/g, '&quot;')})" class="flex items-center gap-2 px-3 py-1.5 bg-primary-500 hover:bg-primary-600 text-white text-sm rounded-lg transition-colors cursor-pointer">
+                    <button id="download-files-zip-btn" class="flex items-center gap-2 px-3 py-1.5 bg-primary-500 hover:bg-primary-600 text-white text-sm rounded-lg transition-colors cursor-pointer">
                       <i data-lucide="archive" class="w-4 h-4"></i>
                       <span>${t("downloadAsZip")}</span>
                     </button>
@@ -1841,90 +2601,71 @@
             `;
             display.classList.remove('hidden');
             lucide.createIcons();
-          } else if (result.type === 'file' && isImage) {
-            // 单图类型：直接展示
-            display.innerHTML = `
-              <div class="bg-gradient-to-br from-primary-50 to-emerald-50 rounded-lg p-6 border border-primary-200">
-                <div class="flex items-center justify-between mb-4">
-                  <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center">
-                      <i data-lucide="image" class="w-6 h-6 text-white"></i>
-                    </div>
-                    <div>
-                      <h3 class="font-bold text-gray-900">${t("imagePreview")}</h3>
-                      <p class="text-sm text-gray-600">${result.fileName || '图片'}</p>
-                    </div>
-                  </div>
-                  <button onclick="downloadImageFromResult('${result.content}', '${result.fileName}')" class="flex items-center gap-2 px-3 py-1.5 bg-primary-500 hover:bg-primary-600 text-white text-sm rounded-lg transition-colors cursor-pointer">
-                    <i data-lucide="download" class="w-4 h-4"></i>
-                    <span>${t("download")}</span>
-                  </button>
-                </div>
-                <div class="bg-white rounded-lg p-4 mb-3">
-                  <img src="${result.content}" alt="${result.fileName}" class="w-full rounded cursor-pointer hover:opacity-90 transition-opacity" onclick="openImagePreview('${result.content}')">
-                </div>
-                <div class="flex items-start gap-2 text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg p-3">
-                  <i data-lucide="clock" class="w-3.5 h-3.5 mt-0.5 flex-shrink-0"></i>
-                  <p>${t("contentAutoDelete")}</p>
-                </div>
-              </div>
-            `;
-            display.classList.remove('hidden');
-            lucide.createIcons();
-          } else if (result.type === 'file') {
-            // 普通文件类型：显示进度条并下载
-            progressDiv.classList.remove('hidden');
-            let progress = 0;
-            progressInterval = setInterval(() => {
-              progress += 10;
-              if (progress <= 100) {
-                progressBar.style.width = progress + '%';
-                progressText.textContent = progress + '%';
-              }
-              if (progress >= 100) {
-                clearInterval(progressInterval);
-              }
-            }, 50);
 
-            // 触发文件下载
-            const link = document.createElement('a');
-            link.href = result.content;
-            link.download = result.fileName;
-            link.click();
+            // 逐个加载文件（图片预览）
+            const fileObjectUrls = [];
+            for (let i = 0; i < files.length; i++) {
+              try {
+                const fileResp = await fetch(`/api/download?code=${code}&fileIndex=${i}&lang=${currentLang}`);
+                if (fileResp.ok) {
+                  const fileBlob = await fileResp.blob();
+                  const objectUrl = URL.createObjectURL(fileBlob);
+                  fileObjectUrls.push({ objectUrl, name: files[i].name });
+                  // 如果是图片，更新预览
+                  const isImage = files[i].type && files[i].type.startsWith('image/');
+                  if (isImage) {
+                    const previewDiv = document.getElementById(`file-preview-${i}`);
+                    if (previewDiv) {
+                      previewDiv.innerHTML = `<img src="${objectUrl}" alt="${escapeHtml(files[i].name)}" class="w-full h-full object-cover cursor-pointer hover:opacity-90 transition-opacity" onclick="openImagePreview('${objectUrl}')">`;
+                    }
+                  }
+                }
+              } catch (e) {
+                // 单个加载失败不影响其他
+              }
+            }
 
-            // 等待进度条完成
-            setTimeout(() => {
-              progressDiv.classList.add('hidden');
-              progressBar.style.width = '0%';
-              progressText.textContent = '0%';
-              
-              display.innerHTML = `
-                <div class="bg-gradient-to-br from-primary-50 to-emerald-50 rounded-lg p-6 border border-primary-200">
-                  <div class="flex items-center gap-3 mb-4">
-                    <div class="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center">
-                      <i data-lucide="check" class="w-6 h-6 text-white"></i>
-                    </div>
-                    <div>
-                      <h3 class="font-bold text-gray-900">${t("downloadSuccess")}</h3>
-                      <p class="text-sm text-gray-600">${result.fileName}</p>
-                    </div>
-                  </div>
-                  <div class="flex items-start gap-2 text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg p-3">
-                    <i data-lucide="clock" class="w-3.5 h-3.5 mt-0.5 flex-shrink-0"></i>
-                    <p>${t("fileAutoDelete")}</p>
-                  </div>
-                </div>
-              `;
-              display.classList.remove('hidden');
-              lucide.createIcons();
-            }, 600);
-          } else {
+            // 绑定批量下载按钮
+            document.getElementById('download-all-files-btn').onclick = () => {
+              fileObjectUrls.forEach((item, index) => {
+                setTimeout(() => {
+                  const link = document.createElement('a');
+                  link.href = item.objectUrl;
+                  link.download = item.name;
+                  link.click();
+                }, index * 200);
+              });
+              showToast(`${t('downloading')} (${fileObjectUrls.length})`);
+            };
+
+            document.getElementById('download-files-zip-btn').onclick = async () => {
+              try {
+                const zip = new JSZip();
+                for (const item of fileObjectUrls) {
+                  const resp = await fetch(item.objectUrl);
+                  const blob = await resp.blob();
+                  zip.file(item.name, blob);
+                }
+                const zipBlob = await zip.generateAsync({type: 'blob'});
+                const url = URL.createObjectURL(zipBlob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'files.zip';
+                link.click();
+                URL.revokeObjectURL(url);
+                showToast(t('downloadAsZip') + ' ✓');
+              } catch (error) {
+                showToast('ZIP download failed', 'error');
+              }
+            };
+
+          } else if (result.type === 'text') {
             // 文本类型：不显示进度条，直接显示内容
             display.innerHTML = `
               <div class="bg-gradient-to-br from-primary-50 to-emerald-50 rounded-lg p-6 border border-primary-200">
                 <div class="flex items-center justify-between mb-4">
                   <h3 class="font-bold text-gray-900">${t("textContent")}</h3>
-                  <button onclick="copyText(\`${escapeHtml(result.content).replace(/`/g, '\\`')}\`, this)" class="flex items-center gap-2 px-3 py-1.5 bg-primary-500 hover:bg-primary-600 text-white text-sm rounded-lg transition-colors cursor-pointer">
+                  <button id="copy-text-btn" class="flex items-center gap-2 px-3 py-1.5 bg-primary-500 hover:bg-primary-600 text-white text-sm rounded-lg transition-colors cursor-pointer">
                     <i data-lucide="copy" class="w-4 h-4"></i>
                     <span>${t("copy")}</span>
                   </button>
@@ -1939,16 +2680,16 @@
               </div>
             `;
             display.classList.remove('hidden');
+            // 绑定复制按钮
+            const textToCopy = result.content;
+            document.getElementById('copy-text-btn').onclick = function() {
+              copyText(textToCopy, this);
+            };
             lucide.createIcons();
           }
 
           hideMessage('receive-message');
           document.getElementById('receive-code').value = '';
-        } else {
-          progressDiv.classList.add('hidden');
-          progressBar.style.width = '0%';
-          progressText.textContent = '0%';
-          showMessage('receive-message', result.error || t('getFailed'), 'error');
         }
       } catch (error) {
         if (progressInterval) clearInterval(progressInterval);
@@ -1976,9 +2717,9 @@
         showToast(t('textCopied'));
         
         const originalHTML = button.innerHTML;
-        button.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i><span>${t("copied")}</span>';
+        button.innerHTML = `<i data-lucide="check" class="w-4 h-4"></i><span>${t("copied")}</span>`;
         lucide.createIcons();
-        
+
         setTimeout(() => {
           button.innerHTML = originalHTML;
           lucide.createIcons();
@@ -1994,12 +2735,12 @@
           textarea.select();
           const success = document.execCommand('copy');
           document.body.removeChild(textarea);
-          
+
           if (success) {
             showToast(t('textCopied'));
-            
+
             const originalHTML = button.innerHTML;
-            button.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i><span>${t("copied")}</span>';
+            button.innerHTML = `<i data-lucide="check" class="w-4 h-4"></i><span>${t("copied")}</span>`;
             lucide.createIcons();
             
             setTimeout(() => {
@@ -2037,91 +2778,6 @@
       }).catch(() => {
         showToast(t('copyFailed'), 'error');
       });
-    }
-
-    // Download image from result
-    function downloadImageFromResult(dataUrl, fileName) {
-      const link = document.createElement('a');
-      link.href = dataUrl;
-      link.download = fileName || 'image.png';
-      link.click();
-      showToast(t('imageDownloading'));
-    }
-
-    // Download all images (one by one)
-    function downloadAllImages(images) {
-      images.forEach((img, index) => {
-        setTimeout(() => {
-          const link = document.createElement('a');
-          link.href = img.dataUrl;
-          link.download = img.name;
-          link.click();
-        }, index * 200); // Stagger downloads
-      });
-      showToast(`${t('imageDownloading')} (${images.length})`);
-    }
-
-    // Download images as ZIP
-    async function downloadImagesAsZip(images) {
-      try {
-        const zip = new JSZip();
-
-        images.forEach(img => {
-          const base64Data = img.dataUrl.split(',')[1];
-          zip.file(img.name, base64Data, {base64: true});
-        });
-
-        const blob = await zip.generateAsync({type: 'blob'});
-        const url = URL.createObjectURL(blob);
-
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'images.zip';
-        link.click();
-
-        URL.revokeObjectURL(url);
-        showToast(t('downloadAsZip') + ' ✓');
-      } catch (error) {
-        showToast('ZIP download failed', 'error');
-      }
-    }
-
-    // Download files as ZIP
-    async function downloadFilesAsZip(files) {
-      try {
-        const zip = new JSZip();
-
-        files.forEach(f => {
-          const base64Data = f.dataUrl.split(',')[1];
-          zip.file(f.name, base64Data, {base64: true});
-        });
-
-        const blob = await zip.generateAsync({type: 'blob'});
-        const url = URL.createObjectURL(blob);
-
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'files.zip';
-        link.click();
-
-        URL.revokeObjectURL(url);
-        showToast(t('downloadAsZip') + ' ✓');
-      } catch (error) {
-        showToast('ZIP download failed', 'error');
-      }
-    }
-
-    // Download all files (one by one)
-    function downloadAllFiles(files) {
-      files.forEach((f, index) => {
-        setTimeout(() => {
-          const link = document.createElement('a');
-          link.href = f.dataUrl;
-          link.download = f.name;
-          link.click();
-        }, index * 200);
-      });
-      showToast(`${t('downloading')} (${files.length})`);
     }
 
     // Image preview modal

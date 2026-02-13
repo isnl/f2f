@@ -6,7 +6,8 @@
     "build:css": "postcss src/input.css -o public/assets/css/style.css",
     "watch:css": "postcss src/input.css -o public/assets/css/style.css --watch",
     "dev": "npm run build:css && wrangler pages dev public --kv TRANSFERS",
-    "deploy": "npm run build:css",
+    "minify:html": "html-minifier-terser --collapse-whitespace --remove-comments --remove-redundant-attributes --remove-empty-attributes --minify-css true --minify-js true public/index.html -o public/index.html",
+    "deploy": "npm run build:css && npm run minify:html",
     "build": "npm run build:css"
   },
   "keywords": [
@@ -45,6 +46,7 @@
     "@tailwindcss/postcss": "^4.1.16",
     "autoprefixer": "^10.4.21",
     "cssnano": "^7.1.1",
+    "html-minifier-terser": "^7.2.0",
     "postcss": "^8.5.6",
     "postcss-cli": "^11.0.1",
     "tailwindcss": "^4.1.16",
