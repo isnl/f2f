@@ -2,9 +2,9 @@
 
 # 🚀 F2F.icu
 
-**简单、快速、安全的点对点文件传输工具**
+**Simple, Fast, and Secure Peer-to-Peer File Transfer Tool**
 
-[English](./README_EN.md) | 简体中文
+English | [简体中文](./README_ZH.md) | [日本語](./README_JA.md) | [한국어](./README_KO.md) | [Français](./README_FR.md) | [Español](./README_ES.md) | [Deutsch](./README_DE.md)
 
 [![GitHub stars](https://img.shields.io/github/stars/isnl/f2f?style=flat-square&logo=github)](https://github.com/isnl/f2f/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/isnl/f2f?style=flat-square&logo=github)](https://github.com/isnl/f2f/network)
@@ -15,147 +15,147 @@
 [![Deploy with Cloudflare Pages](https://img.shields.io/badge/Deploy%20with-Cloudflare%20Pages-F38020?style=flat-square&logo=cloudflare)](https://pages.cloudflare.com/)
 [![Powered by Workers](https://img.shields.io/badge/Powered%20by-Cloudflare%20Workers-F38020?style=flat-square&logo=cloudflare)](https://workers.cloudflare.com/)
 
-[🌐 在线体验](https://f2f.icu) | [📖 文档](https://github.com/isnl/f2f) | [🐛 报告问题](https://github.com/isnl/f2f/issues) | [💡 功能建议](https://github.com/isnl/f2f/issues/new)
+[🌐 Live Demo](https://f2f.icu) | [📖 Documentation](https://github.com/isnl/f2f) | [🐛 Report Issues](https://github.com/isnl/f2f/issues) | [💡 Feature Requests](https://github.com/isnl/f2f/issues/new)
 
 </div>
 
 ---
 
-## ✨ 特性
+## ✨ Features
 
 <table>
   <tr>
     <td align="center">🚀</td>
-    <td><b>极速传输</b><br/>基于 Cloudflare 全球边缘网络，毫秒级响应</td>
+    <td><b>Lightning Fast</b><br/>Powered by Cloudflare's global edge network with millisecond response times</td>
     <td align="center">🔐</td>
-    <td><b>6位分享码</b><br/>简单易记，21.8亿种组合保证安全</td>
+    <td><b>6-Digit Share Code</b><br/>Simple and memorable, with 2.18 billion combinations for security</td>
   </tr>
   <tr>
     <td align="center">📦</td>
-    <td><b>大文件支持</b><br/>单文件最大支持 25MB，满足日常需求</td>
+    <td><b>Large File Support</b><br/>Single file up to 25MB, perfect for everyday needs</td>
     <td align="center">📝</td>
-    <td><b>多种格式</b><br/>支持文件、文本、图片等多种内容类型</td>
+    <td><b>Multiple Formats</b><br/>Support for files, text, images, and various content types</td>
   </tr>
   <tr>
     <td align="center">📚</td>
-    <td><b>批量上传</b><br/>支持多文件（最多100个）和多图片（最多25张）同时上传</td>
+    <td><b>Batch Upload</b><br/>Support multiple files (up to 100) and images (up to 25) at once</td>
     <td align="center">📦</td>
-    <td><b>ZIP打包下载</b><br/>多文件/多图片支持一键打包下载</td>
+    <td><b>ZIP Download</b><br/>Download multiple files/images as a single ZIP package</td>
   </tr>
   <tr>
     <td align="center">⏱️</td>
-    <td><b>自动销毁</b><br/>下载后 1 分钟自动删除，保护隐私</td>
+    <td><b>Auto-Deletion</b><br/>Automatically deleted 1 minute after download to protect privacy</td>
     <td align="center">🆓</td>
-    <td><b>完全免费</b><br/>基于 Cloudflare 免费服务，无需绑卡</td>
+    <td><b>Completely Free</b><br/>Based on Cloudflare's free tier, no credit card required</td>
   </tr>
   <tr>
     <td align="center">🎨</td>
-    <td><b>精美界面</b><br/>现代化 UI 设计，极致用户体验</td>
+    <td><b>Beautiful Interface</b><br/>Modern UI design with exceptional user experience</td>
     <td align="center">📱</td>
-    <td><b>响应式设计</b><br/>完美支持手机、平板、桌面端</td>
+    <td><b>Responsive Design</b><br/>Perfect support for mobile, tablet, and desktop</td>
   </tr>
 </table>
 
-## 🎯 在线演示
+## 🎯 Live Demo
 
-👉 **访问：[https://f2f.icu](https://f2f.icu)**
+👉 **Visit: [https://f2f.icu](https://f2f.icu)**
 
 <div align="center">
   <img src="https://img.shields.io/badge/Demo-Available-success?style=for-the-badge" alt="Demo Available"/>
 </div>
 
-## 📸 预览
+## 📸 Preview
 
 <details>
-<summary>点击查看界面截图</summary>
+<summary>Click to view interface screenshots</summary>
 
-### 发送界面
-![发送界面](./docs/imgs/send.png)
+### Send Interface
+![Send Interface](./docs/imgs/send.png)
 
-### 接收界面
-![接收界面](./docs/imgs/receive.png)
+### Receive Interface
+![Receive Interface](./docs/imgs/receive.png)
 
 </details>
 
-## 🛠️ 技术栈
+## 🛠️ Technology Stack
 
 <div align="center">
 
-| 技术 | 说明 |
-|------|------|
-| ⚡️ **Cloudflare Pages** | 前端静态网站托管，全球 CDN 加速 |
-| 🔥 **Cloudflare Workers** | Serverless 后端 API，边缘计算 |
-| 💾 **Cloudflare KV** | 键值存储，原生 TTL 支持 |
-| 🎨 **Tailwind CSS** | 现代化 CSS 框架，快速构建界面 |
-| 📝 **TypeScript** | 类型安全的 JavaScript 超集 |
+| Technology | Description |
+|------------|-------------|
+| ⚡️ **Cloudflare Pages** | Frontend static website hosting with global CDN acceleration |
+| 🔥 **Cloudflare Workers** | Serverless backend API with edge computing |
+| 💾 **Cloudflare KV** | Key-value storage with native TTL support |
+| 🎨 **Tailwind CSS** | Modern CSS framework for rapid UI development |
+| 📝 **TypeScript** | Type-safe JavaScript superset |
 
 </div>
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-### 前置要求
+### Prerequisites
 
 - ✅ Node.js 16+
-- ✅ Cloudflare 账号（免费版即可）
+- ✅ Cloudflare account (free tier is sufficient)
 - ✅ Git
 
-### 一键部署
+### One-Click Deploy
 
-#### 方法一：Fork 并部署（推荐）
+#### Method 1: Fork and Deploy (Recommended)
 
-1. **Fork 本仓库**
-   
-   点击右上角的 `Fork` 按钮
+1. **Fork this repository**
 
-2. **连接 Cloudflare Pages**
-   
-   - 登录 [Cloudflare Dashboard](https://dash.cloudflare.com/)
-   - 进入 `Workers & Pages` → `Create application` → `Pages` → `Connect to Git`
-   - 选择你 Fork 的仓库
-   - 构建配置：
-     - **构建命令**：留空（或 `npm run build`）
-     - **输出目录**：`public`
-   - 点击 `Save and Deploy`
+   Click the `Fork` button in the top right
 
-3. **配置 KV 存储**
-   
-   - 在 Dashboard 中进入 `Workers & Pages` → `KV`
-   - 点击 `Create a namespace`，命名为 `f2f-transfers`
-   - 回到你的 Pages 项目 → `Settings` → `Functions` → `KV namespace bindings`
-   - 添加绑定：
-     - **变量名**：`TRANSFERS`
-     - **KV 命名空间**：选择 `f2f-transfers`
-   - 保存并重新部署
+2. **Connect to Cloudflare Pages**
 
-4. **完成！🎉**
-   
-   访问 Cloudflare 提供的域名即可使用
+   - Login to [Cloudflare Dashboard](https://dash.cloudflare.com/)
+   - Go to `Workers & Pages` → `Create application` → `Pages` → `Connect to Git`
+   - Select your forked repository
+   - Build configuration:
+     - **Build command**: Leave blank (or `npm run build`)
+     - **Output directory**: `public`
+   - Click `Save and Deploy`
 
-#### 方法二：本地开发
+3. **Configure KV Storage**
+
+   - In Dashboard, go to `Workers & Pages` → `KV`
+   - Click `Create a namespace`, name it `f2f-transfers`
+   - Go back to your Pages project → `Settings` → `Functions` → `KV namespace bindings`
+   - Add binding:
+     - **Variable name**: `TRANSFERS`
+     - **KV namespace**: Select `f2f-transfers`
+   - Save and redeploy
+
+4. **Done! 🎉**
+
+   Visit the domain provided by Cloudflare
+
+#### Method 2: Local Development
 
 ```bash
-# 克隆仓库
+# Clone repository
 git clone https://github.com/isnl/f2f.git
 cd f2f
 
-# 安装依赖
+# Install dependencies
 npm install
 
-# 创建 KV 命名空间
+# Create KV namespace
 wrangler kv:namespace create "TRANSFERS"
 
-# 配置 wrangler.toml
-# 将生成的 namespace ID 填入 wrangler.toml
+# Configure wrangler.toml
+# Add the generated namespace ID to wrangler.toml
 
-# 启动本地开发服务器
+# Start local development server
 npm run dev
 
-# 访问 http://localhost:8788
+# Visit http://localhost:8788
 ```
 
-### 配置文件说明
+### Configuration File
 
-编辑 `wrangler.toml`：
+Edit `wrangler.toml`:
 
 ```toml
 name = "f2f-transfer"
@@ -165,324 +165,324 @@ pages_build_output_dir = "public"
 
 [[kv_namespaces]]
 binding = "TRANSFERS"
-id = "your_kv_namespace_id_here"          # 替换为你的生产环境 KV ID
-preview_id = "your_preview_kv_id_here"    # 替换为你的预览环境 KV ID
+id = "your_kv_namespace_id_here"          # Replace with your production KV ID
+preview_id = "your_preview_kv_id_here"    # Replace with your preview KV ID
 ```
 
-## 📖 使用指南
+## 📖 Usage Guide
 
-### 📤 发送文件/文本
+### 📤 Send Files/Text
 
-1. 切换到**发送**标签
-2. 输入或生成 6 位分享码（支持大写字母 A-Z 和数字 0-9）
-3. 选择内容类型：
-   - **文件**：点击上传或拖拽文件（支持多文件，最多100个，总大小≤25MB）
-   - **文本**：直接输入文本内容
-   - **图片**：选择图片或 Ctrl/Cmd + V 粘贴截图（支持多图，最多25张）
-4. 点击**创建分享**
-5. 复制分享码或分享链接发送给接收方
+1. Switch to **Send** tab
+2. Enter or generate a 6-digit share code (supports uppercase letters A-Z and numbers 0-9)
+3. Select content type:
+   - **File**: Click to upload or drag and drop (supports multiple files, up to 100, total ≤25MB)
+   - **Text**: Enter text content directly
+   - **Image**: Select image or Ctrl/Cmd + V to paste screenshot (supports multiple images, up to 25)
+4. Click **Create Share**
+5. Copy the share code or link and send to recipient
 
-### 📥 接收文件/文本
+### 📥 Receive Files/Text
 
-1. 切换到**接收**标签
-2. 输入 6 位取件码
-3. 点击**获取内容**
-4. 下载选项：
-   - **单文件**：自动下载
-   - **多文件/多图片**：可选择逐个下载或一键打包为 ZIP 下载
-   - **文本/图片**：直接显示预览
-5. ⚠️ 内容将在 **1 分钟后自动删除**，请及时保存
+1. Switch to **Receive** tab
+2. Enter 6-digit pickup code
+3. Click **Get Content**
+4. Download options:
+   - **Single file**: Auto-download
+   - **Multiple files/images**: Choose to download individually or as a ZIP package
+   - **Text/Image**: Direct preview display
+5. ⚠️ Content will be **automatically deleted after 1 minute**, please save promptly
 
-## ⚙️ 工作原理
+## ⚙️ How It Works
 
 ```mermaid
 graph LR
-    A[发送方上传] --> B[转换为 Base64]
-    B --> C[存储到 KV]
-    C --> D[生成分享码]
-    D --> E[接收方输入码]
-    E --> F[从 KV 读取]
-    F --> G[标记已下载]
-    G --> H[设置 1 分钟 TTL]
-    H --> I[自动删除]
+    A[Sender Upload] --> B[Convert to Base64]
+    B --> C[Store in KV]
+    C --> D[Generate Share Code]
+    D --> E[Receiver Enters Code]
+    E --> F[Read from KV]
+    F --> G[Mark as Downloaded]
+    G --> H[Set 1 Minute TTL]
+    H --> I[Auto Delete]
 ```
 
-### 数据流程
+### Data Flow
 
-1. **上传阶段**
-   - 文件 → Base64 编码 → 存储到 KV
-   - 默认 TTL：1 小时（未下载 1 小时后自动删除）
+1. **Upload Phase**
+   - File → Base64 encoding → Store in KV
+   - Default TTL: 1 hour (auto-delete after 1 hour if not downloaded)
 
-2. **下载阶段**
-   - 验证分享码 → 读取数据
-   - 标记为已下载 → 更新 TTL 为 1 分钟
-   - 自动触发浏览器下载（文件）或显示（文本/图片）
+2. **Download Phase**
+   - Verify share code → Read data
+   - Mark as downloaded → Update TTL to 1 minute
+   - Auto-trigger browser download (files) or display (text/images)
 
-3. **清理阶段**
-   - KV 自动根据 TTL 删除过期数据
-   - 无需手动清理，零维护成本
+3. **Cleanup Phase**
+   - KV automatically deletes expired data based on TTL
+   - Zero maintenance cost
 
-### 为什么选择 KV 存储？
+### Why Choose KV Storage?
 
-| 特性 | KV 存储 | R2 对象存储 | D1 数据库 |
-|------|---------|-------------|-----------|
-| 单值大小 | **25MB** ✅ | 5GB | 1MB（需分片） |
-| TTL 支持 | **原生支持** ✅ | ❌ 需手动实现 | ❌ 需手动实现 |
-| 读写延迟 | **极低** ✅ | 低 | 较低 |
-| 免费额度 | **100K 读/天** ✅ | 需绑卡 | 10个库 |
-| 适用场景 | **临时文件存储** ✅ | 大文件存储 | 结构化数据 |
+| Feature | KV Storage | R2 Object Storage | D1 Database |
+|---------|------------|-------------------|-------------|
+| Single value size | **25MB** ✅ | 5GB | 1MB (needs sharding) |
+| TTL support | **Native** ✅ | ❌ Manual implementation | ❌ Manual implementation |
+| Read/write latency | **Very low** ✅ | Low | Lower |
+| Free tier | **100K reads/day** ✅ | Requires credit card | 10 databases |
+| Use case | **Temporary file storage** ✅ | Large file storage | Structured data |
 
-## 🔒 安全说明
+## 🔒 Security
 
-| 项目 | 说明 |
-|------|------|
-| 🔢 **分享码强度** | 6 位字符（A-Z, 0-9），共 36^6 ≈ 21.8 亿种组合 |
-| ⏰ **数据保留** | 未下载：1 小时 / 已下载：1 分钟 |
-| ⚠️ **隐私提醒** | 不建议传输敏感信息（如密码、身份证等） |
-| 🔐 **传输安全** | 全程 HTTPS 加密传输 |
+| Item | Description |
+|------|-------------|
+| 🔢 **Code Strength** | 6 characters (A-Z, 0-9), ~2.18 billion combinations |
+| ⏰ **Data Retention** | Not downloaded: 1 hour / Downloaded: 1 minute |
+| ⚠️ **Privacy Notice** | Not recommended for sensitive information (passwords, IDs, etc.) |
+| 🔐 **Transfer Security** | Full HTTPS encryption |
 
-## 📊 限制说明
+## 📊 Limitations
 
-- **文件大小**：总大小最大 25MB
-- **文件数量**：单次最多 100 个文件或 25 张图片
-- **分享码格式**：6 位大写字母或数字（A-Z, 0-9）
-- **数据保留时间**：
-  - 未下载：1 小时后自动删除
-  - 已下载：1 分钟后自动删除
-- **KV 免费额度**：
-  - 每天 100,000 次读取
-  - 每天 1,000 次写入
-  - 对个人使用完全够用
+- **File Size**: Maximum 25MB total
+- **File Count**: Up to 100 files or 25 images per transfer
+- **Share Code Format**: 6-digit uppercase letters or numbers (A-Z, 0-9)
+- **Data Retention**:
+  - Not downloaded: Auto-delete after 1 hour
+  - Downloaded: Auto-delete after 1 minute
+- **KV Free Tier**:
+  - 100,000 reads per day
+  - 1,000 writes per day
+  - Sufficient for personal use
 
-## 📝 API 文档
+## 📝 API Documentation
 
 ### POST `/api/upload`
 
-上传文件或文本
+Upload file or text
 
-**请求参数（FormData）：**
+**Request Parameters (FormData):**
 
 ```typescript
 {
-  code: string,       // 6位分享码（必填）
-  type: 'file' | 'text' | 'files' | 'images',  // 内容类型（必填）
-  content: string,    // 内容（必填）
-                      // - file: Base64 编码的文件内容
-                      // - text: 纯文本内容
-                      // - files: JSON 数组 [{dataUrl, name, size, type}, ...]
-                      // - images: JSON 数组 [{dataUrl, name}, ...]
-  fileName?: string   // 文件名（type=file 时必填）
+  code: string,       // 6-digit share code (required)
+  type: 'file' | 'text' | 'files' | 'images',  // Content type (required)
+  content: string,    // Content (required)
+                      // - file: Base64 encoded file content
+                      // - text: Plain text content
+                      // - files: JSON array [{dataUrl, name, size, type}, ...]
+                      // - images: JSON array [{dataUrl, name}, ...]
+  fileName?: string   // File name (required when type=file)
 }
 ```
 
-**响应：**
+**Response:**
 
 ```typescript
 {
   success: true,
-  code: string,       // 分享码
-  message: string     // 提示信息
+  code: string,       // Share code
+  message: string     // Status message
 }
 ```
 
 ### GET `/api/download`
 
-下载文件或获取文本
+Download file or get text
 
-**请求参数：**
+**Request Parameters:**
 
 ```
-?code=ABC123  // 6位取件码
+?code=ABC123  // 6-digit pickup code
 ```
 
-**响应：**
+**Response:**
 
 ```typescript
 {
   success: true,
   type: 'file' | 'text' | 'files' | 'images',
-  content: string,      // Base64、文本或 JSON 数组
-  contentType: string,  // MIME 类型
-  fileName?: string     // 文件名（type=file 时返回）
+  content: string,      // Base64, text, or JSON array
+  contentType: string,  // MIME type
+  fileName?: string     // File name (returned when type=file)
 }
 ```
 
-## 🎨 自定义配置
+## 🎨 Customization
 
-### 修改文件大小限制
+### Modify File Size Limit
 
-编辑 `functions/api/upload.ts`：
+Edit `functions/api/upload.ts`:
 
 ```typescript
-const maxSize = 25 * 1024 * 1024; // 修改为你想要的大小（字节）
+const maxSize = 25 * 1024 * 1024; // Modify to your desired size (bytes)
 ```
 
-### 修改数据保留时间
+### Modify Data Retention Time
 
-**上传时的 TTL**（未下载状态）：
+**Upload TTL** (not downloaded):
 
 ```typescript
 // functions/api/upload.ts
-expirationTtl: 3600 // 1小时 = 3600秒，可自定义
+expirationTtl: 3600 // 1 hour = 3600 seconds, customizable
 ```
 
-**下载后的 TTL**（已下载状态）：
+**Download TTL** (downloaded):
 
 ```typescript
 // functions/api/download.ts
-expirationTtl: 60 // 1分钟 = 60秒，可自定义
+expirationTtl: 60 // 1 minute = 60 seconds, customizable
 ```
 
-## 🚀 性能优化
+## 🚀 Performance Optimization
 
-### 前端优化
+### Frontend Optimization
 
-- ✅ Tailwind CSS 按需加载
-- ✅ 图标懒加载（Lucide Icons）
-- ✅ 响应式图片预览
-- ✅ 防抖和节流处理
+- ✅ Tailwind CSS on-demand loading
+- ✅ Lazy loading icons (Lucide Icons)
+- ✅ Responsive image preview
+- ✅ Debouncing and throttling
 
-### 后端优化
+### Backend Optimization
 
-- ✅ 边缘计算（Cloudflare Workers）
-- ✅ 全球 CDN 加速
-- ✅ KV 存储低延迟读写
+- ✅ Edge computing (Cloudflare Workers)
+- ✅ Global CDN acceleration
+- ✅ Low-latency KV storage
 
-### 建议
+### Recommendations
 
-1. 启用 Cloudflare 的 Brotli 压缩
-2. 配置自定义域名并启用 HTTPS
-3. 启用 Cloudflare Analytics 监控流量
-4. 使用 Cloudflare Workers Analytics 监控 API 性能
+1. Enable Cloudflare's Brotli compression
+2. Configure custom domain with HTTPS
+3. Enable Cloudflare Analytics to monitor traffic
+4. Use Cloudflare Workers Analytics to monitor API performance
 
-## 🤝 贡献指南
+## 🤝 Contributing
 
-我们欢迎所有形式的贡献！🎉
+We welcome all forms of contributions! 🎉
 
-### 如何贡献
+### How to Contribute
 
-1. **Fork 本仓库**
-2. **创建特性分支** (`git checkout -b feature/AmazingFeature`)
-3. **提交改动** (`git commit -m 'Add some AmazingFeature'`)
-4. **推送到分支** (`git push origin feature/AmazingFeature`)
-5. **提交 Pull Request**
+1. **Fork this repository**
+2. **Create a feature branch** (`git checkout -b feature/AmazingFeature`)
+3. **Commit changes** (`git commit -m 'Add some AmazingFeature'`)
+4. **Push to branch** (`git push origin feature/AmazingFeature`)
+5. **Submit Pull Request**
 
-### 贡献类型
+### Types of Contributions
 
-- 🐛 报告 Bug
-- 💡 提出新功能建议
-- 📖 改进文档
-- 🎨 优化 UI/UX
-- ⚡️ 性能优化
-- 🌍 多语言支持
+- 🐛 Report bugs
+- 💡 Suggest new features
+- 📖 Improve documentation
+- 🎨 Optimize UI/UX
+- ⚡️ Performance optimization
+- 🌍 Multi-language support
 
-### 开发规范
+### Development Guidelines
 
-- 遵循 TypeScript 规范
-- 保持代码简洁易读
-- 添加必要的注释
-- 提交前测试功能
+- Follow TypeScript conventions
+- Keep code clean and readable
+- Add necessary comments
+- Test features before submitting
 
-## 🌟 致谢
+## 🌟 Acknowledgments
 
-感谢以下技术和项目：
+Thanks to the following technologies and projects:
 
-- [Cloudflare Pages](https://pages.cloudflare.com/) - 静态网站托管
-- [Cloudflare Workers](https://workers.cloudflare.com/) - Serverless 计算平台
-- [Tailwind CSS](https://tailwindcss.com/) - CSS 框架
-- [Lucide Icons](https://lucide.dev/) - 开源图标库
+- [Cloudflare Pages](https://pages.cloudflare.com/) - Static website hosting
+- [Cloudflare Workers](https://workers.cloudflare.com/) - Serverless computing platform
+- [Tailwind CSS](https://tailwindcss.com/) - CSS framework
+- [Lucide Icons](https://lucide.dev/) - Open source icon library
 
-## 📄 许可证
+## 📄 License
 
-本项目采用 [MIT](LICENSE) 许可证 - 详见 LICENSE 文件
+This project is licensed under the [MIT](LICENSE) License - see the LICENSE file for details
 
-## 💬 联系方式
+## 💬 Contact
 
-- 🐛 **报告问题**：[GitHub Issues](https://github.com/isnl/f2f/issues)
-- 💡 **功能建议**：[GitHub Discussions](https://github.com/isnl/f2f/discussions)
-- 📧 **邮件联系**：[通过 GitHub](https://github.com/isnl)
+- 🐛 **Report Issues**: [GitHub Issues](https://github.com/isnl/f2f/issues)
+- 💡 **Feature Suggestions**: [GitHub Discussions](https://github.com/isnl/f2f/discussions)
+- 📧 **Email Contact**: [Via GitHub](https://github.com/isnl)
 
-## ❓ 常见问题
+## ❓ FAQ
 
 <details>
-<summary><b>为什么不用 R2 对象存储？</b></summary>
+<summary><b>Why not use R2 object storage?</b></summary>
 
-R2 对象存储需要绑定银行卡才能使用，而 KV 存储完全免费且开箱即用。对于 25MB 以内的临时文件传输，KV 存储完全够用，且延迟更低。
+R2 object storage requires credit card binding, while KV storage is completely free and ready to use. For temporary file transfers under 25MB, KV storage is sufficient with lower latency.
 </details>
 
 <details>
-<summary><b>如何修改文件大小限制？</b></summary>
+<summary><b>How to modify file size limit?</b></summary>
 
-修改 `functions/api/upload.ts` 中的 `maxSize` 常量即可。但请注意：
-- KV 单值最大限制为 25MB
-- 超过 25MB 需要使用 R2 对象存储
-- 文件越大，上传和下载时间越长
+Modify the `maxSize` constant in `functions/api/upload.ts`. Note:
+- KV single value maximum is 25MB
+- Files over 25MB require R2 object storage
+- Larger files take longer to upload/download
 </details>
 
 <details>
-<summary><b>数据真的安全吗？</b></summary>
+<summary><b>Is data really secure?</b></summary>
 
-- ✅ 所有数据存储在 Cloudflare 边缘节点，物理安全有保障
-- ✅ 全程 HTTPS 加密传输
-- ✅ 自动删除机制保护隐私
-- ⚠️ 但 6 位分享码存在被猜测的极小概率
-- ⚠️ 建议不要传输高度敏感信息（如密码、私钥等）
+- ✅ All data stored on Cloudflare edge nodes with physical security
+- ✅ Full HTTPS encrypted transfer
+- ✅ Auto-deletion mechanism protects privacy
+- ⚠️ Small probability of 6-digit code being guessed
+- ⚠️ Not recommended for highly sensitive information (passwords, private keys, etc.)
 </details>
 
 <details>
-<summary><b>为什么下载后是 1 分钟删除而不是立即删除？</b></summary>
+<summary><b>Why 1-minute deletion after download instead of immediate?</b></summary>
 
-给用户一定的容错时间：
-- 避免网络延迟导致下载失败
-- 允许用户重新下载一次
-- 1 分钟后自动删除，平衡了便利性和安全性
+Provides error tolerance time for users:
+- Avoids download failures due to network latency
+- Allows users to re-download once
+- 1-minute auto-deletion balances convenience and security
 
-你可以在代码中自定义这个时间。
+You can customize this time in the code.
 </details>
 
 <details>
-<summary><b>免费额度够用吗？</b></summary>
+<summary><b>Is the free tier sufficient?</b></summary>
 
-对于个人使用绰绰有余：
-- **KV 读取**：每天 100,000 次
-- **KV 写入**：每天 1,000 次
-- **Workers 请求**：每天 100,000 次
+More than enough for personal use:
+- **KV Reads**: 100,000 per day
+- **KV Writes**: 1,000 per day
+- **Workers Requests**: 100,000 per day
 
-如果是团队或高频使用，可能需要升级到付费版本。
+For teams or high-frequency use, you may need to upgrade to a paid plan.
 </details>
 
 <details>
-<summary><b>可以自建部署吗？</b></summary>
+<summary><b>Can I self-host?</b></summary>
 
-完全可以！本项目开源，你可以：
-1. Fork 本仓库
-2. 部署到自己的 Cloudflare 账号
-3. 自定义域名和配置
-4. 完全掌控数据和服务
+Absolutely! This project is open source, you can:
+1. Fork this repository
+2. Deploy to your own Cloudflare account
+3. Customize domain and configuration
+4. Have full control over data and service
 </details>
 
 <details>
-<summary><b>支持批量上传吗？</b></summary>
+<summary><b>Does it support batch upload?</b></summary>
 
-✅ **支持！** 当前版本已支持批量上传：
-- **多文件上传**：最多 100 个文件，总大小不超过 25MB
-- **多图片上传**：最多 25 张图片，总大小不超过 25MB
-- **下载方式**：支持逐个下载或一键打包为 ZIP 下载
+✅ **Yes!** The current version supports batch upload:
+- **Multiple files**: Up to 100 files, total size not exceeding 25MB
+- **Multiple images**: Up to 25 images, total size not exceeding 25MB
+- **Download options**: Download individually or as a single ZIP package
 </details>
 
 <details>
-<summary><b>如何查看使用统计？</b></summary>
+<summary><b>How to view usage statistics?</b></summary>
 
-在 Cloudflare Dashboard 中可以查看：
-- **Workers Analytics**：API 调用次数、响应时间等
-- **KV Metrics**：读写次数、存储使用量等
-- **Pages Analytics**：访问量、地理分布等
+In Cloudflare Dashboard you can view:
+- **Workers Analytics**: API call count, response time, etc.
+- **KV Metrics**: Read/write count, storage usage, etc.
+- **Pages Analytics**: Traffic, geographic distribution, etc.
 </details>
 
 ---
 
 
-## ⭐ Star 历史
+## ⭐ Star History
 
 <div align="center">
 
@@ -494,10 +494,10 @@ R2 对象存储需要绑定银行卡才能使用，而 KV 存储完全免费且�
 
 <div align="center">
 
-### 🌟 如果这个项目对你有帮助，请给个 Star 吧！
+### 🌟 If this project helps you, please give it a Star!
 
 **Made with ❤️ by [isnl](https://github.com/isnl)**
 
-[⬆ 回到顶部](#-f2ficu)
+[⬆ Back to Top](#-f2ficu)
 
 </div>

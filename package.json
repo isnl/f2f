@@ -11,12 +11,35 @@
   },
   "keywords": [
     "cloudflare",
-    "workers",
+    "cloudflare-workers",
+    "cloudflare-pages",
     "file-transfer",
-    "p2p"
+    "file-sharing",
+    "text-sharing",
+    "image-sharing",
+    "p2p",
+    "peer-to-peer",
+    "share-code",
+    "temporary-file",
+    "serverless",
+    "edge-computing",
+    "batch-upload",
+    "zip-download",
+    "kv-storage",
+    "tailwindcss",
+    "free",
+    "no-registration"
   ],
-  "author": "",
+  "author": "isnl",
   "license": "MIT",
+  "homepage": "https://f2f.icu",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/isnl/f2f.git"
+  },
+  "bugs": {
+    "url": "https://github.com/isnl/f2f/issues"
+  },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20241127.0",
     "@tailwindcss/postcss": "^4.1.16",
