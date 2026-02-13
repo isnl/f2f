@@ -7,5 +7,5 @@ pages_build_output_dir = "./public"
 # 然后将生成的 ID 替换下面的示例值
 [[kv_namespaces]]
 binding = "TRANSFERS"
-id = "your_kv_namespace_id_here"          # 替换为你的生产环境 KV ID
-preview_id = "your_preview_kv_id_here"    # 替换为你的预览环境 KV ID
+id = "8165433365d846d18326564e0eed67ef"
+preview_id = "442a56727084451d978cfde3aca1a0b2"

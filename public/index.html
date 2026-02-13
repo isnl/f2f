@@ -435,6 +435,7 @@
         selectImageFile: 'Please select image file (PNG, JPG, GIF, WEBP, etc.)',
         dragImageOnly: 'Please drag image files only',
         uploading: 'Uploading...',
+        compressing: 'Compressing...',
         getting: 'Getting...',
         uploadFailed: 'Upload failed',
         getFailed: 'Get failed',
@@ -540,6 +541,7 @@
         selectImageFile: '请选择图片文件（PNG、JPG、GIF、WEBP等）',
         dragImageOnly: '请拖入图片文件',
         uploading: '上传中...',
+        compressing: '压缩中...',
         getting: '获取中...',
         uploadFailed: '上传失败',
         getFailed: '获取失败',
@@ -645,6 +647,7 @@
         selectImageFile: '画像ファイルを選択してください（PNG、JPG、GIF、WEBPなど）',
         dragImageOnly: '画像ファイルのみドラッグしてください',
         uploading: 'アップロード中...',
+        compressing: '圧縮中...',
         getting: '取得中...',
         uploadFailed: 'アップロード失敗',
         getFailed: '取得失敗',
@@ -750,6 +753,7 @@
         selectImageFile: '이미지 파일을 선택하세요 (PNG, JPG, GIF, WEBP 등)',
         dragImageOnly: '이미지 파일만 드래그하세요',
         uploading: '업로드 중...',
+        compressing: '압축 중...',
         getting: '가져오는 중...',
         uploadFailed: '업로드 실패',
         getFailed: '가져오기 실패',
@@ -855,6 +859,7 @@
         selectImageFile: 'Selecciona un archivo de imagen (PNG, JPG, GIF, WEBP, etc.)',
         dragImageOnly: 'Arrastra solo archivos de imagen',
         uploading: 'Subiendo...',
+        compressing: 'Comprimiendo...',
         getting: 'Obteniendo...',
         uploadFailed: 'Error al subir',
         getFailed: 'Error al obtener',
@@ -960,6 +965,7 @@
         selectImageFile: 'Sélectionnez un fichier image (PNG, JPG, GIF, WEBP, etc.)',
         dragImageOnly: 'Glissez uniquement des fichiers image',
         uploading: 'Envoi en cours...',
+        compressing: 'Compression...',
         getting: 'Récupération...',
         uploadFailed: "Échec de l'envoi",
         getFailed: 'Échec de la récupération',
@@ -1065,6 +1071,7 @@
         selectImageFile: 'Bitte Bilddatei auswählen (PNG, JPG, GIF, WEBP usw.)',
         dragImageOnly: 'Bitte nur Bilddateien ziehen',
         uploading: 'Wird hochgeladen...',
+        compressing: 'Komprimierung...',
         getting: 'Wird abgerufen...',
         uploadFailed: 'Upload fehlgeschlagen',
         getFailed: 'Abruf fehlgeschlagen',
@@ -1735,6 +1742,16 @@
     let selectedImages = []; // Array for multiple images
     let currentContentType = 'file'; // 'file', 'text', or 'image'
 
+    // 压缩支持检测
+    const COMPRESSION_SUPPORTED = typeof CompressionStream !== 'undefined';
+
+    // gzip 压缩
+    async function compressData(blob) {
+      const cs = new CompressionStream('gzip');
+      const stream = blob.stream().pipeThrough(cs);
+      return await new Response(stream).blob();
+    }
+
     // Toast notification
     function showToast(message, type = 'success') {
       const container = document.getElementById('toast-container');
@@ -1916,19 +1933,23 @@
         return;
       }
 
-      // Generate unique ID and create object URL for preview
+      // Generate unique ID and read as data URL
       const id = Date.now() + '-' + Math.random().toString(36).substr(2, 9);
-      const previewUrl = URL.createObjectURL(file);
+      const reader = new FileReader();
 
-      selectedFiles.push({
-        id,
-        file,
-        previewUrl,
-        name: file.name,
-        size: file.size,
-        type: file.type
-      });
-      updateFilesPreview();
+      reader.onload = (e) => {
+        selectedFiles.push({
+          id,
+          file,
+          dataUrl: e.target.result,
+          name: file.name,
+          size: file.size,
+          type: file.type
+        });
+        updateFilesPreview();
+      };
+
+      reader.readAsDataURL(file);
     }
 
     // Get file icon based on type
@@ -1976,7 +1997,7 @@
             <div class="relative bg-white rounded-lg border-2 border-gray-200 hover:border-primary-400 transition-all overflow-visible">
               <div class="w-full h-24 bg-gray-50 flex items-center justify-center overflow-hidden rounded-t-lg">
                 ${isImage ? `
-                  <img src="${f.previewUrl}" alt="${f.name}" class="w-full h-full object-cover">
+                  <img src="${f.dataUrl}" alt="${f.name}" class="w-full h-full object-cover">
                 ` : `
                   <i data-lucide="${icon}" class="w-10 h-10 text-primary-600"></i>
                 `}
@@ -1998,15 +2019,12 @@
 
     // Remove a single file
     function removeFile(id) {
-      const file = selectedFiles.find(f => f.id === id);
-      if (file && file.previewUrl) URL.revokeObjectURL(file.previewUrl);
       selectedFiles = selectedFiles.filter(f => f.id !== id);
       updateFilesPreview();
     }
 
     // Clear all files
     function clearAllFiles() {
-      selectedFiles.forEach(f => { if (f.previewUrl) URL.revokeObjectURL(f.previewUrl); });
       selectedFiles = [];
       document.getElementById('file-input').value = '';
       updateFilesPreview();
@@ -2052,17 +2070,21 @@
         return;
       }
 
-      // Generate unique ID and create object URL for preview
+      // Generate unique ID and read as data URL
       const id = Date.now() + '-' + Math.random().toString(36).substr(2, 9);
-      const previewUrl = URL.createObjectURL(file);
+      const reader = new FileReader();
 
-      selectedImages.push({
-        id,
-        file,
-        previewUrl,
-        name: file.name
-      });
-      updateImagesPreview();
+      reader.onload = (e) => {
+        selectedImages.push({
+          id,
+          file,
+          dataUrl: e.target.result,
+          name: file.name
+        });
+        updateImagesPreview();
+      };
+
+      reader.readAsDataURL(file);
     }
 
     // Update the images grid preview
@@ -2085,7 +2107,7 @@
         grid.innerHTML = selectedImages.map((img, index) => `
           <div class="relative bg-white rounded-lg border-2 border-gray-200 hover:border-primary-400 transition-all overflow-visible">
             <div class="w-full h-20 bg-gray-50 flex items-center justify-center overflow-hidden rounded-t-lg">
-              <img src="${img.previewUrl}" alt="${img.name}" class="w-full h-full object-cover">
+              <img src="${img.dataUrl}" alt="${img.name}" class="w-full h-full object-cover">
             </div>
             <button onclick="event.stopPropagation(); removeImage('${img.id}')" class="absolute -top-2 -right-2 w-6 h-6 bg-red-500 hover:bg-red-600 rounded-full flex items-center justify-center text-white shadow-lg cursor-pointer border-2 border-white z-10">
               <i data-lucide="x" class="w-3 h-3"></i>
@@ -2102,15 +2124,12 @@
 
     // Remove a single image
     function removeImage(id) {
-      const img = selectedImages.find(img => img.id === id);
-      if (img && img.previewUrl) URL.revokeObjectURL(img.previewUrl);
       selectedImages = selectedImages.filter(img => img.id !== id);
       updateImagesPreview();
     }
 
     // Clear all images
     function clearAllImages() {
-      selectedImages.forEach(img => { if (img.previewUrl) URL.revokeObjectURL(img.previewUrl); });
       selectedImages = [];
       document.getElementById('image-input').value = '';
       updateImagesPreview();
@@ -2200,35 +2219,43 @@
 
       const btn = document.getElementById('upload-btn');
       const originalHTML = btn.innerHTML;
-      btn.disabled = true;
-      btn.innerHTML = `
-        <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      const spinnerSvg = `<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
           <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
           <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-        </svg>
-        <span>${t('uploading')}</span>
-      `;
+        </svg>`;
+      btn.disabled = true;
 
       try {
         const formData = new FormData();
         formData.append('code', code);
 
         if (selectedFiles.length > 0) {
-          // File upload - send actual File objects
-          formData.append('type', selectedFiles.length === 1 ? 'file' : 'files');
-          selectedFiles.forEach(f => {
-            formData.append('files', f.file, f.name);
-          });
+          // Multi-file upload - pack files as JSON array
+          const filesData = selectedFiles.map(f => ({
+            dataUrl: f.dataUrl,
+            name: f.name,
+            size: f.size,
+            type: f.type
+          }));
+
+          formData.append('type', 'files');
+          formData.append('content', JSON.stringify(filesData));
         } else if (selectedImages.length > 0) {
-          // Image upload - send actual File objects
-          formData.append('type', selectedImages.length === 1 ? 'file' : 'images');
-          selectedImages.forEach(img => {
-            formData.append('files', img.file, img.name);
-          });
+          // Multi-image upload - pack images as JSON array
+          const imagesData = selectedImages.map(img => ({
+            dataUrl: img.dataUrl,
+            name: img.name
+          }));
+
+          formData.append('type', 'images');
+          formData.append('content', JSON.stringify(imagesData));
         } else {
           formData.append('type', 'text');
           formData.append('content', textContent);
         }
+
+        // 显示"上传中..."
+        btn.innerHTML = `${spinnerSvg}<span>${t('uploading')}</span>`;
 
         const response = await fetch(`/api/upload?lang=${currentLang}`, {
           method: 'POST',
@@ -2296,147 +2323,18 @@
 
       try {
         const response = await fetch(`/api/download?code=${code}&lang=${currentLang}`);
+        const result = await response.json();
 
-        if (!response.ok) {
-          // Error responses are always JSON
-          const result = await response.json();
-          progressDiv.classList.add('hidden');
-          progressBar.style.width = '0%';
-          progressText.textContent = '0%';
-          showMessage('receive-message', result.error || t('getFailed'), 'error');
-          return;
-        }
-
-        const contentType = response.headers.get('Content-Type') || '';
-        const transferType = response.headers.get('X-Transfer-Type');
-
-        if (transferType === 'file') {
-          // 单文件：响应体是二进制数据
-          const blob = await response.blob();
-          const fileName = decodeURIComponent(response.headers.get('X-File-Name') || 'download');
-          const fileContentType = contentType.split(';')[0].trim();
-          const isImage = fileContentType.startsWith('image/');
-
-          if (isImage) {
-            // 图片：显示预览
-            const objectUrl = URL.createObjectURL(blob);
-            const display = document.getElementById('receive-result');
-            display.innerHTML = `
-              <div class="bg-gradient-to-br from-primary-50 to-emerald-50 rounded-lg p-6 border border-primary-200">
-                <div class="flex items-center justify-between mb-4">
-                  <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center">
-                      <i data-lucide="image" class="w-6 h-6 text-white"></i>
-                    </div>
-                    <div>
-                      <h3 class="font-bold text-gray-900">${t("imagePreview")}</h3>
-                      <p class="text-sm text-gray-600">${escapeHtml(fileName)}</p>
-                    </div>
-                  </div>
-                  <button id="download-single-image-btn" class="flex items-center gap-2 px-3 py-1.5 bg-primary-500 hover:bg-primary-600 text-white text-sm rounded-lg transition-colors cursor-pointer">
-                    <i data-lucide="download" class="w-4 h-4"></i>
-                    <span>${t("download")}</span>
-                  </button>
-                </div>
-                <div class="bg-white rounded-lg p-4 mb-3">
-                  <img id="preview-single-image" alt="${escapeHtml(fileName)}" class="w-full rounded cursor-pointer hover:opacity-90 transition-opacity">
-                </div>
-                <div class="flex items-start gap-2 text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg p-3">
-                  <i data-lucide="clock" class="w-3.5 h-3.5 mt-0.5 flex-shrink-0"></i>
-                  <p>${t("contentAutoDelete")}</p>
-                </div>
-              </div>
-            `;
-            display.classList.remove('hidden');
-            const imgEl = document.getElementById('preview-single-image');
-            imgEl.src = objectUrl;
-            imgEl.onclick = () => openImagePreview(objectUrl);
-            document.getElementById('download-single-image-btn').onclick = () => {
-              const link = document.createElement('a');
-              link.href = objectUrl;
-              link.download = fileName;
-              link.click();
-              showToast(t('imageDownloading'));
-            };
-            lucide.createIcons();
-          } else {
-            // 普通文件：显示进度条并下载
-            progressDiv.classList.remove('hidden');
-            let progress = 0;
-            progressInterval = setInterval(() => {
-              progress += 10;
-              if (progress <= 100) {
-                progressBar.style.width = progress + '%';
-                progressText.textContent = progress + '%';
-              }
-              if (progress >= 100) {
-                clearInterval(progressInterval);
-              }
-            }, 50);
-
-            // 触发文件下载
-            const objectUrl = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = objectUrl;
-            link.download = fileName;
-            link.click();
-            URL.revokeObjectURL(objectUrl);
-
-            const display = document.getElementById('receive-result');
-            // 等待进度条完成
-            setTimeout(() => {
-              progressDiv.classList.add('hidden');
-              progressBar.style.width = '0%';
-              progressText.textContent = '0%';
-
-              display.innerHTML = `
-                <div class="bg-gradient-to-br from-primary-50 to-emerald-50 rounded-lg p-6 border border-primary-200">
-                  <div class="flex items-center gap-3 mb-4">
-                    <div class="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center">
-                      <i data-lucide="check" class="w-6 h-6 text-white"></i>
-                    </div>
-                    <div>
-                      <h3 class="font-bold text-gray-900">${t("downloadSuccess")}</h3>
-                      <p class="text-sm text-gray-600">${escapeHtml(fileName)}</p>
-                    </div>
-                  </div>
-                  <div class="flex items-start gap-2 text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg p-3">
-                    <i data-lucide="clock" class="w-3.5 h-3.5 mt-0.5 flex-shrink-0"></i>
-                    <p>${t("fileAutoDelete")}</p>
-                  </div>
-                </div>
-              `;
-              display.classList.remove('hidden');
-              lucide.createIcons();
-            }, 600);
-          }
-          hideMessage('receive-message');
-          document.getElementById('receive-code').value = '';
-        } else if (contentType.includes('application/json')) {
-          // JSON 响应：text / images / files
-          const result = await response.json();
+        if (response.ok) {
           const display = document.getElementById('receive-result');
+          const isImage = result.contentType && result.contentType.startsWith('image/');
 
           if (result.type === 'images') {
-            // 多图类型：展示网格，逐个下载显示
-            const files = result.files; // [{name, size, type}]
-            const imageItems = files.map((f, index) => ({
-              name: f.name,
-              size: f.size,
-              type: f.type,
-              index
-            }));
-
-            // 先展示骨架屏，然后逐步加载图片
-            const imagesHtml = imageItems.map((img, index) => `
+            // 多图类型：展示网格
+            const images = JSON.parse(result.content);
+            const imagesHtml = images.map((img, index) => `
               <div class="relative group aspect-square bg-gray-100 rounded-lg overflow-hidden">
-                <div id="img-placeholder-${index}" class="w-full h-full flex items-center justify-center bg-gray-200">
-                  <svg class="animate-spin h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                </div>
-                <img id="img-loaded-${index}" class="w-full h-full object-cover cursor-pointer hover:opacity-90 transition-opacity hidden" alt="${escapeHtml(img.name)}">
+                <img src="${img.dataUrl}" alt="${escapeHtml(img.name)}" class="w-full h-full object-cover cursor-pointer hover:opacity-90 transition-opacity" onclick="openImagePreview('${img.dataUrl}')">
                 <div class="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-xs px-2 py-1 truncate">
                   ${index + 1}. ${escapeHtml(img.name)}
                 </div>
@@ -2452,7 +2350,7 @@
                     </div>
                     <div>
                       <h3 class="font-bold text-gray-900">${t("imagesPreview")}</h3>
-                      <p class="text-sm text-gray-600">${files.length} ${files.length === 1 ? 'image' : 'images'}</p>
+                      <p class="text-sm text-gray-600">${images.length} ${images.length === 1 ? 'image' : 'images'}</p>
                     </div>
                   </div>
                   <div class="flex gap-2">
@@ -2480,52 +2378,28 @@
             display.classList.remove('hidden');
             lucide.createIcons();
 
-            // 逐个加载图片
-            const imageObjectUrls = [];
-            for (let i = 0; i < imageItems.length; i++) {
-              try {
-                const imgResp = await fetch(`/api/download?code=${code}&fileIndex=${i}&lang=${currentLang}`);
-                if (imgResp.ok) {
-                  const imgBlob = await imgResp.blob();
-                  const objectUrl = URL.createObjectURL(imgBlob);
-                  imageObjectUrls.push({ objectUrl, name: imageItems[i].name });
-                  const imgEl = document.getElementById(`img-loaded-${i}`);
-                  const placeholder = document.getElementById(`img-placeholder-${i}`);
-                  if (imgEl && placeholder) {
-                    imgEl.src = objectUrl;
-                    imgEl.onclick = () => openImagePreview(objectUrl);
-                    imgEl.classList.remove('hidden');
-                    placeholder.classList.add('hidden');
-                  }
-                }
-              } catch (e) {
-                // 单张加载失败不影响其他
-              }
-            }
-
             // 绑定批量下载按钮
             document.getElementById('download-all-images-btn').onclick = () => {
-              imageObjectUrls.forEach((item, index) => {
+              images.forEach((img, index) => {
                 setTimeout(() => {
                   const link = document.createElement('a');
-                  link.href = item.objectUrl;
-                  link.download = item.name;
+                  link.href = img.dataUrl;
+                  link.download = img.name;
                   link.click();
                 }, index * 200);
               });
-              showToast(`${t('imageDownloading')} (${imageObjectUrls.length})`);
+              showToast(`${t('imageDownloading')} (${images.length})`);
             };
 
             document.getElementById('download-images-zip-btn').onclick = async () => {
               try {
                 const zip = new JSZip();
-                for (const item of imageObjectUrls) {
-                  const resp = await fetch(item.objectUrl);
-                  const blob = await resp.blob();
-                  zip.file(item.name, blob);
-                }
-                const zipBlob = await zip.generateAsync({type: 'blob'});
-                const url = URL.createObjectURL(zipBlob);
+                images.forEach(img => {
+                  const base64Data = img.dataUrl.split(',')[1];
+                  zip.file(img.name, base64Data, {base64: true});
+                });
+                const blob = await zip.generateAsync({type: 'blob'});
+                const url = URL.createObjectURL(blob);
                 const link = document.createElement('a');
                 link.href = url;
                 link.download = 'images.zip';
@@ -2539,20 +2413,17 @@
 
           } else if (result.type === 'files') {
             // 多文件类型：展示网格
-            const files = result.files;
+            const files = JSON.parse(result.content);
             const filesHtml = files.map((f, index) => {
-              const isImage = f.type && f.type.startsWith('image/');
+              const isFileImage = f.type && f.type.startsWith('image/');
               const icon = getFileIcon(f.type || '');
-              const fileSize = formatFileSize(f.size);
+              const sizeKB = (f.size / 1024).toFixed(1);
 
               return `
                 <div class="relative group bg-gray-100 rounded-lg overflow-hidden p-3">
-                  ${isImage ? `
-                    <div id="file-preview-${index}" class="aspect-square mb-2 bg-gray-200 rounded overflow-hidden flex items-center justify-center">
-                      <svg class="animate-spin h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
+                  ${isFileImage ? `
+                    <div class="aspect-square mb-2 bg-gray-200 rounded overflow-hidden">
+                      <img src="${f.dataUrl}" alt="${escapeHtml(f.name)}" class="w-full h-full object-cover cursor-pointer hover:opacity-90 transition-opacity" onclick="openImagePreview('${f.dataUrl}')">
                     </div>
                   ` : `
                     <div class="aspect-square mb-2 bg-gradient-to-br from-primary-100 to-emerald-100 rounded flex items-center justify-center">
@@ -2560,7 +2431,7 @@
                     </div>
                   `}
                   <div class="text-xs truncate font-medium text-gray-900" title="${escapeHtml(f.name)}">${escapeHtml(f.name)}</div>
-                  <div class="text-xs text-gray-500">${fileSize}</div>
+                  <div class="text-xs text-gray-500">${sizeKB} KB</div>
                 </div>
               `;
             }).join('');
@@ -2602,52 +2473,28 @@
             display.classList.remove('hidden');
             lucide.createIcons();
 
-            // 逐个加载文件（图片预览）
-            const fileObjectUrls = [];
-            for (let i = 0; i < files.length; i++) {
-              try {
-                const fileResp = await fetch(`/api/download?code=${code}&fileIndex=${i}&lang=${currentLang}`);
-                if (fileResp.ok) {
-                  const fileBlob = await fileResp.blob();
-                  const objectUrl = URL.createObjectURL(fileBlob);
-                  fileObjectUrls.push({ objectUrl, name: files[i].name });
-                  // 如果是图片，更新预览
-                  const isImage = files[i].type && files[i].type.startsWith('image/');
-                  if (isImage) {
-                    const previewDiv = document.getElementById(`file-preview-${i}`);
-                    if (previewDiv) {
-                      previewDiv.innerHTML = `<img src="${objectUrl}" alt="${escapeHtml(files[i].name)}" class="w-full h-full object-cover cursor-pointer hover:opacity-90 transition-opacity" onclick="openImagePreview('${objectUrl}')">`;
-                    }
-                  }
-                }
-              } catch (e) {
-                // 单个加载失败不影响其他
-              }
-            }
-
             // 绑定批量下载按钮
             document.getElementById('download-all-files-btn').onclick = () => {
-              fileObjectUrls.forEach((item, index) => {
+              files.forEach((f, index) => {
                 setTimeout(() => {
                   const link = document.createElement('a');
-                  link.href = item.objectUrl;
-                  link.download = item.name;
+                  link.href = f.dataUrl;
+                  link.download = f.name;
                   link.click();
                 }, index * 200);
               });
-              showToast(`${t('downloading')} (${fileObjectUrls.length})`);
+              showToast(`${t('downloading')} (${files.length})`);
             };
 
             document.getElementById('download-files-zip-btn').onclick = async () => {
               try {
                 const zip = new JSZip();
-                for (const item of fileObjectUrls) {
-                  const resp = await fetch(item.objectUrl);
-                  const blob = await resp.blob();
-                  zip.file(item.name, blob);
-                }
-                const zipBlob = await zip.generateAsync({type: 'blob'});
-                const url = URL.createObjectURL(zipBlob);
+                files.forEach(f => {
+                  const base64Data = f.dataUrl.split(',')[1];
+                  zip.file(f.name, base64Data, {base64: true});
+                });
+                const blob = await zip.generateAsync({type: 'blob'});
+                const url = URL.createObjectURL(blob);
                 const link = document.createElement('a');
                 link.href = url;
                 link.download = 'files.zip';
@@ -2659,7 +2506,91 @@
               }
             };
 
-          } else if (result.type === 'text') {
+          } else if (result.type === 'file' && isImage) {
+            // 单图类型：直接展示
+            display.innerHTML = `
+              <div class="bg-gradient-to-br from-primary-50 to-emerald-50 rounded-lg p-6 border border-primary-200">
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center">
+                      <i data-lucide="image" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <div>
+                      <h3 class="font-bold text-gray-900">${t("imagePreview")}</h3>
+                      <p class="text-sm text-gray-600">${escapeHtml(result.fileName || '')}</p>
+                    </div>
+                  </div>
+                  <button id="download-single-image-btn" class="flex items-center gap-2 px-3 py-1.5 bg-primary-500 hover:bg-primary-600 text-white text-sm rounded-lg transition-colors cursor-pointer">
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                    <span>${t("download")}</span>
+                  </button>
+                </div>
+                <div class="bg-white rounded-lg p-4 mb-3">
+                  <img src="${result.content}" alt="${escapeHtml(result.fileName || '')}" class="w-full rounded cursor-pointer hover:opacity-90 transition-opacity" onclick="openImagePreview('${result.content}')">
+                </div>
+                <div class="flex items-start gap-2 text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg p-3">
+                  <i data-lucide="clock" class="w-3.5 h-3.5 mt-0.5 flex-shrink-0"></i>
+                  <p>${t("contentAutoDelete")}</p>
+                </div>
+              </div>
+            `;
+            display.classList.remove('hidden');
+            document.getElementById('download-single-image-btn').onclick = () => {
+              const link = document.createElement('a');
+              link.href = result.content;
+              link.download = result.fileName || 'image.png';
+              link.click();
+              showToast(t('imageDownloading'));
+            };
+            lucide.createIcons();
+          } else if (result.type === 'file') {
+            // 普通文件类型：显示进度条并下载
+            progressDiv.classList.remove('hidden');
+            let progress = 0;
+            progressInterval = setInterval(() => {
+              progress += 10;
+              if (progress <= 100) {
+                progressBar.style.width = progress + '%';
+                progressText.textContent = progress + '%';
+              }
+              if (progress >= 100) {
+                clearInterval(progressInterval);
+              }
+            }, 50);
+
+            // 触发文件下载
+            const link = document.createElement('a');
+            link.href = result.content;
+            link.download = result.fileName;
+            link.click();
+
+            // 等待进度条完成
+            setTimeout(() => {
+              progressDiv.classList.add('hidden');
+              progressBar.style.width = '0%';
+              progressText.textContent = '0%';
+
+              display.innerHTML = `
+                <div class="bg-gradient-to-br from-primary-50 to-emerald-50 rounded-lg p-6 border border-primary-200">
+                  <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center">
+                      <i data-lucide="check" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <div>
+                      <h3 class="font-bold text-gray-900">${t("downloadSuccess")}</h3>
+                      <p class="text-sm text-gray-600">${escapeHtml(result.fileName || '')}</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-2 text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg p-3">
+                    <i data-lucide="clock" class="w-3.5 h-3.5 mt-0.5 flex-shrink-0"></i>
+                    <p>${t("fileAutoDelete")}</p>
+                  </div>
+                </div>
+              `;
+              display.classList.remove('hidden');
+              lucide.createIcons();
+            }, 600);
+          } else {
             // 文本类型：不显示进度条，直接显示内容
             display.innerHTML = `
               <div class="bg-gradient-to-br from-primary-50 to-emerald-50 rounded-lg p-6 border border-primary-200">
@@ -2690,6 +2621,11 @@
 
           hideMessage('receive-message');
           document.getElementById('receive-code').value = '';
+        } else {
+          progressDiv.classList.add('hidden');
+          progressBar.style.width = '0%';
+          progressText.textContent = '0%';
+          showMessage('receive-message', result.error || t('getFailed'), 'error');
         }
       } catch (error) {
         if (progressInterval) clearInterval(progressInterval);
